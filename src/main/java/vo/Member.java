@@ -3,12 +3,13 @@ package vo;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Member {
 	private int mno;
 	private int grade;
@@ -16,7 +17,7 @@ public class Member {
 	private String pw;
 	private String username;
 	private int gender;
-	private Date birthday;
+	private String birthday;
 	private String tel;
 	private int total;
 	private String email;

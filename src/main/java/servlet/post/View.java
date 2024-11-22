@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dto.Criteria;
 import service.PostService;
 import service.PostServiceImpl;
+import utils.Commons;
 
 @WebServlet("/post/view")
 public class View extends HttpServlet{
@@ -17,8 +19,22 @@ public class View extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/jsp/post/view.jsp").forward(req, resp);
+		Criteria cri = new Criteria(req); 
+		
+		String pnoStr = req.getParameter("pno");
 
+		
+		if(pnoStr == null) {
+			Commons.printMsg("비정상적인 접근입니다", "list", resp);
+			return;
+		}
+		Long pno = Long.valueOf(pnoStr);
+		
+		req.setAttribute("post", service.view(pno));
+		req.setAttribute("cri", cri);
+		req.getRequestDispatcher("/WEB-INF/jsp/post/view.jsp").forward(req, resp);
+		
+		
 	}
 	
 }

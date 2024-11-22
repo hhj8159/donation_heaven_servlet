@@ -29,8 +29,10 @@
            
 			<div class="my-3 col-md-9 mx-auto">
                 <form method="post" action="write?page=1&${cri.qs}">
+                	<input type="hidden" id="id" name="id" value="${post.id}">
+                	
 	                <label for="title" class="form-label mt-3"><b> 제목</b></label>
-	                <input type="text" class="form-control" id="title" placeholder="title" name="title"  >
+	                <input type="text" class="form-control" id="title" placeholder="title" name="title">
 	
 	                <label for="content" class="form-label mt-3"><b> 내용</b></label>
 	                <textarea class="form-control" rows="20" id="content" name="content" placeholder="content"></textarea>
@@ -38,7 +40,6 @@
 	             	<label for="attach" class="form-label my-1"><span class="btn text-light btn-sm" style="background-color: #005B48;">파일 첨부</span></label>
 	             	<span class="mx-2 attach-count-txt"></span>
 	                <input type="file" id="attach" name="files" class="d-none" multiple>
-	                <!-- readonly는 서버로 보내짐 disabled와 차이가 있음 -->
 					
                     <ul class="list-group attach-result">
 					

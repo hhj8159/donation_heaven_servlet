@@ -82,19 +82,19 @@
                     <p style="font-size: 30px"><span class="font-color bold-text">기부천국</span> 홈페이지 <span class="font-color bold-text" style="color:#FF0000">가입</span>을 환영합니다</p>
                     <p>기부천국은 천사 회원님을 환영합니다</p>
                 </div>
-                <form name = "frm"class="mx-auto col-12 col-sm-9 p-2 " method="post" action="${cp}signup2">
+                <form name = "frm"class="mx-auto col-12 col-sm-9 p-2 " method="post" >
                 <div >
                     <div class="row ">
-                    <label for="name" class="col-2 mt-2"  >이름</label><input type="text" class="col-3 form-control textwidth" id="name">
+                    <label for="name" class="col-2 mt-2"  >이름</label><input type="text" class="col-3 form-control textwidth" id="name" name="name">
                     </div>
                     <div class="row mt-3">
                         <label for="birthday" class="col-2 mt-2">생년월일</label><input type="password" class="form-control col-3 textwidth" id="birthday" name="birthday">
                     </div>
                     <div class="row mt-3 ">
-                        <label for="name" class="col-2 mt-2" style="padding: 0px">휴대전화 번호</label><input type="text" class="col-3 form-control" style=" width: 30%;" id="name"><button class="btn" style="background-color: #005B48; color: white; width: 10%">인증</button>
+                        <label for="name" class="col-2 mt-2" style="padding: 0px">휴대전화 번호</label><input type="text" class="col-3 form-control" style=" width: 30%;" id="name" name="tel"><button class="btn" style="background-color: #005B48; color: white; width: 10%">인증</button>
                     </div>
                     <div class="row mt-3">
-                            <label for="birthday" class="col-2 mt-2">인증번호</label><input type="password" class="form-control col-3 textwidth" id="birthday" name="birthday">
+                            <label for="birthday" class="col-2 mt-2">인증번호</label><input type="text" class="form-control col-3 textwidth" id="oknum" name="oknum">
                     </div>
                     <button class="btn mt-3 mb-5" style="background-color: #005B48; color: white; width: 40%;margin-left: 31%;" >다음 단계</button>
                 </div>

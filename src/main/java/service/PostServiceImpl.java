@@ -17,14 +17,13 @@ public class PostServiceImpl implements PostService{
 	}
 	
 	@Override
-	public int write(Post post) { //mb 자원관리때문에 메서드안에 메서드마다 넣어야함....ㅠ
+	public int write(Post post) { 
 		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
 			PostMapper mapper = session.getMapper(PostMapper.class);
-			//첨부파일....
 			AttachMapper attachMapper = session.getMapper(AttachMapper.class);
-			System.out.println(post); // post.getPno() = null
+			System.out.println(post); 
 			mapper.insert(post);
-			System.out.println(post); // post.getPno() != null
+			System.out.println(post);
 			post.getAttachs().forEach(a -> {
 				a.setPno(post.getPno());
 				attachMapper.insert(a);

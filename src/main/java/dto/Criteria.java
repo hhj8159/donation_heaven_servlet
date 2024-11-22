@@ -18,14 +18,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class Criteria {
-	//변할수 있게 (포스트 멤버는 final 해야됨)
-	private int page = 1; // 현재 페이지 
-	private int amount = 10; // 한 페이지당 보여줄 게시글 수
+	
+	private int page = 1; 
+	private int amount = 10; 
 	private int category = 2;
 	private String type;
 	private String keyword;
 	
-	public int getOffset() { // 데이터베이스에서 몇 번째 데이터부터 가져올지를 계산
+	public int getOffset() { 
 		return (page - 1) * 10;
 	}
 	
@@ -33,15 +33,12 @@ public class Criteria {
 	public Criteria (HttpServletRequest req) {
 		if(req == null) return;
 		
-		Field[] fields = getClass().getDeclaredFields(); //reflect
+		Field[] fields = getClass().getDeclaredFields();
 		for(Field field : fields) {
 			String tmp = req.getParameter(field.getName());
-//			System.out.println(field);
-//			System.out.print(field.getType() + "::");//type 알아오기
-//			System.out.print((field.getType() == String.class) + "::");
-//			System.out.println(field.getType() == int.class);
+
 			if(tmp != null && !tmp.equals("")) {
-				//invocate?
+			
 				try {
 					Object obj = tmp;
 					if(field.getType() == int.class) {
@@ -54,19 +51,11 @@ public class Criteria {
 			}
 		}	
 	}
-//	public static void main(String[] args) {
-//		new Criteria(null);
-//	}
-	
-	//query string 문자열 생성(el에서 사용될 예정)
-	
-	
-	// page 포함
+
 	public String getQs2() {
 		return "page="+page+"&"+getQs();
 	}
 	
-	// page 불포함
 	public String getQs() {
 		Field[] fields = getClass().getDeclaredFields();	
 		String[] strs = new String[4];
@@ -85,9 +74,5 @@ public class Criteria {
 	
 	public String[] getTypeArr() {
 		return type.split("");
-	}
-	
-	public static void main(String[] args) {
-//		System.out.println(new Criteria().getQs());
 	}
 }
