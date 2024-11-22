@@ -1,4 +1,4 @@
-package member;
+package servlet.member;
 
 import java.io.IOException;
 

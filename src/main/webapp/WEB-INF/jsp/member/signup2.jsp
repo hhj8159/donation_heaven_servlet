@@ -104,6 +104,14 @@
                         <input type="text" class="form-control textwidth mt-2" id="pwd" placeholder="비밀번호">
                         <input type="text" class="form-control textwidth mt-3" id="pwdresult" placeholder="비밀번호 확인">
                     </div>
+                     <label for="name" class="col-2 mt-3" >주소</label>
+                    <div class="row mt-3 ">
+                        <input type="text" class="col-3 form-control " style=" width: 53%;margin-left: 16%;" id="roadAddr" placeholder="도로명 검색"><button class="btn" id="search" style="background-color: #005B48; color: white; width: 15%">주소지 검색</button>
+                    </div>
+                    <input type="text" class="col-3 form-control textwidth mt-3 mb-3"  id="name" placeholder="상세주소">
+                    <ul class="list-group search-result-wrap mb-3 w-50" style="margin-left: 15%;" >
+                    
+                    </ul>
                         
                     <button class="btn mt-5 mb-5" style="background-color: #005B48; color: white; width: 40%;margin-left: 31%;" >확인</button>
                 </div>
@@ -113,10 +121,49 @@
         <jsp:include page="../common/footer.jsp"></jsp:include>
     </div>
     <script>
-/*     if($.cookie("save")){
-    	$("#id").val($.cookie("save"));
-    	$("#mySwitch").prop("checked",true);
-    } */
+    $(function(){
+        $("#search").click(function(){
+            event.preventDefault();
+            
+        const keyword = $(this).prev().val();
+        if(!keyword) {
+            return;
+        }
+        const data = {
+            keyword,
+            confmKey : 'devU01TX0FVVEgyMDI0MTEwNjE0NTczMjExNTIxNjE=',
+            currentPage : 1,
+            countPerPage : 100,
+            resultType : 'json'
+        };
+        
+        $.ajax({
+            url :"https://business.juso.go.kr/addrlink/addrLinkApiJsonp.do",
+            type : "get",
+            data,
+            dataType : "jsonp",
+            crossDomain : true,
+            success : function(data){
+                let arr = data.results.juso;
+                console.log(data.results.juso);
+                let idx = 0;
+
+                for(let i =0;i < arr.length;i++){
+                    let str = `<li class="list-group-item"><a href="#" class="small">\${arr[idx].roadAddr}</a></li>`
+                    $('ul.search-result-wrap').append(str);
+                    idx++;
+                }
+            },
+            error : function(xhr,msg){
+                console.log(msg);
+            }
+        })
+    });
+    $("ul.search-result-wrap").on("click","a",function(){
+        $("#roadAddr").val($(this).text().trim());
+        $("ul.search-result-wrap").closest("ul.search-result-wrap").empty();
+    });
+})
     </script>
 </body>
 </html>
