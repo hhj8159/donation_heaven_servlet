@@ -1,4 +1,4 @@
-package post;
+package servlet.post;
 
 import java.io.IOException;
 

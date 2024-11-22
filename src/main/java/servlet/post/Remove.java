@@ -1,4 +1,4 @@
-package post;
+package servlet.post;
 
 import java.io.IOException;
 
@@ -11,14 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import service.PostService;
 import service.PostServiceImpl;
 
-@WebServlet("/post/view")
-public class View extends HttpServlet{
+@WebServlet("/post/remove")
+public class Remove extends HttpServlet{
 	private PostService service = new PostServiceImpl();
-
+	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/jsp/post/view.jsp").forward(req, resp);
-
-	}
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		}
 	
 }
