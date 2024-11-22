@@ -66,16 +66,16 @@
     <div class="wrap">
          <jsp:include page="../common/header.jsp"></jsp:include>
         <main class="container card w-50 mt-5" style="margin-left: 25%;">
-            <div class="mt-3 w-100">
+            <div class="mt-3 w-100 col-md-8">
                 <div class="row" >
                     <div class="divwrap" >
                         <span class="">Step 1</span><span class="bold-text" style="margin-left: 40%;">Step 2</span>
                     </div>
                     <div class="col-6 circlewrap mt-2">
-                        <span class="dot float-start" style="margin: 1px;" ></span><hr class="d-inline-block circlehr" style="width: 87%;"><span class="dot2 float-end" style="margin: 0px;"></span>
+                        <span class="dot float-start" style="margin: 1px;" ></span><hr class="d-inline-block circlehr float-center" style="width: 87%;"><span class="dot2 float-end" style="margin: 0px;"></span>
                     </div>
                     <div class="spanwrap mt-2">
-                        <span class="">후원정보 확인</span> <span class="bold-text" style="margin-left: 34%">홈페이지 ID 만들기</span>
+                        <span class="">후원정보 확인</span> <span class="bold-text " style="margin-left: 34%">홈페이지 ID 만들기</span>
                     </div>
                 </div>
                 <hr style="width: 80%;margin-left: 10%;">
@@ -85,30 +85,30 @@
                     <div style="margin-left: 15%;" class="mt-3">
                         성별<br>
                         <div class="mt-2">
-                            <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel1" value="male" aria-label="...">남성
-                            <input class="form-check-input ms-4" type="radio" name="radioNoLabel" id="radioNoLabel1" value="female" aria-label="..." checked>여성
+                            <input class="form-check-input" type="radio" name="gender" id="radioNoLabel1" value="1" aria-label="...">남성
+                            <input class="form-check-input ms-4" type="radio" name="gender" id="radioNoLabel1" value="2" aria-label="..." checked>여성
                         </div>
                     </div>
                     <div class="mt-3">
                     <label for="name" class="mt-2"  >이메일</label>
-                    <input type="text" class="form-control textwidth mt-2" id="email">
+                    <input type="text" class="form-control textwidth mt-2" id="email" name="email">
                     <button class="btn mt-3 mb-2 textwidth" style="background-color: #005B48; color: white; width: 20%;" >인증번호 발송</button>
                     <input type="text" class="form-control textwidth" id="email" placeholder="인증번호" style="display: none;">
                     </div>
                     <div class="mt-3">
                         <label for="name" class="mt-2"  >아이디</label>
-                        <input type="text" class="form-control textwidth mt-2" id="id">
+                        <input type="text" class="form-control textwidth mt-2" id="id" name="id">
                     </div>
                     <div class="mt-3">
                         <label for="name" class="mt-2"  >비밀번호</label>
-                        <input type="text" class="form-control textwidth mt-2" id="pwd" placeholder="비밀번호">
+                        <input type="text" class="form-control textwidth mt-2" id="pwd" placeholder="비밀번호" name="pw">
                         <input type="text" class="form-control textwidth mt-3" id="pwdresult" placeholder="비밀번호 확인">
                     </div>
                      <label for="name" class="col-2 mt-3" >주소</label>
                     <div class="row mt-3 ">
-                        <input type="text" class="col-3 form-control " style=" width: 53%;margin-left: 16%;" id="roadAddr" placeholder="도로명 검색"><button class="btn" id="search" style="background-color: #005B48; color: white; width: 15%">주소지 검색</button>
+                        <input type="text" class="col-3 form-control " style=" width: 53%;margin-left: 16%;" id="roadAddr" name="addr" placeholder="도로명 검색"><button class="btn" id="search" style="background-color: #005B48; color: white; width: 15%">주소지 검색</button>
                     </div>
-                    <input type="text" class="col-3 form-control textwidth mt-3 mb-3"  id="name" placeholder="상세주소">
+                    <input type="text" class="col-3 form-control textwidth mt-3 mb-3"  id="name" name = "detailAddr" placeholder="상세주소">
                     <ul class="list-group search-result-wrap mb-3 w-50" style="margin-left: 15%;" >
                     
                     </ul>
@@ -149,7 +149,7 @@
                 let idx = 0;
 
                 for(let i =0;i < arr.length;i++){
-                    let str = `<li class="list-group-item"><a href="#" class="small">\${arr[idx].roadAddr}</a></li>`
+                    let str = `<li class="list-group-item"><a href="#" class="small" id="addr" onclick="return false">\${arr[idx].roadAddr}</a></li>`
                     $('ul.search-result-wrap').append(str);
                     idx++;
                 }

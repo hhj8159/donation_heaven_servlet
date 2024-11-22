@@ -16,8 +16,9 @@
     </environment>
   </environments>
   <mappers>
-
+    <!-- <mapper resource="mapper/PostMapper.xml"/> -->
         <mapper resource="mapper/MemberMapper.xml"/>
-
+                <!-- <mapper resource="mapper/AttachMapper.xml"/> -->
+        <!-- <mapper resource="mapper/ReplyMapper.xml"/> -->
   </mappers>
 </configuration>
