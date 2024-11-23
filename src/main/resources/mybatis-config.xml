@@ -16,16 +16,10 @@
     </environment>
   </environments>
   <mappers>
-<<<<<<< HEAD
+
         <mapper resource="mapper/MemberMapper.xml"/>
 		<mapper resource="mapper/PostMapper.xml"/>
 		<mapper resource="mapper/AttachMapper.xml"/>
-			
-=======
-    <!-- <mapper resource="mapper/PostMapper.xml"/> -->
-        <mapper resource="mapper/MemberMapper.xml"/>
-                <!-- <mapper resource="mapper/AttachMapper.xml"/> -->
-        <!-- <mapper resource="mapper/ReplyMapper.xml"/> -->
->>>>>>> b66b8c21bcf1d95e4062608aac03702294048dc5
+
   </mappers>
 </configuration>

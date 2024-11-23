@@ -12,11 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import service.MemberService;
+import service.MemberServiceImpl;
 import vo.Member;
 
 @WebServlet("/signup")
 public class Signup extends HttpServlet{
-
+	private MemberService service = new MemberServiceImpl();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getRequestDispatcher("/WEB-INF/jsp/member/signup.jsp").forward(req, resp);
@@ -29,16 +31,40 @@ public class Signup extends HttpServlet{
         String birthday = req.getParameter("birthday");
         String tel = req.getParameter("tel");
         String oknum = req.getParameter("oknum");
+
+        String gender = req.getParameter("gender");
+        int genderint =  Integer.parseInt(gender);
+        String email = req.getParameter("email");
+        String id = req.getParameter("id");
+        String pw = req.getParameter("pw");
+        String addr = req.getParameter("addr");
+        String detailAddr = req.getParameter("detailAddr");
+        System.out.println(name +"/ "+  birthday +"/ "+  tel +"/ " + gender +"/ "+  email +"/ "+  id +"/ "+ pw + "/" + addr + "/"+detailAddr);
         
-        HttpSession session = req.getSession();
-        session.setAttribute("name", name);
-        session.setAttribute("birthday", birthday);
-        session.setAttribute("tel", tel);
+//        HttpSession session = req.getSession();
+//        session.setAttribute("name", name);
+//        session.setAttribute("birthday", birthday);
+//        session.setAttribute("tel", tel);
 
 
         
         System.out.println(name +"/ "+  birthday +"/ "+  tel +"/ "+ oknum );
-        resp.sendRedirect(req.getContextPath()+"/signup2");
+        Member member = Member.builder()
+        		.username(name)
+        		.tel(tel)
+        		.birthday(birthday)
+        		 .gender(genderint)
+        		 .email(email)
+                .id(id)
+                .pw(pw)
+                .roadAddr(addr)
+                .detailAddr(detailAddr)
+                .build();
+        System.out.println(member);
+
+        service.register(member);
+        resp.sendRedirect(req.getContextPath()+"/signin");
+
 	       
 	}
 	

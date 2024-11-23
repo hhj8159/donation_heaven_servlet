@@ -14,8 +14,6 @@ public class MemberServiceImpl implements MemberService{
 	
 	public static void main(String[] args) {
 
-		Member member = instance.findBy();
-	    System.out.println(member);
 	}
 	@Override
 	public int register(Member member) {
@@ -26,15 +24,16 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public Member findBy() {
+	public Member findBy(String id) {
 		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession()){
 			MemberMapper mapper = session.getMapper(MemberMapper.class);
-			return mapper.selectOne();
+			System.out.println(mapper.selectOne(id));
+			return mapper.selectOne(id);
 		}
 	}
 	@Override
 	public boolean login(String id, String pw) {
-		Member m = findBy();
+		Member m = findBy(id);
 		return m != null && m.getPw().equals(pw);
 	}
 	

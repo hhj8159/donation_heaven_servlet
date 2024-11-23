@@ -9,7 +9,7 @@ public interface MemberService {
 	int register(Member member);
 	
 	//회원 단일조회
-	Member findBy();
+	Member findBy(String id);
 	//로그인
 	boolean login(String id,String pw);
 	//회원 전제초회
