@@ -60,5 +60,29 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		return false;
 	}
+	@Override
+	public void emailinsert(String email,String code) {
+		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
+			MemberMapper mapper = session.getMapper(MemberMapper.class);
+			System.out.println(mapper.emailinsert(email,code));
+			mapper.emailinsert(email,code);
+		}
+	}
+	@Override
+	public void emailselect(String email, String code) {
+		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
+			MemberMapper mapper = session.getMapper(MemberMapper.class);
+			mapper.emailselect(email,code);
+		}
+	}
+	@Override
+	public void emaildelete(String email) {
+		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
+			MemberMapper mapper = session.getMapper(MemberMapper.class);
+			mapper.emaildelete(email);
+		}
+	}
+	
+	
 	
 }

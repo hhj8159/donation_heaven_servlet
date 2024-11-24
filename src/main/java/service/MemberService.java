@@ -2,6 +2,8 @@ package service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import vo.Member;
 
 public interface MemberService {
@@ -22,5 +24,11 @@ public interface MemberService {
 	boolean modify(Member member);
 	//회원 로그아웃
 	boolean logout(String id);
+	
+	void emailinsert(@Param("email") String email,@Param("code")String code);
+	
+	void emailselect(@Param("email") String email,@Param("code")String code);
+	
+	void emaildelete(@Param("email") String email);
 	
 }

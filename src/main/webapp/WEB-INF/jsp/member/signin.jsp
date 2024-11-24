@@ -66,6 +66,8 @@
             width: 70%;
         }
     </style>
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js"
+  integrity="sha384-DKYJZ8NLiK8MN4/C5P2dtSmLQ4KwPaoqAfyA/DfmEc1VDxu4yyC7wy6K1Hs90nka" crossorigin="anonymous"></script>
 
 </head>
 
@@ -74,7 +76,7 @@
     <div class="wrap">
         <jsp:include page="../common/header.jsp"></jsp:include>
         <main class="container">
-            <div class="card mt-5 w-75" style="margin-left: 15%;">
+            <div class="card mt-5 w-75 mb-5" style="margin-left: 15%;">
                 <div class="text-center mt-5">
                     <p class="font-color bold-text"><span class="font-angel">천사 </span> 회원님, 반갑습니다</p>
                     <p>홈페이지 로그인을 통해, 나의 후원 정보 및 결연아동의 소식,</p>
@@ -98,8 +100,14 @@
                                     class="font-size"><span>비밀번호찾기</span></a><span class="font-size mx-1"> | </span><a
                                     href="${cp}signup"><span class="font-size">회원가입</span></a>
                             </div>
-
-                            <button class="btn btn-primary mb-5 " style="margin-left: 10%;">카카오 로그인</button>
+							<div class="textwidth">
+                            <a id="kakao-login-btn" href="javascript:loginWithKakao()" class="text-center">
+							  <img src="${cp}images/kakao_login_medium_narrow.png" width="222"
+							    alt="카카오 로그인 버튼" />
+							</a>
+							<p id="token-result"></p>
+							<button class="api-btn" onclick="requestUserInfo()" style="visibility: hidden" >사용자 정보 가져오기</button>
+							</div>
                         </div>
                         <div class="col-5">
                         
@@ -115,9 +123,100 @@
     </div>
 
     <script>
+    Kakao.init('0099f520165f3cbda94c9f9c80092492'); // 사용하려는 앱의 JavaScript 키 입력
+    console.log( Kakao.isInitialized() ); 
     <c:if test="${param.error == 'faild'}">
 	alert("아이디 혹은 비밀번호가 잘못되었습니다.");
 	</c:if>
+	function loginWithKakao() {
+	    Kakao.Auth.authorize({
+	      redirectUri: 'http://localhost:8080/donation_heaven/index',
+	    });
+	  }
+
+	  // 아래는 데모를 위한 UI 코드입니다.
+	  displayToken()
+	  function displayToken() {
+	    var token = getCookie('authorize-access-token');
+
+	    if(token) {
+	      Kakao.Auth.setAccessToken(token);
+	      Kakao.Auth.getStatusInfo()
+	        .then(function(res) {
+	          if (res.status === 'connected') {
+	            document.getElementById('token-result').innerText
+	              = 'login success, token: ' + Kakao.Auth.getAccessToken();
+	          }
+	        })
+	        .catch(function(err) {
+	          Kakao.Auth.setAccessToken(null);
+	        });
+	    }
+	  }
+
+	  function getCookie(name) {
+	    var parts = document.cookie.split(name + '=');
+	    if (parts.length === 2) { return parts[1].split(';')[0]; }
+	  }
+	  
+	  
+	  
+
+/* 	  function requestUserInfo() {
+		  event.preventDefault();
+		    Kakao.API.request({
+		    	url: '/v2/user/me',
+		    	success: function (res) {
+	                  console.log(res);
+	                  // 이메일, 성별, 닉네임, 프로필이미지
+	                  var email = res.kakao_account.email;
+	                  var gender = res.kakao_account.gender;
+	                  var profile_nickname = res.kakao_account.profile.nickname;
+	                  var profile_image = res.kakao_account.profile.thumbnail_image_url;
+	                  var birthday = res.kakao_account.birthday;
+
+	                  console.log(email, gender, profile_nickname, profile_image, birthday);
+	              },
+	              fail: function (error) {
+	                  alert('카카오 로그인에 실패했습니다. 관리자에게 문의하세요.' + JSON.stringify(error));
+	              }
+		      });
+		  } */
+		  
+		  
+/* 		  $.ajax({
+			    type : "POST"
+			    , url : 'https://kauth.kakao.com/oauth/token'
+			    , data : {
+			        grant_type : 'authorization_code',
+			        client_id : '0099f520165f3cbda94c9f9c80092492',
+			        redirect_uri : 'http://localhost:8080/donation_heaven/signin',
+			        code : kakaoCode
+			    }
+			    , contentType:'application/x-www-form-urlencoded;charset=utf-8'
+			    , dataType: null
+			    , success : function(response) {
+			        Kakao.Auth.setAccessToken(response.access_token);
+			        document.querySelector('button.api-btn').style.visibility = 'visible';
+			    }
+			    ,error : function(jqXHR, error) {
+
+			    }
+			}); */
+		  
+/* 		  function requestUserInfo() {
+			  event.preventDefault();
+			  Kakao.API.request({
+				  url: '/v2/user/me',
+				})
+				  .then(function(response) {
+				    console.log(response);
+				  })
+				  .catch(function(error) {
+				    console.log(error);
+				  });
+			  } */
+		  
     </script>
 </body>
 

@@ -10,4 +10,13 @@
     <insert id="insert" >
 	insert into member (username,tel,gender,email,id,pw,road_addr,detail_addr) values(#{username},#{tel},#{gender},#{email},#{id},#{pw},#{roadAddr},#{detailAddr})
   </insert>
+  <insert id="emailinsert">
+	insert into email_verification(email,code) values(#{email},#{code});
+  	 </insert>
+    <select id="emailselect">
+	Select code from email_verification Where code = #{code} AND email = #{email} ORDER BY createdate DESC limit 1;
+  	 </select>
+  	 <delete id="emaildelete">
+  	 Delete From email_verification Where email = #{email};
+  	 </delete>
 </mapper>

@@ -64,7 +64,7 @@
         display: block;
     }
 </style>
-<link rel='stylesheet' type='text/css'href='../font/font.css'>
+<link rel='stylesheet' type='text/css'href='${cp}font/font.css'>
 </head>
 <body>
 
@@ -106,7 +106,7 @@
                     <label for="name" class="col-2 mt-2"  >이름</label><input type="text" class="col-3 form-control textwidth" id="name" name="name">
                     </div>
                     <div class="row mt-3">
-                        <label for="birthday" class="col-2 mt-2">생년월일</label><input type="password" class="form-control col-3 textwidth" id="birthday" name="birthday">
+                        <label for="birthday" class="col-2 mt-2">생년월일</label><input type="text" class="form-control col-3 textwidth" id="birthday" name="birthday" placeholder="생년월일 8자리를입력해주세요">
                     </div>
                     <div class="row mt-3 ">
                         <label for="name" class="col-2 mt-2" style="padding: 0px">휴대전화 번호</label><input type="text" class="col-3 form-control" style=" width: 30%;" id="name" name="tel"><button class="btn" style="background-color: #005B48; color: white; width: 10%">인증</button>
@@ -129,9 +129,11 @@
                     <label for="name" class="col-2 mt-2">이메일</label>
                     <input type="text" class="form-control textwidth mt-2 " id="email" name="email">
                     </div>
-                    <input type="text" class="form-control mt-2" id="email" placeholder="인증번호" style="margin-left: 31%;width: 20%">
-                    <button class="btn mt-3 mb-5" style="background-color: #005B48; color: white; width: 40%;margin-left: 31%;" >인증 번호 발송</button>
-
+                    <button class="btn mt-3 mb-3" style="background-color: #005B48; color: white; width: 40%;margin-left: 31%;" id="emailbtn">인증 번호 발송</button>
+                    <input type="text" class="form-control  none" id="emailcode" name ="code"placeholder="인증번호" style="margin-left: 31%;width: 20% ;">
+                    <button class="btn mt-3 mb-5 none" style="background-color: #005B48; color: white; width: 40%;margin-left: 31%;" id="emailbtn2">인증 번호 확인</button>
+                    
+					<div class="none" id="step3div">
                     <div class="row">
                         <label for="name" class="col-2 mt-2"  >아이디</label>
                         <input type="text" class="form-control textwidth mt-2" id="id" name="id">
@@ -151,6 +153,7 @@
                     </ul>
                         
                     <button class="btn mt-5 mb-5" style="background-color: #005B48; color: white; width: 40%;margin-left: 31%;" >확인</button>
+                    </div>
                 </div>
                 </div>
                 </form>
@@ -160,6 +163,81 @@
     </div>
     <script>
     $(function(){
+    	
+    	$("#emailbtn").click(function(){
+    		event.preventDefault();
+    		const email = $("#email").val();
+
+    	    if (!email) {
+    	        alert("이메일을 입력해주세요.");
+    	        return;
+    	    }
+
+    	    $.ajax({
+    	        url: "${cp}sendemail",
+    	        type: "POST",
+    	        data: { email },
+    	        success: function (response) {
+    	        	console.log(response);
+    	            if (response === "success") {
+    	                alert("인증번호가 발송되었습니다 이메일을 확인해주세요.");
+    	                $("#emailcode").removeClass("none").addClass("block");
+    	                $("#emailbtn2").removeClass("none").addClass("block");
+    	            } else {
+    	                alert("인증번호 발송에 실패했습니다 다시 시도해주세요.");
+    	            }
+    	        },
+    	        error: function () {
+    	            alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
+    	        },
+    	    });
+    	});
+    	
+    	$("#emailbtn2").click(function(){
+    		event.preventDefault();
+    		const emailcode = $("#emailcode").val();
+    		const email = $("#email").val();
+    	    if (!email) {
+    	        alert("이메일을 입력해주세요.");
+    	        return;
+    	    }else if(!emailcode){
+    	        alert("이메일을 입력해주세요.");
+    	        return;
+    	    }
+
+    	    $.ajax({
+    	        url: "${cp}emailselect",
+    	        type: "POST",
+    	        data: { email: email,
+    	        		code: emailcode },
+    	        success: function (response) {
+    	        	console.log(response);
+    	            if (response === "success") {
+    	                $("#step3div").removeClass("none").addClass("block");
+    	                alert("인증번호가 확인되었습니다");
+	    	                $.ajax({
+	    	        	        url: "${cp}emaildelete",
+	    	        	        type: "POST",
+	    	        	        data: { email},
+	    	        	        success: function (response) {
+	    	        	        	console.log(response);
+	    	        	        },
+	    	        		});
+
+    	            } else {
+    	                alert("인증번호가 틀립니다");
+    	            }
+    	        },
+    	        error: function () {
+    	            alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
+    	        },
+    		});
+    	});
+    
+    	
+    	
+    	
+    	
         $("#search").click(function(){
             event.preventDefault();
             
@@ -208,6 +286,9 @@
         $("#step1").removeClass("block").addClass("none");
         $("#step2").removeClass("none").addClass("block");
     })
+    
+    
+    
 })
     </script>
 </body>

@@ -63,7 +63,7 @@ public class Signup extends HttpServlet{
         System.out.println(member);
 
         service.register(member);
-        resp.sendRedirect(req.getContextPath()+"/signin");
+        resp.sendRedirect(req.getContextPath()+"/sucessSignup");
 
 	       
 	}
