@@ -1,0 +1,111 @@
+[33mcommit 61884c8ad9b9592c2bde806ea9cf526561d13f4c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: hhj8159 <tkddnjs3351@naver.com>
+Date:   Mon Nov 25 17:47:49 2024 +0900
+
+    도네이션 jsp수정
+
+[33mcommit 6a746e19d8c0bf52d8cef6233d822621dfb97a71[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: ihyeonu <dlgusdn2312@gmail.com>
+Date:   Mon Nov 25 15:50:36 2024 +0900
+
+    리플 컨트롤러 만드는중
+
+[33mcommit fe09d0b289b5f5887cc48cb6a07bf54021ac5180[m
+Author: ihyeonu <dlgusdn2312@gmail.com>
+Date:   Mon Nov 25 10:24:47 2024 +0900
+
+    인덱스 생성
+
+[33mcommit 3998764d1e50bd822b75b3d6d63621ba5cda8308[m
+Author: mekwon92 <me92100984@gmail.com>
+Date:   Mon Nov 25 09:35:09 2024 +0900
+
+    header.jsp 링크수정
+
+[33mcommit 50f92135822e31644a4ab290eb0a78875ed70845[m
+Author: kimyoungtae <kyt4423@gmail.com>
+Date:   Mon Nov 25 01:42:29 2024 +0900
+
+    회원가입 메일인증구현완료,카카오로그인 40퍼완료UI수정
+
+[33mcommit 1885cfbaed824098a05b13184e2c9d40d26ac4a6[m
+Author: kimyoungtae <kyt4423@gmail.com>
+Date:   Sun Nov 24 02:43:15 2024 +0900
+
+    회원가입,로그인기능구현완료
+
+[33mcommit b5401dab88a6c76d257f02ed1b50e598fb37f50f[m
+Merge: acb5095 b66b8c2
+Author: mekwon92 <me92100984@gmail.com>
+Date:   Fri Nov 22 18:43:07 2024 +0900
+
+    Merge branch 'master' of https://github.com/hhj8159/donation_heaven_servlet
+    
+    # Conflicts:
+    #       src/main/resources/mybatis-config.xml
+
+[33mcommit b66b8c21bcf1d95e4062608aac03702294048dc5[m
+Author: kimyoungtae-kor <kyt4423@gmail.com>
+Date:   Fri Nov 22 18:27:06 2024 +0900
+
+    회원가입 sql오류 UI변경해야함
+
+[33mcommit 622d64a0054315fcf2c6c0bcc736b703702cb7ab[m
+Author: ihyeonu <dlgusdn2312@gmail.com>
+Date:   Fri Nov 22 18:01:20 2024 +0900
+
+    헤더 li태그 수정
+
+[33mcommit b8dfa56550c494b85f29dced532b4207802ec46d[m
+Author: ihyeonu <dlgusdn2312@gmail.com>
+Date:   Fri Nov 22 17:33:19 2024 +0900
+
+    헤더푸터수정
+
+[33mcommit acb50950aac09a5018a9e16a1f596c59f2bbbaa9[m
+Author: mekwon92 <me92100984@gmail.com>
+Date:   Fri Nov 22 17:05:17 2024 +0900
+
+    게시판 서블릿,매퍼
+
+[33mcommit 497beb76f9bec1de27522302dd9440e9bf096770[m
+Author: ihyeonu <dlgusdn2312@gmail.com>
+Date:   Fri Nov 22 16:43:42 2024 +0900
+
+    댓글 서비스 임플 생성
+
+[33mcommit 85f9e0efddbcf50cae7b3598e6c911b6437b4b96[m
+Author: mekwon92 <me92100984@gmail.com>
+Date:   Fri Nov 22 15:52:33 2024 +0900
+
+    게시판 view 차단버튼
+
+[33mcommit 6843c3d6b5fca771efcf90f7a388022fd36fd1d8[m
+Author: kimyoungtae-kor <kyt4423@gmail.com>
+Date:   Fri Nov 22 15:08:31 2024 +0900
+
+    db연결 확인 쿼리문 확인완료
+
+[33mcommit 855c337111b388ff1638d15a72aaf2a676eed004[m
+Author: mekwon92 <me92100984@gmail.com>
+Date:   Fri Nov 22 14:39:36 2024 +0900
+
+    게시판
+
+[33mcommit 1363ba3deecbdc1cc255b415ea362dccf976069a[m
+Author: mekwon92 <me92100984@gmail.com>
+Date:   Fri Nov 22 11:58:53 2024 +0900
+
+    pom.xml <dependencies>, vo, 게시판쪽 jsp
+
+[33mcommit b1dbe76dbc91f547fa9b2ebb2255bd98eb624b2f[m
+Author: kimyoungtae <kyt4423@gmail.com>
+Date:   Fri Nov 22 00:17:23 2024 +0900
+
+    서블렛 로그인,회원가입페이지연결
+
+[33mcommit a40163b659cc159aa17acf74a85c42e762114fbd[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: Sangwon1233 <tkddnjs3351@naver.com>
+Date:   Thu Nov 21 18:00:48 2024 +0900
+
+    First Commit
