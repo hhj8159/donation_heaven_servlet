@@ -64,7 +64,6 @@ public class MemberServiceImpl implements MemberService{
 	public void emailinsert(String email,String code) {
 		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
 			MemberMapper mapper = session.getMapper(MemberMapper.class);
-			System.out.println(mapper.emailinsert(email,code));
 			mapper.emailinsert(email,code);
 		}
 	}

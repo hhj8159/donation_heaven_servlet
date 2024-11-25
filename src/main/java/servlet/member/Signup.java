@@ -37,8 +37,8 @@ public class Signup extends HttpServlet{
         String email = req.getParameter("email");
         String id = req.getParameter("id");
         String pw = req.getParameter("pw");
-        String addr = req.getParameter("addr");
-        String detailAddr = req.getParameter("detailAddr");
+        String addr = req.getParameter("roadAddrPart1");
+        String detailAddr = req.getParameter("addrDetail");
         System.out.println(name +"/ "+  birthday +"/ "+  tel +"/ " + gender +"/ "+  email +"/ "+  id +"/ "+ pw + "/" + addr + "/"+detailAddr);
         
 //        HttpSession session = req.getSession();
