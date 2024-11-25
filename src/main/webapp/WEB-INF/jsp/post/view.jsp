@@ -83,6 +83,11 @@
 		                    <a href="report?" class="btn btn-secondary text-light" style="width: 70px;" onclick="return confirm('신고하시겠습니까?')">신고</a>                    
                     	</c:if>                    	
                     </div>
+                    <form>
+                    <input type="hidden" value="${post.pno}">
+                    <input type="text">
+                    <input type="submit" class="btn" value="댓글작성">
+                    </form>
                 </main>
             <jsp:include page="../common/footer.jsp"></jsp:include>
             </div>
