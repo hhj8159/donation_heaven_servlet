@@ -166,17 +166,17 @@
 	                	<td>${p.viewCount}</td>
 	                	<td>${p.likes}</td>
 	                </tr>
-	                </c:forEach>
-		                
-		                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="view?pno=${p.pno}&${pageDto.cri.qs2}" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>${p.title}</h4></div></a></div>
-		                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="#" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기</h4></div></a></div>
-		                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="#" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기</h4></div></a></div>
-		                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="#" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기</h4></div></a></div>
-		                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="#" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기</h4></div></a></div>
-		                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="#" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기</h4></div></a></div>
-		                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="#" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기</h4></div></a></div>
-		                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="#" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기</h4></div></a></div>
-		                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="#" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기</h4></div></a></div>
+	                </c:forEach items="${posts}" var="p">
+	                	<c:if test="${empty posts}"><tr><td colspan="5">작성된 글이 없습니다.<td></tr></c:if>
+	                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="view?pno=${p.pno}&${pageDto.cri.qs2}" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>${p.title}</h4></div></a></div>
+	                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="#" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기</h4></div></a></div>
+	                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="#" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기</h4></div></a></div>
+	                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="#" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기</h4></div></a></div>
+	                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="#" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기</h4></div></a></div>
+	                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="#" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기</h4></div></a></div>
+	                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="#" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기</h4></div></a></div>
+	                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="#" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기</h4></div></a></div>
+	                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="#" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기</h4></div></a></div>
 		                </div>
 		            </div>
 	            
