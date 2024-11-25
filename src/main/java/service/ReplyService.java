@@ -14,4 +14,4 @@ public interface ReplyService {
 	
 	Reply findBy(Long rno);
 
-}	
+}

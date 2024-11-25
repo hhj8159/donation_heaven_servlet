@@ -13,8 +13,7 @@ public class Index extends HttpServlet{
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("msg");
-		resp.getWriter().print("<h1>hello Servlet</h1>");
+		req.getRequestDispatcher("/WEB-INF/jsp/common/index.jsp").forward(req, resp);
 	}
 	
 }
