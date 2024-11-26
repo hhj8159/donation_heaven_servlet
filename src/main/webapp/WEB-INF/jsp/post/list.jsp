@@ -147,7 +147,7 @@
            	</c:if>
            	<!-- 갤러리 -->
            	<c:if test="${pageDto.cri.category == 4}">
-	           	<div class="clearfix"><a href="write.html" class="btn text-light float-end" style="background-color: #005B48; width: 70px;">글쓰기</a></div>	               
+	           	<div class="clearfix"><a href="write?${pageDto.cri.qs2}" class="btn text-light float-end" style="background-color: #005B48; width: 70px;">글쓰기</a></div>	               
 	            <div class="justify-content-center">
 	                <div class ="d-flex flex-wrap justify-content-center">
 	                	<c:if test="${empty posts}"><tr><td colspan="5">작성된 글이 없습니다.<td></tr></c:if>
@@ -180,7 +180,7 @@
 		             
 		                	<td><fmt:formatDate value="${p.regdate}" pattern="yyyy-MM-dd" /></td>
 		                	<!-- 다운로드수를 어찌 처리해야하나... -->
-		                	<td>몰라</td>
+		                	<td>${p.attachs.downloadCount}</td>
 		                	<td><button>다운로드</button></td>
 		                </tr>
 	                </c:forEach>

@@ -7,10 +7,11 @@
 	<id column="pno" property="pno"/>
 	<result column="title" property="title"/>
 	<result column="content" property="content"/>
-	<result column="writer" property="writer"/>
+	<result column="id" property="id"/>
 	<result column="regdate" property="regdate"/>
 	<result column="updatedate" property="updatedate"/>
 	<result column="view_count" property="viewCount"/>
+	<result column="likes" property="likes"/>
 	<result column="cno" property="cno"/>
 	<result column="attach_flag" property="attachFlag"/>
 </resultMap>
@@ -60,6 +61,12 @@
   <update id="increaseViewCount">
   update post set view_count = view_count + 1 where pno = #{pno}
   </update>
+  
+  <update id="increaseLikes">
+  update post set likes = likes + 1 where pno = #{pno}
+  </update>
+  
+  
   <delete id="delete">
   delete from post where pno = #{pno}
   </delete>

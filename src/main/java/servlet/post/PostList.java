@@ -20,7 +20,7 @@ public class PostList extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Criteria cri = new Criteria(req);
-		System.out.println(cri);
+//		System.out.println(cri);
 		
 		
 		

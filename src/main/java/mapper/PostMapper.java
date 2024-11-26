@@ -19,4 +19,8 @@ public interface PostMapper {
 	int increaseViewCount(Long pno);
 	
 	int delete(Long pno);
+	
+//	int increaseLikes(Long pno);
+
+	void increaseLikes(Long pno);
 }

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import dto.Criteria;
 import service.PostService;
 import service.PostServiceImpl;
+import utils.Commons;
 import vo.Attach;
 import vo.Post;
 
@@ -39,6 +40,16 @@ public class Write extends HttpServlet{
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		String id = req.getParameter("id");
+		
+		// 제목이랑 내용 공백시 처리해야됨(jsp에서 해야됨!!)
+		String ct = content.trim();
+		String tt = title.trim();
+	
+		String redirectUrl = "write?"+cri.getQs2();
+		if(ct.length() == 0 || tt.length() == 0) {		
+			Commons.printMsg("글 내용을 입력해주세요", redirectUrl, resp);
+			return;
+		}
 		
 		List<Attach> attachs = new ArrayList<>();
 

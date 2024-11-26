@@ -79,7 +79,7 @@
                 	</c:if>
                 	
                 	<c:if test="${post.id != member.id}">
-                  <a href="likes?" class="btn text-light" style="background-color: #005B48; width: 70px;" onclick="return confirm('추천하시겠습니까?')">추천</a>
+                  <a href="like?" class="btn text-light" style="background-color: #005B48; width: 70px;" onclick="return confirm('추천하시겠습니까?')">추천</a>
                   <a href="list?${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 70px;">목록</a>
                   <a href="report?" class="btn btn-secondary text-light" style="width: 70px;" onclick="return confirm('신고하시겠습니까?')">신고</a>                    
                 	</c:if>                    	

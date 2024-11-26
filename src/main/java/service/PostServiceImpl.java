@@ -90,4 +90,14 @@ public class PostServiceImpl implements PostService{
 		}
 	}
 	
+	@Override
+	public int like(Long pno) {
+		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
+			PostMapper mapper = session.getMapper(PostMapper.class);
+			Post post = mapper.selectOne(pno);
+			mapper.increaseLikes(pno);
+			return mapper.update(post);
+		}
+	}
+	
 }

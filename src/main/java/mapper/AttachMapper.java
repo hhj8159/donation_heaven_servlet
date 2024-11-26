@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import vo.Attach;
 
 public interface AttachMapper {
-	@Insert("insert into attach values(#{uuid}, #{origin}, #{path}, #{image}, #{pno})")
+	@Insert("insert into attach (uuid, origin, path, image, pno) values (#{uuid}, #{origin}, #{path}, #{image}, #{pno})")
 	int insert(Attach attach);	
 	
 	@Select("select * from attach where pno= #{pno}")
