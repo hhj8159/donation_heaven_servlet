@@ -84,6 +84,24 @@
                   <a href="report?" class="btn btn-secondary text-light" style="width: 70px;" onclick="return confirm('신고하시겠습니까?')">신고</a>                    
                 	</c:if>                    	
                 </div>
+                <div class="text-center my-5">
+                        <c:if test="${post.writer == member.id}">
+                            <a href="modify?pno=${post.pno}&${cri.qs2}" class="btn btn-warning">수정</a>
+                            <a href="list?${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 70px;">목록</a>
+                            <a href="remove?pno=${post.pno}&${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 70px;" onclick="return confirm('삭제하시겠습니까?')">삭제</a>
+                        </c:if>
+                        
+                        <c:if test="${post.writer != member.id}">
+                            <a href="likes?" class="btn text-light" style="background-color: #005B48; width: 70px;" onclick="return confirm('추천하시겠습니까?')">추천</a>
+                            <a href="list?${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 70px;">목록</a>
+                            <a href="report?" class="btn btn-secondary text-light" style="width: 70px;" onclick="return confirm('신고하시겠습니까?')">신고</a>                    
+                        </c:if>                        
+                    </div>
+                    <form>
+                    <input type="hidden" value="${post.pno}">
+                    <input type="text">
+                    <input type="submit" class="btn" value="댓글작성">
+                    </form>
             </main>
         <jsp:include page="../common/footer.jsp"></jsp:include>
         </div>
