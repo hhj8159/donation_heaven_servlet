@@ -4,6 +4,9 @@
 <html>
 <head>
 <jsp:include page="../common/head.jsp"></jsp:include>
+
+   <link rel='stylesheet' type='text/css'href='alert.css'>
+   
    <style>
         .font-color {color: #005B48; font-size: 25px;}
         body{
@@ -174,13 +177,17 @@
                                 <button type="button" class="btn btn-outline-success m-4 mb-5 w-75" id="donabtn">후원 신청하기</button> 
                             </div>
                         </div>
-                    </div>                    
+                    </div>
+                    
 
                 </div>
-            </div>            
+            </div> 
+            
         </main>
        <jsp:include page="../common/footer.jsp"></jsp:include>
     </div>
+    <script src="./alert.js"></script>
+
     <script>
 
         
@@ -209,11 +216,9 @@
 
 
             $("#priceWrite").keyup(function (event) {
-                if($("#priceWrite").val().length >= 17){
-                    
-                    alert("후원금액은 0~17자리까지 가능합니다");
-                    // customAlert.alert("후원금액은 0~17자리까지 가능합니다","경고!");
-
+                if($("#priceWrite").val().length >= 17){                    
+                    // alert("후원금액은 0~17자리까지 가능합니다");
+                    customAlert.alert("후원금액은 0~17자리까지 가능합니다","경고!");
                     $("#priceWrite").val(0);
                     return;
                 }
@@ -227,17 +232,34 @@
                 $("#totaldonationprice").text(tdprice);
             });
 
-
+            
+            
 
             $("#nextbtn1").click(function(){
-                event.preventDefault();
-                $("#select").removeClass("block").addClass("none");        
-                $("#info").removeClass("none").addClass("block");
+                event.preventDefault();                                
+                if($("#totaldonationprice").text() == "" || $("#totaldonationprice").text() <= 999) {
+                    customAlert.alert("1000원 이상의 후원금액을 입력해주세요","경고!");                    
+                }
+                else {
+                    $("#select").removeClass("block").addClass("none");        
+                    $("#info").removeClass("none").addClass("block");
+                }                
             })
             $("#nextbtn2").click(function(){
                 event.preventDefault();
+                // if($("#roadAddr").text() == "") {
+                //     console.log("test1");
+                //     customAlert.alert("도로명주소를 입력해주세요","경고!");
+                    
+                // }                    
+                // if($("#detailAddr").text() == "") {
+                //     console.log("test2");
+                //     customAlert.alert("상세주소를 입력해주세요","경고!");
+                // }
+                
                 $("#info").removeClass("block").addClass("none");
-                $("#pay").removeClass("none").addClass("block");                
+                $("#pay").removeClass("none").addClass("block");    
+                    
             })
             $("#prebtn1").click(function(){
                 event.preventDefault();
@@ -295,11 +317,6 @@
                     $(this).closest("ul.search-result-wrap").empty();
                 })                
             })
-
-
-
-
-
 
     })
     </script>    
