@@ -90,13 +90,13 @@
                 <form name="frm" class="mx-auto col-12 col-sm-9 p-2 " method="post">
                     <div class="row mb-5">
                         <div class="col-7">
-                            <input type="text" class=" form-control textwidth" id="id" placeholder="아이디" name="id">
+                            <input type="text" class=" form-control textwidth" id="id" placeholder="아이디" name="id" value="${cookie['save'].value}">
                             <input type="password" class="form-control my-3 textwidth" id="pwd" placeholder="비밀번호"
                                 name="pw">
                             <button class=" btn textwidth" style="background-color: #005B48; color: white;">로그인</button>
                             <div class=" form-check form-switch my-3">
                                 <input class="form-check-input " style="margin-left: 1%" type="checkbox" id="mySwitch"
-                                    name="remember-id" value="yes">
+                                    name="remember-id" value="yes" ${empty cookie['save'] ? '' : 'checked'}>
                                 <label class="form-check-label font-size" style="margin-left: 2%" for="mySwitch">아이디
                                     저장</label>
                                 <a href="#" class="font-size" style="margin-left: 8%;">아이디</a> <span

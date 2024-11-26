@@ -4,6 +4,7 @@
 <html>
 <head>
    <jsp:include page="../common/head.jsp"></jsp:include>
+      <link rel='stylesheet' type='text/css'href='${cp}css/alert.css'>
    <style>
     .font-color {color: #005B48; font-size: 30px;}
     .donation {background-color: #005B48; color: white; font-size: 30px; margin-right: 30px; }
@@ -140,18 +141,19 @@
                     </div>
                     <div class="mt-3 row">
                         <label for="name" class="col-2 mt-2"  >비밀번호</label>
-                        <input type="text" class="form-control textwidth mt-2" id="pwd" placeholder="비밀번호" name="pw">
+                        <input type="password" class="form-control textwidth mt-2" id="pwd" placeholder="비밀번호" name="pw">
                     </div>
-                    <input type="text" class="form-control mt-2 " id="pwdresult" placeholder="비밀번호 확인" style="margin-left: 31%;width: 41%;">
-                     <label for="name" class="col-2 mt-3" >주소</label>
-                    <div class="mt-3 ">
-                    <button class="btn mb-3" id="search" style="background-color: #005B48; color: white; width: 15%;margin-left: 15%">주소지 검색</button>
-                        <input type="text" class="form-control " style=" width: 55%;margin-left: 15%;" id="roadAddrPart1" name="roadAddrPart1" placeholder="도로명 주소" readonly>
-                    </div>
-                    <input type="text" class="col-3 form-control textwidth mt-3 mb-3" style="margin-left: 15%" id="addrDetail" name = "addrDetail" placeholder="상세주소" readonly>
-                    <ul class="list-group search-result-wrap mb-3 w-50" style="margin-left: 15%;" >
+                    <input type="password" class="form-control mt-2 " id="pwdresult" placeholder="비밀번호 확인" style="margin-left: 31%;width: 41%;">
                     
-                    </ul>
+                    <div class="mt-3 row">
+                     <label for="name" class="col-2 mt-3" >주소</label>
+                    <button class="btn mb-3 mt-2" id="search" style="background-color: #005B48; color: white; width: 15%;">주소지 검색</button>
+                        
+                    </div>
+                    <div>
+                    <input type="text" class="form-control " style=" width: 55%;margin-left: 31%;" id="roadAddrPart1" name="roadAddrPart1" placeholder="도로명 주소" readonly>
+                    <input type="text" class="col-3 form-control textwidth mt-3 mb-3" style="margin-left: 31%" id="addrDetail" name = "addrDetail" placeholder="상세주소" readonly>
+                    </div>
                         
                     <button class="btn mt-5 mb-5" style="background-color: #005B48; color: white; width: 40%;margin-left: 31%;" >확인</button>
                     </div>
@@ -162,15 +164,16 @@
         </main>
          <jsp:include page="../common/footer.jsp"></jsp:include>
     </div>
+    <script src="${cp}js/alert.js"></script>
     <script>
     $(function(){
     	
-    	$("#emailbtn").click(function(){
+    	$("#emailbtn").on('click',function(event){
     		event.preventDefault();
     		const email = $("#email").val();
 
     	    if (!email) {
-    	        alert("이메일을 입력해주세요.");
+    	    	customAlert.alert("이메일을 입력해주세요.","경고!");
     	        return;
     	    }
 
@@ -181,15 +184,15 @@
     	        success: function (response) {
     	        	console.log(response);
     	            if (response === "success") {
-    	                alert("인증번호가 발송되었습니다 이메일을 확인해주세요.");
+    	            	customAlert.alert("인증번호가 발송되었습니다 이메일을 확인해주세요.","승인");
     	                $("#emailcode").removeClass("none").addClass("block");
     	                $("#emailbtn2").removeClass("none").addClass("block");
     	            } else {
-    	                alert("인증번호 발송에 실패했습니다 다시 시도해주세요.");
+    	            	customAlert.alert("인증번호 발송에 실패했습니다 다시 시도해주세요.");
     	            }
     	        },
     	        error: function () {
-    	            alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
+    	        	customAlert.alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
     	        },
     	    });
     	});
@@ -199,10 +202,10 @@
     		const emailcode = $("#emailcode").val();
     		const email = $("#email").val();
     	    if (!email) {
-    	        alert("이메일을 입력해주세요.");
+    	    	customAlert.alert("이메일을 입력해주세요.","경고!");
     	        return;
     	    }else if(!emailcode){
-    	        alert("이메일을 입력해주세요.");
+    	    	customAlert.alert("이메일을 입력해주세요.","경고!");
     	        return;
     	    }
 
@@ -215,7 +218,9 @@
     	        	console.log(response);
     	            if (response === "success") {
     	                $("#step3div").removeClass("none").addClass("block");
-    	                alert("인증번호가 확인되었습니다");
+    	                customAlert.alert("인증번호가 확인되었습니다","확인");
+    	                $("#emailcode").removeClass("block").addClass("none");
+    	                $("#emailbtn2").removeClass("block").addClass("none");
 	    	                $.ajax({
 	    	        	        url: "${cp}emaildelete",
 	    	        	        type: "POST",
@@ -226,11 +231,11 @@
 	    	        		});
 
     	            } else {
-    	                alert("인증번호가 틀립니다");
+    	            	customAlert.alert("인증번호가 틀립니다");
     	            }
     	        },
     	        error: function () {
-    	            alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
+    	        	customAlert.alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
     	        },
     		});
     	});
