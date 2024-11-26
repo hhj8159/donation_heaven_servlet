@@ -50,7 +50,7 @@ public class Signup extends HttpServlet{
         
         System.out.println(name +"/ "+  birthday +"/ "+  tel +"/ "+ oknum );
         Member member = Member.builder()
-        		.username(name)
+        		.name(name)
         		.tel(tel)
         		.birthday(birthday)
         		 .gender(genderint)

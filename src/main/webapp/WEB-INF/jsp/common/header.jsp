@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <header class="container-fluid">     
             <nav class="navbar bg-white navbar-expand-sm">
                 <ul class="navbar-nav container justify-content-start">
@@ -18,12 +18,22 @@
                     
                     
                 </ul>
-				<div class="sign" style="margin-top: 50px; color: #005B48;">
+                <c:if test="${empty sessionScope.member}">
+                   <div class="sign" style="margin-top: 50px; color: #005B48;">
                  	 <a href="signin" class="small float-start text-decoration-none" style="color: #005B48;">로그인</a>
                      <a href="#" class="small float-start text-decoration-none vertical mx-3" style="color: #005B48;"><p> | </p></a>
                      <a href="signup.html" class="small float-start text-decoration-none signup" style="margin-right: 20px; color: #005B48;">회원가입</a> 
                 </div>
                 <a href="donation" class="btn btn-block btn-sm col-1 donation" style="background-color: #005B48; color: white; font-size: 30px; margin-right: 30px; ">후원하기</a>
+               	</c:if>
+               	<c:if test="${not empty sessionScope.member}">
+						<div class="mt-4">
+                       <div class="sign" style="color: #005B48;">
+                 	   <p class=""><strong>${member.name}</strong>님<br> 환영합니다</p>
+                		</div>
+                		</div>
+                <a href="donation" class="btn btn-block btn-sm col-1 donation ms-5" style="background-color: #005B48; color: white; font-size: 30px; margin-right: 30px; ">후원하기</a>
+                      	</c:if>
                
             </nav>
         </header>
