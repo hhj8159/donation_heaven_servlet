@@ -36,7 +36,13 @@
             <jsp:include page="../common/header.jsp" />
             <main class="container">
                 <div class="clearfix py-4">
-                    <h2 class="mt-5 font-color bold-text float-start"><b>공지사항</b></h2>
+                    <h2 class="mt-5 font-color bold-text;"><b> 
+			            <c:if test="${cri.category == 1}">공지사항</c:if>
+			            <c:if test="${cri.category == 2}">자유게시판</c:if>
+			            <c:if test="${cri.category == 3}">질문과 답변</c:if>
+			            <c:if test="${cri.category == 4}">봉사인증</c:if>
+			            <c:if test="${cri.category == 5}">자료실</c:if>            
+            		</b></h2>
                 </div>
                 <div class="card border-start-0 border-end-0 rounded-0 border-2">
                     <div class="card-header">
@@ -73,15 +79,19 @@
                 
                 <div class="text-center my-5">
                 	<c:if test="${post.id == member.id}">
-                  <a href="modify?pno=${post.pno}&${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 70px;">수정</a>
-                  <a href="list?${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 70px;">목록</a>
-                  <a href="remove?pno=${post.pno}&${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 70px;" onclick="return confirm('삭제하시겠습니까?')">삭제</a>
+	                  <a href="modify?pno=${post.pno}&${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 70px;">수정</a>
+	                  <a href="list?${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 70px;">목록</a>
+	                  <a href="remove?pno=${post.pno}&${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 70px;" onclick="return confirm('삭제하시겠습니까?')">삭제</a>
                 	</c:if>
                 	
                 	<c:if test="${post.id != member.id}">
-                  <a href="like?" class="btn text-light" style="background-color: #005B48; width: 70px;" onclick="return confirm('추천하시겠습니까?')">추천</a>
-                  <a href="list?${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 70px;">목록</a>
-                  <a href="report?" class="btn btn-secondary text-light" style="width: 70px;" onclick="return confirm('신고하시겠습니까?')">신고</a>                    
+                	  <c:if test="${cri.category== 2}">
+	                  <a href="like?pno=${post.pno}&${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 70px;" onclick="return confirm('추천하시겠습니까?')">추천</a>                	  
+                	  </c:if>
+	                  <a href="list?${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 70px;">목록</a>
+	                  <c:if test="${cri.category== 2}">
+	                  <a href="report?" class="btn btn-secondary text-light" style="width: 70px;" onclick="return confirm('신고하시겠습니까?')">신고</a>                    
+                	  </c:if>
                 	</c:if>                    	
                 </div>    
                 <form>

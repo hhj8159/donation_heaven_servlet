@@ -32,6 +32,8 @@ public class Criteria {
 	//request 분석 후 필드초기화
 	public Criteria (HttpServletRequest req) {
 
+		if(req == null) return;
+
 		String c = req.getParameter("category");
 		
 		String a = req.getParameter("amount");
@@ -39,8 +41,11 @@ public class Criteria {
 		//category가 4일 경우 amount 9
 		// 고칠거있음.....(잘모르겟음ㅠㅠ)
 		
+		if(c == null)
+			return;
+		
 		if(a == null) {
-			if(c.equals("4")) {
+			if(c != null && c.equals("4")) {
 				this.amount = 9;		
 			}
 			else {
@@ -50,7 +55,6 @@ public class Criteria {
 		
 		
 		
-		if(req == null) return;
 		
 		Field[] fields = getClass().getDeclaredFields();
 		

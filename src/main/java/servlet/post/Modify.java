@@ -64,8 +64,6 @@ public class Modify extends HttpServlet{
 			return;
 		}
 		
-		
-		
 		Member m = (Member) memberObj;
 
 		//파라미터 수집
@@ -79,6 +77,33 @@ public class Modify extends HttpServlet{
 			Commons.printMsg("본인이 작성한 글만 수정할 수 있습니다", "list?"+cri.getQs2(), resp);
 			return;
 		}
+		
+		//첨부파일수정하고싶ㅇ므 .ㅠㅠㅠ
+//		List<Attach> attachs = new ArrayList<>();
+//
+//		
+//		String[] uuids = req.getParameterValues("uuid");
+//		String[] origins = req.getParameterValues("origin");
+//		String[] images = req.getParameterValues("image");
+//		String[] paths = req.getParameterValues("path");
+//
+//		
+//		if(uuids != null) {
+//			for(int i = 0; i < uuids.length; i++) {
+//				attachs.add(Attach.builder()
+//						.uuid(uuids[i])
+//						.origin(origins[i])
+//						.image(images[i].equals("true"))
+//						.path(paths[i])
+//						.build());
+//			}
+//		}
+//			
+//		
+//		service.modify(Post.builder().title(title).content(content).attachs(attachs).build());
+//		resp.sendRedirect("view?pno="+pno+"&"+cri.getQs2());
+//		
+//		
 		
 		service.modify(Post.builder().title(title).content(content).pno(pno).build());
 		resp.sendRedirect("view?pno="+pno+"&"+cri.getQs2());

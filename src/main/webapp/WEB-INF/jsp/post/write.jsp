@@ -25,11 +25,17 @@
     <div class="wrap">
         <jsp:include page="../common/header.jsp" />       
         <main class="container">
-            <h2 class="mt-5 font-color bold-text;"><b>공지사항</b></h2>
+             <h2 class="mt-5 font-color bold-text;"><b> 
+	            <c:if test="${cri.category == 1}">공지사항</c:if>
+	            <c:if test="${cri.category == 2}">자유게시판</c:if>
+	            <c:if test="${cri.category == 3}">질문과 답변</c:if>
+	            <c:if test="${cri.category == 4}">봉사인증</c:if>
+	            <c:if test="${cri.category == 5}">자료실</c:if>            
+       		</b></h2>
            
 			<div class="my-3 col-md-9 mx-auto">
                 <form method="post" action="write?page=1&${cri.qs}">
-                	<input type="hidden" id="id" name="id" value="${post.id}">
+                	<input type="hidden" class="form-control" id="id" name="id" value="${member.id}">
                 	
 	                <label for="title" class="form-label mt-3"><b> 제목</b></label>
 	                <input type="text" class="form-control" id="title" placeholder="title" name="title">

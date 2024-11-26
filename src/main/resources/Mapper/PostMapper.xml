@@ -45,7 +45,7 @@
 		    		or content like concat('%', #{keyword},'%')
 		    	</if>
 		    	<if test='t == "W"'>
-		    		or writer like concat('%', #{keyword},'%')
+		    		or id like concat('%', #{keyword},'%')
 		    	</if>
 		    </foreach>
 	    </trim>

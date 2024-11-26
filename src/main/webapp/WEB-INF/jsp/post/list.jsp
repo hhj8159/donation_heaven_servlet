@@ -73,12 +73,12 @@
 	                </tr>
 	                </thead> 
 	                <tbody>
-		  		    <c:if test="${empty posts}"><tr><td colspan="3">작성된 글이 없습니다.<td></tr></c:if>
+		  		    <c:if test="${empty posts}"><tr><td colspan="4">작성된 글이 없습니다.<td></tr></c:if>
 	                <c:forEach items="${posts}" var="p">
 	                <tr>
 	                	<td>${p.pno}</td>
 	             		<td class="text-truncate text-start"><a href="view?pno=${p.pno}&${pageDto.cri.qs2}" class="text-decoration-none text-reset">${p.title}</a>
-	                	<c:if test="${p.attachFlag}"><i class="fa-solid fa-paperclip text-dark"></i></c:if>
+	                	<c:if test="${p.attachFlag}"><i class="fa-solid fa-paperclip text-dark"></i></c:if></td>
 	                	<td><fmt:formatDate value="${p.regdate}" pattern="yyyy-MM-dd" /></td>
 	                	<td>${p.viewCount}</td>
 	                </tr>
@@ -100,7 +100,7 @@
 	                </tr>
 	                </thead> 
 	                <tbody>
-		  		    <c:if test="${empty posts}"><tr><td colspan="5">작성된 글이 없습니다.<td></tr></c:if>
+		  		    <c:if test="${empty posts}"><tr><td colspan="6">작성된 글이 없습니다.<td></tr></c:if>
 	                <c:forEach items="${posts}" var="p">
 	                <tr>
 	                	<td>${p.pno}</td>
@@ -127,19 +127,17 @@
 	                </tr>
 	                </thead> 
 	                <tbody>
-	                <c:if test="${empty member.id}"><tr><td colspan="3">로그인 후 확인가능합니다.<td></tr></c:if>
-		  		    <c:if test="${empty posts}"><tr><td colspan="3">작성된 글이 없습니다.<td></tr></c:if>
-	                <c:forEach items="${posts}" var="p">
+	                <c:if test="${empty member.id}"><tr><td colspan="4">로그인 후 확인가능합니다.</td></tr></c:if>
+		  		    <c:if test="${not empty member.id && empty posts}"><tr><td colspan="4">작성된 글이 없습니다.</td></tr></c:if>
+	                <c:forEach items="${posts}" var="p" varStatus="status">	        
 		               <c:if test="${p.id == member.id}">
-			                <tr>
+			               <tr>
 			                	<td>${p.pno}</td>
 			             		<td class="text-truncate text-start"><a href="view?pno=${p.pno}&${pageDto.cri.qs2}" class="text-decoration-none text-reset">${p.title}</a>
 			                	<c:if test="${p.attachFlag}"><i class="fa-solid fa-paperclip text-dark"></i></c:if>	                	
 			                	<td><fmt:formatDate value="${p.regdate}" pattern="yyyy-MM-dd" /></td>
 			                	<td>${p.viewCount}</td>
 			                </tr>
-		                </c:if>
-		                <c:if test="${empty p.id == member.id}"><tr><td colspan="3">질문하신 내역이 없습니다.<td></tr>
 		                </c:if>
 	                </c:forEach>
 	                </tbody>
@@ -172,24 +170,25 @@
 	                </tr>
 	                </thead> 
 	                <tbody>
-		  		    <c:if test="${empty posts}"><tr><td colspan="4">작성된 글이 없습니다.<td></tr></c:if>
+		  		    <c:if test="${empty posts}"><tr><td colspan="5">작성된 글이 없습니다.<td></tr></c:if>
 	                <c:forEach items="${posts}" var="p">		           
-		                <tr>
+		                <tr class="align-middle">
 		                	<td>${p.pno}</td>
-		             		<td class="text-truncate text-start"><a href="view?pno=${p.pno}&${pageDto.cri.qs2}" class="text-decoration-none text-reset">${p.title}</a>
+		             		<td class="text-truncate text-start">${p.title}</td>
 		             
 		                	<td><fmt:formatDate value="${p.regdate}" pattern="yyyy-MM-dd" /></td>
 		                	<!-- 다운로드수를 어찌 처리해야하나... -->
-		                	<td>${p.attachs.downloadCount}</td>
-		                	<td><button>다운로드</button></td>
+		                	<td>몰라</td>	                			
+		                	<td><a type="button" class="btn btn-sm btn-outline-light text-dark" href="${cp}download?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}">다운로드 <i class="fa-solid fa-down-long"></i> </a></td>						
 		                </tr>
 	                </c:forEach>
 	                </tbody>
 	             </table>           		
            	</c:if>
            
-            <c:if test="${pageDto.cri.category != 4}">
+            <c:if test="${(pageDto.cri.category == 2) or (pageDto.cri.category == 3)}">
 	            <a href="write?${pageDto.cri.qs2}" class="btn float-end text-white" style="background-color: #005B48; width: 70px;">글쓰기</a>            
+            
             </c:if>    
 
              <ul class="pagination justify-content-center my-5">

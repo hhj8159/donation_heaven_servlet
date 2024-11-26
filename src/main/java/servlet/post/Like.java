@@ -20,9 +20,9 @@ public class Like extends HttpServlet{
 private PostService service = new PostServiceImpl();
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	    // 요청 파라미터와 세션 정보 확인
-	    String pnoStr = req.getParameter("pno");
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		String pnoStr = req.getParameter("pno");
 	    Object memberObj = req.getSession().getAttribute("member");
 	    Criteria cri = new Criteria(req);
 	    String redirectUrl = "view?" + cri.getQs2();
@@ -42,7 +42,6 @@ private PostService service = new PostServiceImpl();
 	    
 	    service.like(pno);
 		resp.sendRedirect(redirectUrl);
-
-		
+	
 	}
 }
