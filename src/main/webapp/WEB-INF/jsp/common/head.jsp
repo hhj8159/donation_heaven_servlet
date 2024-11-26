@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<meta charset='utf-8'>
+	<meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>기부천국</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -25,3 +25,15 @@
         integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel='stylesheet' type='text/css' href='${cp}font/font.css'>
+    <style>
+        .font-color {color: #005B48; font-size: 30px;}
+        .green-color { color: #005B48; }
+       
+        body{
+            font-family: 'MinSans', sans-serif;
+        }
+        .bold-text {
+           font-family: 'MinSans', sans-serif;
+            font-weight: 700;
+        }
+    </style>
