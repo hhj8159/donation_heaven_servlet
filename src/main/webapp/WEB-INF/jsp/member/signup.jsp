@@ -131,8 +131,10 @@
                     <input type="text" class="form-control textwidth mt-2 " id="email" name="email">
                     </div>
                     <button class="btn mt-3 mb-3" style="background-color: #005B48; color: white; width: 40%;margin-left: 31%;" id="emailbtn">인증 번호 발송</button>
-                    <input type="text" class="form-control  none" id="emailcode" name ="code"placeholder="인증번호" style="margin-left: 31%;width: 20% ;">
-                    <button class="btn mt-3 mb-5 none" style="background-color: #005B48; color: white; width: 40%;margin-left: 31%;" id="emailbtn2">인증 번호 확인</button>
+                    <div class="row mt-2 mb-5">
+		            <input type="text" class="form-control  none" id="emailcode" name ="code"placeholder="인증번호" style="margin-left: 31%;width: 20% ;">
+		            <button class="btn col-2  none" style="background-color: #005B48; color: white; margin-left: 3%;" id="emailbtn2">인증 번호 확인</button>
+		            </div>   
                     
 					<div class="none" id="step3div">
                     <div class="row">
@@ -178,7 +180,7 @@
     	    }
 
     	    $.ajax({
-    	        url: "${cp}sendemail",
+    	        url: "${cp}sendemail/send",
     	        type: "POST",
     	        data: { email },
     	        success: function (response) {
@@ -210,10 +212,10 @@
     	    }
 
     	    $.ajax({
-    	        url: "${cp}emailselect",
+    	        url: "${cp}sendemail/select",
     	        type: "POST",
-    	        data: { email: email,
-    	        		code: emailcode },
+    	        data: { email:email,
+    	        		code:emailcode},
     	        success: function (response) {
     	        	console.log(response);
     	            if (response === "success") {
@@ -222,7 +224,7 @@
     	                $("#emailcode").removeClass("block").addClass("none");
     	                $("#emailbtn2").removeClass("block").addClass("none");
 	    	                $.ajax({
-	    	        	        url: "${cp}emaildelete",
+	    	        	        url: "${cp}sendemail/delete",
 	    	        	        type: "POST",
 	    	        	        data: { email},
 	    	        	        success: function (response) {

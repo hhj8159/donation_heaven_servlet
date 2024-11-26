@@ -19,4 +19,8 @@
   	 <delete id="emaildelete">
   	 Delete From email_verification Where email = #{email};
   	 </delete>
+  	 <!-- <delete id="deleteOldEmails">
+    DELETE FROM email_verification
+    WHERE createdate < NOW() - INTERVAL 20 MINUTE;
+</delete> -->
 </mapper>

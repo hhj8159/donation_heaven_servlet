@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/jusoSample")
-public class JusoSample extends HttpServlet{
+@WebServlet("/updatePassword")
+public class UpdatePassword extends HttpServlet{
 
 	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/jsp/member/Sample.jsp").forward(req, resp);
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.getRequestDispatcher("/WEB-INF/jsp/member/updatepassword.jsp").forward(req, resp);
 	}
 	
 }
