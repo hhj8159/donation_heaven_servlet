@@ -99,7 +99,7 @@
                     <p style="font-size: 30px"><span class="font-color bold-text">기부천국</span> 홈페이지 <span class="font-color bold-text" style="color:#FF0000">가입</span>을 환영합니다</p>
                     <p>기부천국은 천사 회원님을 환영합니다</p>
                 </div>
-                <form name = "frm"class="" method="post" >
+                <form name="form" id="form"class="" method="post" >
                 <div>
                     <div class="block" id="onediv">
                     <div class="row ">
@@ -145,9 +145,10 @@
                     <input type="text" class="form-control mt-2 " id="pwdresult" placeholder="비밀번호 확인" style="margin-left: 31%;width: 41%;">
                      <label for="name" class="col-2 mt-3" >주소</label>
                     <div class="mt-3 ">
-                        <input type="text" class="form-control " style=" width: 55%;margin-left: 15%;" id="roadAddr" name="addr" placeholder="도로명 검색"><button class="btn mt-3" id="search" style="background-color: #005B48; color: white; width: 15%;margin-left: 15%">주소지 검색</button>
+                    <button class="btn mb-3" id="search" style="background-color: #005B48; color: white; width: 15%;margin-left: 15%">주소지 검색</button>
+                        <input type="text" class="form-control " style=" width: 55%;margin-left: 15%;" id="roadAddrPart1" name="roadAddrPart1" placeholder="도로명 주소" readonly>
                     </div>
-                    <input type="text" class="col-3 form-control textwidth mt-3 mb-3" style="margin-left: 15%" id="name" name = "detailAddr" placeholder="상세주소">
+                    <input type="text" class="col-3 form-control textwidth mt-3 mb-3" style="margin-left: 15%" id="addrDetail" name = "addrDetail" placeholder="상세주소" readonly>
                     <ul class="list-group search-result-wrap mb-3 w-50" style="margin-left: 15%;" >
                     
                     </ul>
@@ -240,45 +241,9 @@
     	
         $("#search").click(function(){
             event.preventDefault();
-            
-        const keyword = $(this).prev().val();
-        if(!keyword) {
-            return;
-        }
-        const data = {
-            keyword,
-            confmKey : 'devU01TX0FVVEgyMDI0MTEwNjE0NTczMjExNTIxNjE=',
-            currentPage : 1,
-            countPerPage : 100,
-            resultType : 'json'
-        };
-        
-        $.ajax({
-            url :"https://business.juso.go.kr/addrlink/addrLinkApiJsonp.do",
-            type : "get",
-            data,
-            dataType : "jsonp",
-            crossDomain : true,
-            success : function(data){
-                let arr = data.results.juso;
-                console.log(data.results.juso);
-                let idx = 0;
-
-                for(let i =0;i < arr.length;i++){
-                    let str = `<li class="list-group-item"><a href="#" class="small" id="addr" onclick="return false">\${arr[idx].roadAddr}</a></li>`
-                    $('ul.search-result-wrap').append(str);
-                    idx++;
-                }
-            },
-            error : function(xhr,msg){
-                console.log(msg);
-            }
-        })
-    });
-    $("ul.search-result-wrap").on("click","a",function(){
-        $("#roadAddr").val($(this).text().trim());
-        $("ul.search-result-wrap").closest("ul.search-result-wrap").empty();
-    });
+            var pop = window.open("${cp}jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes");  
+        });
+       
     $("#nextbtn").click(function(){
         event.preventDefault();
         $("#onediv").removeClass("block").addClass("none");
@@ -290,6 +255,14 @@
     
     
 })
+ function jusoCallBack(roadAddrPart1,addrDetail){
+    		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+
+    		document.form.roadAddrPart1.value = roadAddrPart1;
+
+    		document.form.addrDetail.value = addrDetail;
+    		
+    	}
     </script>
 </body>
 </html>

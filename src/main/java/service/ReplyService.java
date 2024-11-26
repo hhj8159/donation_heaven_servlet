@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 import vo.Reply;
 
 public interface ReplyService {
@@ -13,5 +15,5 @@ public interface ReplyService {
 	int removeAll(Long pno);
 	
 	Reply findBy(Long rno);
-
+	
 }
