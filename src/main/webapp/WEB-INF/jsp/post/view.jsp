@@ -44,7 +44,7 @@
                             <p class="text-center" style="font-size: 20px;"><b>${post.title}</b></p>
                         </div>
                         <div class="dropdown">
-                            <div class="text-end">작성자 <span>${post.id}</span> <a class="nav-link dropdown-toggle d-inline" href="#" role="button" data-bs-toggle="dropdown">mekwon</a>
+                            <div class="text-end">작성자 <a class="nav-link dropdown-toggle d-inline" href="#" role="button" data-bs-toggle="dropdown">${post.id}</a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" onclick="return confirm('이 회원을 차단하시겠습니까?')">차단</a>
                                     </li>
@@ -65,7 +65,7 @@
                             <li class="list-group-item">첨부파일이 없습니다.</li>
                         </c:if>
                         <c:forEach items="${post.attachs}" var="a">
-                        	<li class="list-group item"><a href="${cp}download?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}">${a.origin}</a></li>
+                        	<li class="list-group item"><a href="${cp}download?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}" class="text-dark text-decoration-none">${a.origin}</a></li>
                         </c:forEach>
                         </ul>
                     </div>                     
@@ -83,25 +83,12 @@
                   <a href="list?${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 70px;">목록</a>
                   <a href="report?" class="btn btn-secondary text-light" style="width: 70px;" onclick="return confirm('신고하시겠습니까?')">신고</a>                    
                 	</c:if>                    	
-                </div>
-                <div class="text-center my-5">
-                        <c:if test="${post.writer == member.id}">
-                            <a href="modify?pno=${post.pno}&${cri.qs2}" class="btn btn-warning">수정</a>
-                            <a href="list?${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 70px;">목록</a>
-                            <a href="remove?pno=${post.pno}&${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 70px;" onclick="return confirm('삭제하시겠습니까?')">삭제</a>
-                        </c:if>
-                        
-                        <c:if test="${post.writer != member.id}">
-                            <a href="likes?" class="btn text-light" style="background-color: #005B48; width: 70px;" onclick="return confirm('추천하시겠습니까?')">추천</a>
-                            <a href="list?${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 70px;">목록</a>
-                            <a href="report?" class="btn btn-secondary text-light" style="width: 70px;" onclick="return confirm('신고하시겠습니까?')">신고</a>                    
-                        </c:if>                        
-                    </div>
-                    <form>
-                    <input type="hidden" value="${post.pno}">
-                    <input type="text">
-                    <input type="submit" class="btn" value="댓글작성">
-                    </form>
+                </div>    
+                <form>
+	                <input type="hidden" value="${post.pno}">
+	                <input type="text">
+	                <input type="submit" class="btn" value="댓글작성">
+                </form>
             </main>
         <jsp:include page="../common/footer.jsp"></jsp:include>
         </div>

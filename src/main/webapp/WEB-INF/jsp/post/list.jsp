@@ -127,6 +127,7 @@
 	                </tr>
 	                </thead> 
 	                <tbody>
+	                <c:if test="${empty member.id}"><tr><td colspan="3">로그인 후 확인가능합니다.<td></tr></c:if>
 		  		    <c:if test="${empty posts}"><tr><td colspan="3">작성된 글이 없습니다.<td></tr></c:if>
 	                <c:forEach items="${posts}" var="p">
 		               <c:if test="${p.id == member.id}">
@@ -138,10 +139,7 @@
 			                	<td>${p.viewCount}</td>
 			                </tr>
 		                </c:if>
-		                <c:if test="${empty p.id == member.id}">
-			                <tr>
-			                	<td colspan="3">질문하신 내역이 없습니다.<td>
-			                </tr>
+		                <c:if test="${empty p.id == member.id}"><tr><td colspan="3">질문하신 내역이 없습니다.<td></tr>
 		                </c:if>
 	                </c:forEach>
 	                </tbody>
@@ -149,38 +147,16 @@
            	</c:if>
            	<!-- 갤러리 -->
            	<c:if test="${pageDto.cri.category == 4}">
-	           	<div class="clearfix">
-                    <a href="write.html" class="btn text-light float-end" style="background-color: #005B48; width: 70px;">글쓰기</a>
-	            </div>
-	            <div>      
-		            <div class="justify-content-center">
-		                <div class ="d-flex flex-wrap justify-content-center">
-		                	<c:if test="${empty posts}"><tr><td colspan="5">작성된 글이 없습니다.<td></tr></c:if>
-	                <c:forEach items="${posts}" var="p">
-	                <tr>
-	                	<td>${p.pno}</td>
-	             		<td class="text-truncate text-start"><a href="view?pno=${p.pno}&${pageDto.cri.qs2}" class="text-decoration-none text-reset">${p.title}</a>
-	                	<c:if test="${p.attachFlag}"><i class="fa-solid fa-paperclip text-dark"></i></c:if>	                	
-	                	<td>${p.id}</td>
-	                	<td><fmt:formatDate value="${p.regdate}" pattern="yyyy-MM-dd" /></td>
-	                	<td>${p.viewCount}</td>
-	                	<td>${p.likes}</td>
-	                </tr>
-	                </c:forEach>
-	                
+	           	<div class="clearfix"><a href="write.html" class="btn text-light float-end" style="background-color: #005B48; width: 70px;">글쓰기</a></div>	               
+	            <div class="justify-content-center">
+	                <div class ="d-flex flex-wrap justify-content-center">
 	                	<c:if test="${empty posts}"><tr><td colspan="5">작성된 글이 없습니다.<td></tr></c:if>
-	                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="view?pno=${p.pno}&${pageDto.cri.qs2}" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>${p.title}</h4></div></a></div>
-	                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="#" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기</h4></div></a></div>
-	                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="#" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기</h4></div></a></div>
-	                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="#" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기</h4></div></a></div>
-	                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="#" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기</h4></div></a></div>
-	                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="#" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기</h4></div></a></div>
-	                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="#" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기</h4></div></a></div>
-	                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="#" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기</h4></div></a></div>
-	                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="#" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기글쓰기</h4></div></a></div>
-		                </div>
-		            </div>
-	            
+		               	<!-- 출력 갯수에 따라 마지막페이지 정렬하는거 -->
+		                <c:forEach items="${posts}" var="p">
+		                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="view?pno=${p.pno}&${pageDto.cri.qs2}" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>${p.title}</h4></div></a></div>	                
+		                
+		                </c:forEach>
+	            	</div>	            
 	            </div>
            	</c:if>
            	<!-- 자료실 -->
@@ -204,7 +180,7 @@
 		             
 		                	<td><fmt:formatDate value="${p.regdate}" pattern="yyyy-MM-dd" /></td>
 		                	<!-- 다운로드수를 어찌 처리해야하나... -->
-		                	<td>${p.viewCount}</td>
+		                	<td>몰라</td>
 		                	<td><button>다운로드</button></td>
 		                </tr>
 	                </c:forEach>

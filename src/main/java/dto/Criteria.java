@@ -17,23 +17,43 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Criteria {
-	
+public class Criteria {	
 	private int page = 1; 
-	private int amount = 10; 
-	private int category = 2;
+	private int amount; 
+	private int category;
 	private String type;
 	private String keyword;
 	
 	public int getOffset() { 
-		return (page - 1) * 10;
+		return (page - 1) * amount;
 	}
+	
 	
 	//request 분석 후 필드초기화
 	public Criteria (HttpServletRequest req) {
+
+		String c = req.getParameter("category");
+		
+		String a = req.getParameter("amount");
+		
+		//category가 4일 경우 amount 9
+		// 고칠거있음.....(잘모르겟음ㅠㅠ)
+		
+		if(a == null) {
+			if(c.equals("4")) {
+				this.amount = 9;		
+			}
+			else {
+				this.amount = 10;			
+			}			
+		}
+		
+		
+		
 		if(req == null) return;
 		
 		Field[] fields = getClass().getDeclaredFields();
+		
 		for(Field field : fields) {
 			String tmp = req.getParameter(field.getName());
 

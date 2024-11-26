@@ -57,8 +57,47 @@
             
               
         </main>
-        	<jsp:include page="../common/footer.jsp"></jsp:include>
+        <jsp:include page="../common/footer.jsp"></jsp:include>
+   </div>
+   <script>
+	/* 유효성체크해야함 - 개수, 크기, 확장자 제한*/
+		$("#attach").change(function() {
+			const url = '${cp}'+'upload';
+			const formData = new FormData();
+			const files = this.files;
+			
+			if(!files){
+				$(".attach-count-txt").text("");
+				$(".attach-result").empty();
+				return;
+	
+			}
+			for(let i = 0; i < files.length; i++){
+				formData.append("file",files[i]);
+			}
+			$.post({
+				url,
+				contentType:false,
+				processData:false,
+				data:formData
+			})
+			.done(function(data) {
+				$(".attach-count-txt").text(data.length + "개의 파일");
+				let str = '';
+				let strHidden = '';
+				for(let i in data){
+					str += `<li class="list-group-item">\${data[i].origin}</li>`;
+					strHidden += `<input type="hidden" name="uuid" value="\${data[i].uuid}">`;
+					strHidden += `<input type="hidden" name="origin" value="\${data[i].origin}">`;
+					strHidden += `<input type="hidden" name="image" value="\${data[i].image}">`;
+					strHidden += `<input type="hidden" name="path" value="\${data[i].path}">`;
 
-    </div>
+				}
+				$(".attach-result").html(str);
+				$(".uploaded-input").html(strHidden);
+				console.log(data);
+			});
+		});
+	</script>
 </body>
 </html>
