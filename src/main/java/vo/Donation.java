@@ -15,7 +15,9 @@ public class Donation {
 	private int mno;
 	private int dcno;
 	private int dtno;
-	private int price;
+	private Long price;
+	private String roadAddr;
+	private String detailAddr;
 	private String paytype;
 	private Date regdate;
 

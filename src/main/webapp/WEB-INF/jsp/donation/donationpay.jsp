@@ -47,35 +47,35 @@
                                 <hr class="border border-2 border-secondary">
                                 <ul class="list-group list-group-horizontal form-check my-3">
                                     <li class="list-group px-3 col-2">후원방식</li>
-                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" name="donadate" checked>정기후원</label></li>
-                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" name="donadate">일시후원</label></li>
+                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" value="1" name="donationcategory" checked>정기후원</label></li>
+                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" value="2" name="donationcategory">일시후원</label></li>
                                 </ul>
                                 <ul class="list-group list-group-horizontal form-check mb-2 mt-3">
                                     <li class="list-group px-3 col-2">후원종류</li>
-                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" name="donatype" checked>독거노인</label></li>
-                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" name="donatype">결식아동</label></li>
-                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" name="donatype">한부모가정</label></li>
-                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" name="donatype">장애인</label></li>
+                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" value="1" name="donationtype" checked>독거노인</label></li>
+                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" value="2" name="donationtype">결식아동</label></li>
+                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" value="3" name="donationtype">한부모가정</label></li>
+                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" value="4" name="donationtype">장애인</label></li>
                                 </ul>
                                 <div class="list-group list-group-horizontal my-3">
                                     <p class="list-group px-3 mt-2 col-2">후원금액</p>
                                     <div class="col-3 px-3">
-                                        <select class="form-select">
+                                        <select class="form-select" id="donationpriceselect">
                                             <option value="직접입력">직접입력</option>
                                             <option value="10,000">10,000</option>
                                             <option value="50,000">50,000</option>
                                             <option value="100,000">100,000</option>
                                         </select>
                                     </div>
-                                    <p class="list-group ps-1"><input class="form-control text-end" type="text" name="donadate" placeholder="직접입력"></p>
+                                    <p class="list-group ps-1"><input class="form-control text-end" type="number" name="donadate" id="priceWrite" placeholder="직접입력"></p>
                                 </div>
                                 <hr class="border border-2 border-secondary">
                                 <div>
-                                    <ul class="list-group list-group-horizontal float-end">
-                                        <li class="list-group me-3 pt-2">총 후원금액</li>
-                                        <li class="list-group me-1 ms-5 fs-4">0</li>                                    
-                                        <li class="list-group me-3 pt-2">원</li>
-                                    </ul>
+                                    <div class="list-group list-group-horizontal float-end">
+                                        <p class="list-group me-3 pt-2">총 후원금액</p>
+                                        <p class="donationpriceselectlog list-group me-1 ms-5 fs-4" id="totaldonationprice"></p>                                    
+                                        <p class="list-group me-3 pt-2">원</p>
+                                    </div>
                                 </div>
                                 <hr class="border border-1 border-secondary">
                             </div>
@@ -169,14 +169,135 @@
                                 <button type="button" class="btn btn-outline-success m-4 mb-5 w-75" id="donabtn">후원 신청하기</button> 
                             </div>
                         </div>
-                    </div>
-
+                    </div>                    
 
                 </div>
-            </div> 
+            </div>            
         </main>
        <jsp:include page="../common/footer.jsp"></jsp:include>
     </div>
+    <script>
+
+        
+        $(function() {
+            $.numberWithCommas = function (x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            }
+            $("#donationpriceselect").change(function(){
+                $("#totaldonationprice").text(function(){
+                    if($("#donationpriceselect").val() != "직접입력"){
+                        return $("#donationpriceselect").val();
+                    }
+                })
+                if($("#donationpriceselect").val() != "직접입력"){
+                    $("#priceWrite").addClass("none");
+                }else{
+                    $("#priceWrite").removeClass("none");
+                    $("#totaldonationprice").text(function(){
+                        return 0;
+                    })
+                    $("#priceWrite").val(function(){
+                        return 0;
+                    })
+                }
+            });
+
+
+            $("#priceWrite").keyup(function (event) {
+                if($("#priceWrite").val().length >= 17){
+                    
+                    alert("후원금액은 0~17자리까지 가능합니다");
+                    // customAlert.alert("후원금액은 0~17자리까지 가능합니다","경고!");
+
+                    $("#priceWrite").val(0);
+                    return;
+                }
+                let price = Number($(this).val());
+                $(this).val(price);
+                $("#totaldonationprice").text(price);
+                
+                let dprice = $("#totaldonationprice").text();
+                let tdprice = $.numberWithCommas(dprice);
+
+                $("#totaldonationprice").text(tdprice);
+            });
+
+
+
+            $("#nextbtn1").click(function(){
+                event.preventDefault();
+                $("#select").removeClass("block").addClass("none");        
+                $("#info").removeClass("none").addClass("block");
+            })
+            $("#nextbtn2").click(function(){
+                event.preventDefault();
+                $("#info").removeClass("block").addClass("none");
+                $("#pay").removeClass("none").addClass("block");                
+            })
+            $("#prebtn1").click(function(){
+                event.preventDefault();
+                $("#info").removeClass("block").addClass("none");
+                $("#select").removeClass("none").addClass("block");                
+            })
+            $("#prebtn2").click(function(){
+                event.preventDefault();
+                $("#pay").removeClass("block").addClass("none");
+                $("#info").removeClass("none").addClass("block");                
+            })
+            
+
+            
+            $("#search").click(function() {
+                event.preventDefault
+
+                const keyword = $(this).prev().val();
+                if(!keyword) {
+                    return;
+                }
+                const data = {
+                    keyword,
+                    confmKey : 'devU01TX0FVVEgyMDI0MTAyOTEyMTYxNjExNTIwMDI=',
+                    currentPage : 1,
+                    countPerPage : 100,
+                    resultType : 'json' 
+                };
+                console.log(data);
+                
+                $.ajax({
+                    url : "https://business.juso.go.kr/addrlink/addrLinkApiJsonp.do",
+                    type : 'get',
+                    data,
+                    dataType : 'jsonp',
+                    crossDomain : true,
+                    success : function(data) {
+                        console.log(data.results.juso);
+
+                        let str = '';
+                        for(let i in data.results.juso) {
+                            str += `<li class="list-group-item"><a href="#" class="small">
+                                ${data.results.juso[i].roadAddr}</a></li>`;
+                        }
+                        $("ul.search-result-wrap").html(str);
+                                                    
+                    },
+                    error : function(xhr, msg) {
+                        console.log(msg);
+                    }
+                })
+
+                $("ul.search-result-wrap").on("click", "a", function() {
+                    $("#roadAddr").val($(this).text().trim());
+                    $(this).closest("ul.search-result-wrap").empty();
+                })                
+            })
+
+
+
+
+
+
+    })
+    </script>    
 
 </body>
 </html>

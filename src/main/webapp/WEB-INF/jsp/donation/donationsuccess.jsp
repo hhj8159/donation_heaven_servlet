@@ -56,33 +56,13 @@
                                     <p class="float-end">자동이체</p>
                                 </div>
 
-                                <!-- <ul class="list-group list-group-horizontal form-check my-3">
-                                    <li class="list-group ms-5 me-4 float-start">후원자번호</li>
-                                    <li class="list-group mx-5 float-end">000001</li>
-                                </ul>
-                                <ul class="list-group list-group-horizontal form-check my-3">
-                                    <li class="list-group ms-5 me-4 float-start">후원분야</li>
-                                    <li class="list-group mx-5 float-end">결식아동</li>
-                                </ul>   
-                                <ul class="list-group list-group-horizontal my-3">
-                                    <li class="list-group ms-5 me-4 float-start">후원금액 합계</li>
-                                    <li class="list-group mx-5 float-end">30,000원</li>
-                                </ul>
-                                <ul class="list-group list-group-horizontal my-3">
-                                    <li class="list-group ms-5 me-4 float-start">후원방식</li>
-                                    <li class="list-group mx-5 float-end">정기후원</li>
-                                </ul>
-                                <ul class="list-group list-group-horizontal my-3">
-                                    <li class="list-group ms-5 me-4 float-start">납입방법</li>
-                                    <li class="list-group mx-5 float-end ">자동이체</li>
-                                </ul> -->
                             </div>
                             <hr class="border border-2 border-secondary">                            
                         </div>
                     </form>
                     
                     <div class="d-flex col-3 mx-auto">
-                        <button type="button" class="btn btn-outline-success m-4 mb-5 w-75" >확인</button>
+                        <button type="button" class="btn btn-outline-success m-4 mb-5 w-75">확인</button>
                     </div>
                 </div>    
             </div> 
