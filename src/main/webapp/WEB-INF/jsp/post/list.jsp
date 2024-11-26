@@ -146,13 +146,12 @@
            	<!-- 갤러리 -->
            	<c:if test="${pageDto.cri.category == 4}">
 	           	<div class="clearfix"><a href="write?${pageDto.cri.qs2}" class="btn text-light float-end" style="background-color: #005B48; width: 70px;">글쓰기</a></div>	               
-	            <div class="justify-content-center">
-	                <div class ="d-flex flex-wrap justify-content-center">
+	            <div>
+	                <div class ="d-flex flex-wrap justify-content-between px-5">
 	                	<c:if test="${empty posts}"><tr><td colspan="5">작성된 글이 없습니다.<td></tr></c:if>
 		               	<!-- 출력 갯수에 따라 마지막페이지 정렬하는거 -->
 		                <c:forEach items="${posts}" var="p">
-		                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-3 p-0" style="width: 300px;"><a href="view?pno=${p.pno}&${pageDto.cri.qs2}" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>${p.title}</h4></div></a></div>	                
-		                
+		                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-5 p-0" style="width: 300px;"><a href="view?pno=${p.pno}&${pageDto.cri.qs2}" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>${p.title}</h4></div></a></div>	                
 		                </c:forEach>
 	            	</div>	            
 	            </div>
@@ -178,7 +177,7 @@
 		             
 		                	<td><fmt:formatDate value="${p.regdate}" pattern="yyyy-MM-dd" /></td>
 		                	<!-- 다운로드수를 어찌 처리해야하나... -->
-		                	<td>몰라</td>	                			
+		                	<td>${p.attachs}</td>	                			
 		                	<td><a type="button" class="btn btn-sm btn-outline-light text-dark" href="${cp}download?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}">다운로드 <i class="fa-solid fa-down-long"></i> </a></td>						
 		                </tr>
 	                </c:forEach>
