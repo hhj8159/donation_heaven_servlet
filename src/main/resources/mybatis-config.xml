@@ -20,6 +20,7 @@
         <mapper resource="mapper/MemberMapper.xml"/>
 		<mapper resource="mapper/PostMapper.xml"/>
 		<mapper resource="mapper/AttachMapper.xml"/>
+		<mapper resource="mapper/DonationMapper.xml"/>
 
   </mappers>
 </configuration>

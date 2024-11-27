@@ -4,9 +4,7 @@
 <html>
 <head>
 <jsp:include page="../common/head.jsp"></jsp:include>
-
-   <link rel='stylesheet' type='text/css'href='alert.css'>
-   
+   <link rel='stylesheet' type='text/css'href='${cp}css/alert.css'>  
    <style>
         .font-color {color: #005B48; font-size: 25px;}
         body{
@@ -24,8 +22,7 @@
         input::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
-        }
-        
+        }        
     </style>
 </head>
 <body>
@@ -50,7 +47,7 @@
                             <p class="position-absolute top-0 start-100 translate-middle border-radius rounded-pill fs-4 pt-3 p-3 bold-text" style="text-align: center; background-color: #9FA6B2;  width: 30%; color: white;">후원금 납입</p>
                         </div>
                         
-                        <form>                                
+                        <form name="frm1">                                
                             <div class="d-grid col-10 mx-auto">
                                 <hr class="border border-2 border-secondary">
                                 <ul class="list-group list-group-horizontal form-check my-3">
@@ -104,7 +101,7 @@
                             <p class="position-absolute top-0 start-100 translate-middle border-radius rounded-pill fs-4 pt-3 p-3 bold-text" style="text-align: center; background-color: #9FA6B2;  width: 30%; color: white;">후원금 납입</p>
                         </div>
                         
-                        <form>                                
+                        <form name="frm2">                                
                             <div class="d-grid col-10 mx-auto">
                                 <hr class="border border-2 border-secondary">
                                 <ul class="list-group list-group-horizontal form-check my-3">
@@ -122,12 +119,12 @@
                                 <div class="col-md-10">
                                     <div class="list-group list-group-horizontal my-3">
                                         <p class="list-group px-3 me-3 col-2">주소</p>
-                                        <input type="text" class="form-control col-2 ms-3 me-2  py-2 w-50" id="roadAddr" name="addr" placeholder="도로명주소">
+                                        <input type="text" class="form-control col-2 ms-3 me-2  py-2 w-50" id="roadAddrPart1" name="roadAddrPart1" placeholder="도로명주소" readonly>
                                         <button class="btn btn-success py-2 col-3" type="button" style="width: 15%;" id="search">주소 검색</button>
                                     </div>
                                     <div class="list-group list-group-horizontal my-3">
                                         <p class="list-group px-3 me-3 col-2"></p>
-                                        <input type="text" class="form-control col-2 ms-3 me-2 py-2 w-50" placeholder="상세주소" id="detailAddr">
+                                        <input type="text" class="form-control col-2 ms-3 me-2 py-2 w-50" id="addrDetail" name="addrDetail" placeholder="상세주소" readonly>
                                     </div>
                                     <ul class="list-group search-result-wrap mb-3 w-50" style="margin-left: 15%;" >
                 
@@ -154,7 +151,7 @@
                             <p class="position-absolute top-0 start-100 translate-middle border-radius rounded-pill fs-4 pt-3 p-3 bold-text" style="text-align: center; background-color: #005B48;  width: 30%; color: white;">후원금 납입</p>
                         </div>
                         
-                        <form>                                
+                        <form name="frm3">                                
                             <div class="d-grid col-10 mx-auto"> 
                                 <hr class="border border-2 border-secondary">
                                 <ul class="list-group list-group-horizontal form-check my-3">
@@ -186,7 +183,7 @@
         </main>
        <jsp:include page="../common/footer.jsp"></jsp:include>
     </div>
-    <script src="./alert.js"></script>
+    <script src="${cp}js/alert.js"></script>
 
     <script>
 
@@ -217,7 +214,6 @@
 
             $("#priceWrite").keyup(function (event) {
                 if($("#priceWrite").val().length >= 17){                    
-                    // alert("후원금액은 0~17자리까지 가능합니다");
                     customAlert.alert("후원금액은 0~17자리까지 가능합니다","경고!");
                     $("#priceWrite").val(0);
                     return;
@@ -244,81 +240,39 @@
                     $("#select").removeClass("block").addClass("none");        
                     $("#info").removeClass("none").addClass("block");
                 }                
-            })
+            });
             $("#nextbtn2").click(function(){
                 event.preventDefault();
-                // if($("#roadAddr").text() == "") {
-                //     console.log("test1");
-                //     customAlert.alert("도로명주소를 입력해주세요","경고!");
-                    
-                // }                    
-                // if($("#detailAddr").text() == "") {
-                //     console.log("test2");
-                //     customAlert.alert("상세주소를 입력해주세요","경고!");
-                // }
                 
                 $("#info").removeClass("block").addClass("none");
                 $("#pay").removeClass("none").addClass("block");    
                     
-            })
+            });
             $("#prebtn1").click(function(){
                 event.preventDefault();
                 $("#info").removeClass("block").addClass("none");
                 $("#select").removeClass("none").addClass("block");                
-            })
+            });
             $("#prebtn2").click(function(){
                 event.preventDefault();
                 $("#pay").removeClass("block").addClass("none");
                 $("#info").removeClass("none").addClass("block");                
-            })
+            });
             
 
             
-            $("#search").click(function() {
-                event.preventDefault
-
-                const keyword = $(this).prev().val();
-                if(!keyword) {
-                    return;
-                }
-                const data = {
-                    keyword,
-                    confmKey : 'devU01TX0FVVEgyMDI0MTAyOTEyMTYxNjExNTIwMDI=',
-                    currentPage : 1,
-                    countPerPage : 100,
-                    resultType : 'json' 
-                };
-                console.log(data);
-                
-                $.ajax({
-                    url : "https://business.juso.go.kr/addrlink/addrLinkApiJsonp.do",
-                    type : 'get',
-                    data,
-                    dataType : 'jsonp',
-                    crossDomain : true,
-                    success : function(data) {
-                        console.log(data.results.juso);
-
-                        let str = '';
-                        for(let i in data.results.juso) {
-                            str += `<li class="list-group-item"><a href="#" class="small">
-                                ${data.results.juso[i].roadAddr}</a></li>`;
-                        }
-                        $("ul.search-result-wrap").html(str);
-                                                    
-                    },
-                    error : function(xhr, msg) {
-                        console.log(msg);
-                    }
-                })
-
-                $("ul.search-result-wrap").on("click", "a", function() {
-                    $("#roadAddr").val($(this).text().trim());
-                    $(this).closest("ul.search-result-wrap").empty();
-                })                
-            })
+            $("#search").click(function(){
+                event.preventDefault();
+                var pop = window.open("${cp}donationjusopopup","pop","width=570,height=420, scrollbars=yes, resizable=yes");  
+            });
 
     })
+
+ function jusoCallBack(roadAddrPart1,addrDetail){
+    		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+    		document.frm2.roadAddrPart1.value = roadAddrPart1; 
+    		document.frm2.addrDetail.value = addrDetail;    		
+    	}
     </script>    
 
 </body>

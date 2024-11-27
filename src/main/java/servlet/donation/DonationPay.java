@@ -30,8 +30,8 @@ public class DonationPay extends HttpServlet{
         String price = req.getParameter("price");
         Long priceLong = Long.parseLong(price);
         
-        String roadAddr = req.getParameter("roadAddr");
-        String detailAddr = req.getParameter("detailAddr");
+        String roadAddr = req.getParameter("roadAddrPart1");
+        String detailAddr = req.getParameter("addrDetail");
         
         String payType = req.getParameter("payType");
         
