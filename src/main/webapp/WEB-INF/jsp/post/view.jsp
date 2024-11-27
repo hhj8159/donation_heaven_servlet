@@ -59,7 +59,7 @@
                             </div>
                             <p class="text-end mb-0">작성일 <fmt:formatDate value="${post.regdate}" pattern="yyyy-MM-dd"/></p>
                             <c:if test="${cri.category == 2}">
-                            <p class="text-end mb-0">추천 ${post.likes}</p>
+                            <p class="text-end mb-0">추천 <span id="likesCount">${post.likes}</span></p>
                         	</c:if>
                             <p class="text-end mb-0">조회 ${post.viewCount}</p>
                         </div>
@@ -82,19 +82,19 @@
                 
                 <div class="text-center my-5">
                 	<c:if test="${post.id == member.id}">
-	                  <a href="modify?pno=${post.pno}&${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 70px;">수정</a>
-	                  <a href="list?${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 70px;">목록</a>
-	                  <a href="remove?pno=${post.pno}&${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 70px;" onclick="return confirm('삭제하시겠습니까?')">삭제</a>
+	                  <a href="modify?pno=${post.pno}&${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;">수정</a>
+	                  <a href="list?${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;">목록</a>
+	                  <a href="remove?pno=${post.pno}&${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;" onclick="return confirm('삭제하시겠습니까?')">삭제</a>
                 	</c:if>
                 	
                 	<c:if test="${post.id != member.id}">
                 	  <c:if test="${cri.category== 2 and not empty member.id}">
-	                  	<a class="btn text-light" style="background-color: #005B48; width: 80px;" id="likeBtn">추천 ${post.likes} </a>
- 	                  	<a class="btn text-light d-none" style="background-color: #005B48; width: 70px;" id="unlikeBtn">추천 ${post.likes} </a>                 	  
+	                  	<a class="btn text-light" style="background-color: #005B48; width: 80px;" id="likeBtn">추천 <span id="likesCount">${post.likes}</span></a>
+ 	                  	<a class="btn text-light d-none" style="background-color: #005B48; width: 80px;" id="unlikeBtn">추천 ${post.likes} </a>                 	  
                 	  </c:if>
-	                  <a href="list?${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 70px;">목록</a>
+	                  <a href="list?${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;">목록</a>
 	                  <c:if test="${cri.category== 2}">
-	                  <a href="report?" class="btn btn-secondary text-light" style="width: 70px;" onclick="return confirm('신고하시겠습니까?')">신고</a>                    
+	                  <a href="report?" class="btn btn-secondary text-light" style="width: 80px;" onclick="return confirm('신고하시겠습니까?')">신고</a>                    
                 	  </c:if>
                 	</c:if>                 	
                 </div>    
@@ -115,7 +115,7 @@
         			event.preventDefault();
         			const id = $("#memberId").val(); 
         			const pno = $("#postPno").val(); 
-        			if(confirm('추천하시겠습니까?')==true){
+        			if(customConfirm.confirm('추천하시겠습니까?',"추천")==true){
         				$.ajax({
         					url: "${cp}post/like",
         					type: "POST",
@@ -123,8 +123,12 @@
         					success: function(response) {
         						  if (response === "success") {
 	        						customAlert.alert("추천되었습니다","확인");
+	        						let currentLikes = parseInt($("#likesCount").text());
+	                                $("#likesCount").text(currentLikes + 1);
+	        						
         						  }
         						  else if(response === "duplication") {
+        							  console.log("중복불가");
         							  customAlert.alert("같은 아이디로 중복추천 불가능","경고"); 
         						  }
         					},

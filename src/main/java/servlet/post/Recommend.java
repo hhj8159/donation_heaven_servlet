@@ -29,37 +29,22 @@ private LikeService likeservice = new LikeServiceImpl();
 		String pnoStr = req.getParameter("pno");
 		Long pno = Long.valueOf(pnoStr);
 		String id = req.getParameter("id");
-		
-	    Object memberObj = req.getSession().getAttribute("member");
-	    
 	    Criteria cri = new Criteria(req);
-	    String redirectUrl = "view?" + cri.getQs2();
 	
+	    
+	    if(likeservice.findBy(id, pno) == null){
+	    	try {
+	    		service.like(id, pno);
+	    		resp.getWriter().write("success");
+	    	} catch(Exception e){
+	    		e.printStackTrace();
+	    		resp.getWriter().write("fail");
+	    	}
+	    }
+	    else {
+	    	resp.getWriter().write("duplication");
+	    }    
 	      
-	    if (pnoStr == null || memberObj == null) {
-	        Commons.printMsg("비정상적인 접근입니다", redirectUrl, resp);
-	        return;
-	    }
-	    
-	    Member m = (Member) memberObj;
-	    
-	    if(m.getId().equals(likeservice.findBy(id, pno).getId())) {
-	    	Commons.printMsg("본인의 글은 추천할 수 없습니다", redirectUrl, resp);
-	    	return;
-	    }
-		
-		
-		if(likeservice.findBy(id, pno) == null){
-			try {
-				service.like(id, pno);
-				resp.getWriter().write("success");
-			} catch(Exception e){
-				e.printStackTrace();
-				resp.getWriter().write("fail");
-			}
-		}
-		else {
-			resp.getWriter().write("duplication");
-		}    
+
 	}
 }
