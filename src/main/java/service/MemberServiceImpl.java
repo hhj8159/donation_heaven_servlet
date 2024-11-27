@@ -81,6 +81,15 @@ public class MemberServiceImpl implements MemberService{
 			mapper.emaildelete(email);
 		}
 	}
+	@Override
+	public int modifypw(String id, String pw) {
+		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
+			MemberMapper mapper = session.getMapper(MemberMapper.class);
+			return mapper.updatepw(id, pw);
+		}
+	}
+	
+	
 	
 	
 	

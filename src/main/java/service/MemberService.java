@@ -31,4 +31,6 @@ public interface MemberService {
 	
 	void emaildelete(@Param("email") String email);
 	
+	int modifypw(String id,@Param("pw")String pw);
+	
 }

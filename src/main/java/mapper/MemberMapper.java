@@ -14,4 +14,6 @@ public interface MemberMapper {
 	 public int emailselect(@Param("email") String email,@Param("code")String code);
 	 
 	 public int emaildelete(@Param("email") String email);
+	 
+	 public int updatepw(String id,@Param("pw")String pw);
 }

@@ -19,6 +19,9 @@
   	 <delete id="emaildelete">
   	 Delete From email_verification Where email = #{email};
   	 </delete>
+  	 <update id="updatepw">
+  	 Update member set pw = #{pw} Where id = #{id}; 
+  	 </update>
   	 <!-- <delete id="deleteOldEmails">
     DELETE FROM email_verification
     WHERE createdate < NOW() - INTERVAL 20 MINUTE;
