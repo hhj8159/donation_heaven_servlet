@@ -73,11 +73,11 @@
          <main class="container card w-50 mt-5" style="margin-left: 25%;">
                      <form method="post" name="frm">
            <div class="mt-3 w-100 text-center" id="step1">
-            <p class="font-color">회원정보에 등록한 비밀번호 변경</p>
+            <p class="font-color">회원정보에 등록한 아이디 찾기</p>
 
             <div class="row">
-                <label for="name" class="col-2 mt-2"  >아이디</label>
-                <input type="text" class="form-control textwidth mt-2" id="id" name="id">
+                <label for="name" class="col-2 mt-2"  >이름</label>
+                <input type="text" class="form-control textwidth mt-2" id="name" name="name">
             </div>
             <div class="row mt-3">
                 <label for="name" class="col-2 mt-2">이메일</label>
@@ -90,14 +90,14 @@
             </div>
             </div>
              <div class="mt-3 w-100 text-center none mb-5" id="step2">
-              <p class="font-color">비밀번호 변경</p>
+              <p class="font-color">생성하신 아이디</p>
               <div class="row mt-2">
-                <label for="name" class="col-2  mt-2"  >새 비밀번호</label>
-                <input type="password" class="form-control textwidth mt-2" id="newpw" name="newpw">
+                <label for="name" class="col-2  mt-2"  >아이디</label>
+                <input type="text" class="form-control textwidth mt-2" readonly>
             </div>
               <div class="row  mt-2">
-                <label for="name" class="col-2  mt-2" >새 비밀번호 확인</label>
-                <input type="password" class="form-control textwidth mt-2" id="newpw" name="">
+                <label for="name" class="col-2  mt-2" >생성일자</label>
+                <input type="text" class="form-control textwidth mt-2"readonly>
             </div>
             <button class="btn mt-3 mb-3" style="background-color: #005B48; color: white; width: 41%;margin-left: 3%;" id="updatebtn" onclick="alert('비밀번호 변경이 완료되었습니다')">비밀번호 변경</button>
              			

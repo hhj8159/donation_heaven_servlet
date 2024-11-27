@@ -64,7 +64,7 @@
             height: 90%;
             margin-left: 13%;
             width: 70%;
-        }
+
     </style>
     <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js"
   integrity="sha384-DKYJZ8NLiK8MN4/C5P2dtSmLQ4KwPaoqAfyA/DfmEc1VDxu4yyC7wy6K1Hs90nka" crossorigin="anonymous"></script>
@@ -99,7 +99,7 @@
                                     name="remember-id" value="yes" ${empty cookie['save'] ? '' : 'checked'}>
                                 <label class="form-check-label font-size" style="margin-left: 2%" for="mySwitch">아이디
                                     저장</label>
-                                <a href="#" class="font-size" style="margin-left: 8%;">아이디</a> <span
+                                <a href="${cp}searchid" class="font-size" style="margin-left: 8%;">아이디</a> <span
                                     class="font-size mx-1"> / </span> <a href="${cp}updatePassword"
                                     class="font-size"><span>비밀번호찾기</span></a><span class="font-size mx-1"> | </span><a
                                     href="${cp}signup"><span class="font-size">회원가입</span></a>
@@ -123,6 +123,7 @@
 
                 </form>
             </div>
+
         </main>
        <jsp:include page="../common/footer.jsp"></jsp:include>
     </div>
