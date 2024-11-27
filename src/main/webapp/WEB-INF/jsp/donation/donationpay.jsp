@@ -5,49 +5,38 @@
 <head>
 <jsp:include page="../common/head.jsp"></jsp:include>
    <link rel='stylesheet' type='text/css'href='${cp}css/alert.css'>  
-   <style>
-        .font-color {color: #005B48; font-size: 25px;}
-        body{
-            font-family: 'MinSans', sans-serif;
-        }
-        .donation {background-color: #005B48; color: white; font-size: 30px; margin-right: 30px; }
-        .signup {margin-right: 20px;}
-        .sign {margin-top: 50px; color: #005B48;}
-        .sign a:link { color: #005B48; }
-        .donation:hover { color: #005B48;}
-        .footer {background-color: #005B48; color: white;}
-        .block {display: block;}
-        .none {display: none;}
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-        }        
-    </style>
+<style>
+	.block {display: block;}
+	.none {display: none;}
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+    }
+</style>
 </head>
 <body>
-
     <div class="wrap">
         <jsp:include page="../common/header.jsp"></jsp:include>
+        
         <main class="container">
             <div class="row justify-content-center">
-                <div class="col-md-9">
+                <div class="col-md-9">                
                     <div class="py-2">
                         <h2 class="bold-text my-3 mt-3 mb-4">후원 신청하기</h2>
                     </div>
 
 
-                    <div class="block" id="select">
-                        <div class="position-relative mx-auto mb-5 mt-5" style="width: 80%;">
-                            <div>
-                            <div class="border"></div>
-                            </div>
-                            <p class="position-absolute top-0 start-0 translate-middle border-radius rounded-pill fs-4 pt-3 p-3 bold-text" style="text-align: center; background-color: #005B48;  width: 30%; color: white;">후원대상 선택</p>
-                            <p class="position-absolute top-0 start-50 translate-middle border-radius rounded-pill fs-4 pt-3 p-3 bold-text" style="text-align: center; background-color: #9FA6B2;  width: 30%; color: white;">후원회원 정보</p>
-                            <p class="position-absolute top-0 start-100 translate-middle border-radius rounded-pill fs-4 pt-3 p-3 bold-text" style="text-align: center; background-color: #9FA6B2;  width: 30%; color: white;">후원금 납입</p>
-                        </div>
-                        
-                        <form name="frm1">                                
+                    <form name="frm" method="post">
+                        <div class="block" id="select">
+                            <div class="position-relative mx-auto mb-5 mt-5" style="width: 80%;">
+                                <div>
+                                <div class="border"></div>
+                                </div>
+                                <p class="position-absolute top-0 start-0 translate-middle border-radius rounded-pill fs-4 pt-3 p-3 bold-text" style="text-align: center; background-color: #005B48;  width: 30%; color: white;">후원대상 선택</p>
+                                <p class="position-absolute top-0 start-50 translate-middle border-radius rounded-pill fs-4 pt-3 p-3 bold-text" style="text-align: center; background-color: #9FA6B2;  width: 30%; color: white;">후원회원 정보</p>
+                                <p class="position-absolute top-0 start-100 translate-middle border-radius rounded-pill fs-4 pt-3 p-3 bold-text" style="text-align: center; background-color: #9FA6B2;  width: 30%; color: white;">후원금 납입</p>
+                            </div>                                
                             <div class="d-grid col-10 mx-auto">
                                 <hr class="border border-2 border-secondary">
                                 <ul class="list-group list-group-horizontal form-check my-3">
@@ -78,43 +67,40 @@
                                 <div>
                                     <div class="list-group list-group-horizontal float-end">
                                         <p class="list-group me-3 pt-2">총 후원금액</p>
-                                        <p class="donationpriceselectlog list-group me-1 ms-5 fs-4" id="totaldonationprice"></p>                                    
+                                        <p class="donationpriceselectlog list-group me-1 ms-5 fs-4" id="totalDonationPrice"></p>                                    
                                         <p class="list-group me-3 pt-2">원</p>
                                     </div>
                                 </div>
                                 <hr class="border border-1 border-secondary">
                             </div>
-                        </form>
-                        <div class="d-flex col-3 mx-auto">
-                            <button type="button" class="btn btn-outline-success m-4 mb-5 w-75" id="nextbtn1">다음 단계</button>
+                            <div class="d-flex col-3 mx-auto">
+                                <button type="button" class="btn btn-outline-success m-4 mb-5 w-75 mx-auto" id="nextbtn1">다음 단계</button>
+                            </div>  
                         </div>
-                    </div>
 
 
-                    <div class="none" id="info">
-                        <div class="position-relative mx-auto mb-5 mt-5" style="width: 80%;">
-                            <div>
-                            <div class="border"></div>
-                            </div>
-                            <p class="position-absolute top-0 start-0 translate-middle border-radius rounded-pill fs-4 pt-3 p-3 bold-text" style="text-align: center; background-color: #9FA6B2;  width: 30%; color: white;">후원대상 선택</p>
-                            <p class="position-absolute top-0 start-50 translate-middle border-radius rounded-pill fs-4 pt-3 p-3 bold-text" style="text-align: center; background-color: #005B48;  width: 30%; color: white;">후원회원 정보</p>
-                            <p class="position-absolute top-0 start-100 translate-middle border-radius rounded-pill fs-4 pt-3 p-3 bold-text" style="text-align: center; background-color: #9FA6B2;  width: 30%; color: white;">후원금 납입</p>
-                        </div>
-                        
-                        <form name="frm2">                                
+                        <div class="none" id="info">
+                            <div class="position-relative mx-auto mb-5 mt-5" style="width: 80%;">
+                                <div>
+                                <div class="border"></div>
+                                </div>
+                                <p class="position-absolute top-0 start-0 translate-middle border-radius rounded-pill fs-4 pt-3 p-3 bold-text" style="text-align: center; background-color: #9FA6B2;  width: 30%; color: white;">후원대상 선택</p>
+                                <p class="position-absolute top-0 start-50 translate-middle border-radius rounded-pill fs-4 pt-3 p-3 bold-text" style="text-align: center; background-color: #005B48;  width: 30%; color: white;">후원회원 정보</p>
+                                <p class="position-absolute top-0 start-100 translate-middle border-radius rounded-pill fs-4 pt-3 p-3 bold-text" style="text-align: center; background-color: #9FA6B2;  width: 30%; color: white;">후원금 납입</p>
+                            </div>                                
                             <div class="d-grid col-10 mx-auto">
                                 <hr class="border border-2 border-secondary">
                                 <ul class="list-group list-group-horizontal form-check my-3">
                                     <li class="list-group px-3 col-2">이름</li>
-                                    <li class="list-group px-3 ">김길동</li>
+                                    <li class="list-group px-3">김길동</li>
                                 </ul>
                                 <ul class="list-group list-group-horizontal form-check my-3">
                                     <li class="list-group px-3 col-2">휴대전화</li>
-                                    <li class="list-group px-3 ">010-1234-5678</li>
+                                    <li class="list-group px-3">010-1234-5678</li>
                                 </ul>   
                                 <ul class="list-group list-group-horizontal my-3">
                                     <li class="list-group px-3 col-2">이메일</li>
-                                    <li class="list-group px-3 ">kimgd1234@naver.com</li>
+                                    <li class="list-group px-3">kimgd1234@naver.com</li>
                                 </ul>
                                 <div class="col-md-10">
                                     <div class="list-group list-group-horizontal my-3">
@@ -131,52 +117,49 @@
                                     </ul>
                                 </div>
                                 <hr class="border border-2 border-secondary">
+                                <div class="d-flex col-6 mx-auto">
+                                    <button type="button" class="btn btn-outline-success m-4 mb-5 w-75 me-3 mx-auto" id="prebtn1">이전 단계</button>                
+                                    <button type="button" class="btn btn-outline-success m-4 mb-5 w-75 ms-3 mx-auto" id="nextbtn2">다음 단계</button> 
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="none" id="pay">
+                            <div class="position-relative mx-auto mb-5 mt-5" style="width: 80%;">
+                                <div>
+                                  <div class="border"></div>
+                                </div>
+                                <p class="position-absolute top-0 start-0 translate-middle border-radius rounded-pill fs-4 pt-3 p-3 bold-text" style="text-align: center; background-color: #9FA6B2;  width: 30%; color: white;">후원대상 선택</p>
+                                <p class="position-absolute top-0 start-50 translate-middle border-radius rounded-pill fs-4 pt-3 p-3 bold-text" style="text-align: center; background-color: #9FA6B2;  width: 30%; color: white;">후원회원 정보</p>
+                                <p class="position-absolute top-0 start-100 translate-middle border-radius rounded-pill fs-4 pt-3 p-3 bold-text" style="text-align: center; background-color: #005B48;  width: 30%; color: white;">후원금 납입</p>
+                            </div>
+                            <div class="d-grid col-10 mx-auto">
+                                    <hr class="border border-2 border-secondary">
+                                    <ul class="list-group list-group-horizontal form-check my-3">
+                                        <li class="list-group px-3 col-2">납입방법</li>
+                                    </ul>
+                                    <div>
+                                        <div class="d-flex col-12 mx-auto">
+                                            <button type="button" class="btn btn-outline-success mt-4 mb-5 mx-4 py-2 w-75 fs-4 bold-text">신용카드</button>
+                                            <button type="button" class="btn btn-outline-success mt-4 mb-5 mx-4 py-2 w-75 fs-4 bold-text">계좌이체</button>
+                                            <button type="button" class="btn btn-outline-success mt-4 mb-5 mx-4 py-2 w-75 fs-4 bold-text">무통장입금</button>
+                                        </div>
+                                    </div>
+                                   
+                                    <hr class="border border-2 border-secondary">
+                                </div>
+                                <div class="d-flex col-5 mx-auto">
+                                    <button type="button" class="btn btn-outline-success m-4 mb-5 w-75 me-3 mx-auto" id="prebtn2">이전 단계</button>
+                                    <a href="${cp}donationsuccess" type="button" class="btn btn-outline-success m-4 mb-5 w-75 ms-3 mx-auto" id="donabtn">후원 신청하기</a>
+                                </div>
+                            <div>
                                 
                             </div>
-                        </form>                        
-                        <div class="d-flex col-6 mx-auto">
-                            <button type="button" class="btn btn-outline-success m-4 mb-5 w-75" id="prebtn1">이전 단계</button>                
-                            <button type="button" class="btn btn-outline-success m-4 mb-5 w-75" id="nextbtn2">다음 단계</button> 
                         </div>
-                    </div>
-
-                    
-                    <div class="none" id="pay">
-                        <div class="position-relative mx-auto mb-5 mt-5" style="width: 80%;">
-                            <div>
-                              <div class="border"></div>
-                            </div>
-                            <p class="position-absolute top-0 start-0 translate-middle border-radius rounded-pill fs-4 pt-3 p-3 bold-text" style="text-align: center; background-color: #9FA6B2;  width: 30%; color: white;">후원대상 선택</p>
-                            <p class="position-absolute top-0 start-50 translate-middle border-radius rounded-pill fs-4 pt-3 p-3 bold-text" style="text-align: center; background-color: #9FA6B2;  width: 30%; color: white;">후원회원 정보</p>
-                            <p class="position-absolute top-0 start-100 translate-middle border-radius rounded-pill fs-4 pt-3 p-3 bold-text" style="text-align: center; background-color: #005B48;  width: 30%; color: white;">후원금 납입</p>
-                        </div>
-                        
-                        <form name="frm3">                                
-                            <div class="d-grid col-10 mx-auto"> 
-                                <hr class="border border-2 border-secondary">
-                                <ul class="list-group list-group-horizontal form-check my-3">
-                                    <li class="list-group px-3 col-2">납입방법</li>                                
-                                </ul>
-                                <div>
-                                    <div class="d-flex col-12 mx-auto">
-                                        <button type="button" class="btn btn-outline-success mt-4 mb-5 mx-4 py-2 w-75 fs-4 bold-text">신용카드</button>                
-                                        <button type="button" class="btn btn-outline-success mt-4 mb-5 mx-4 py-2 w-75 fs-4 bold-text">계좌이체</button>                
-                                        <button type="button" class="btn btn-outline-success mt-4 mb-5 mx-4 py-2 w-75 fs-4 bold-text">무통장입금</button>                
-                                    </div>             
-                                </div>                           
-                               
-                                <hr class="border border-2 border-secondary">                            
-                            </div>
-                        </form>
-                        <div>
-                            <div class="d-flex col-6 mx-auto">
-                                <button type="button" class="btn btn-outline-success m-4 mb-5 w-75" id="prebtn2">이전 단계</button>                
-                                <button type="button" class="btn btn-outline-success m-4 mb-5 w-75" id="donabtn">후원 신청하기</button> 
-                            </div>
-                        </div>
-                    </div>
-                    
-
+                    </form>
+                   
+					
                 </div>
             </div> 
             
@@ -193,7 +176,7 @@
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
             }
             $("#donationpriceselect").change(function(){
-                $("#totaldonationprice").text(function(){
+                $("#totalDonationPrice").text(function(){
                     if($("#donationpriceselect").val() != "직접입력"){
                         return $("#donationpriceselect").val();
                     }
@@ -202,7 +185,7 @@
                     $("#priceWrite").addClass("none");
                 }else{
                     $("#priceWrite").removeClass("none");
-                    $("#totaldonationprice").text(function(){
+                    $("#totalDonationPrice").text(function(){
                         return 0;
                     })
                     $("#priceWrite").val(function(){
@@ -220,12 +203,12 @@
                 }
                 let price = Number($(this).val());
                 $(this).val(price);
-                $("#totaldonationprice").text(price);
+                $("#totalDonationPrice").text(price);
                 
-                let dprice = $("#totaldonationprice").text();
+                let dprice = $("#totalDonationPrice").text();
                 let tdprice = $.numberWithCommas(dprice);
 
-                $("#totaldonationprice").text(tdprice);
+                $("#totalDonationPrice").text(tdprice);
             });
 
             
@@ -233,21 +216,22 @@
 
             $("#nextbtn1").click(function(){
                 event.preventDefault();                                
-                if($("#totaldonationprice").text() == "" || $("#totaldonationprice").text() <= 999) {
-                    customAlert.alert("1000원 이상의 후원금액을 입력해주세요","경고!");                    
-                }
-                else {
+                if($("#totalDonationPrice").text() == "" || $("#totalDonationPrice").text() <= 999) {
+                    customAlert.alert("후원금액은 1,000원 이상이어야 합니다","경고!");                    
+                } else {
                     $("#select").removeClass("block").addClass("none");        
                     $("#info").removeClass("none").addClass("block");
                 }                
             });
             $("#nextbtn2").click(function(){
                 event.preventDefault();
-                
-                $("#info").removeClass("block").addClass("none");
-                $("#pay").removeClass("none").addClass("block");    
-                    
-            });
+                if($("#roadAddrPart1").val() == "" || $("#addrDetail").val() == "") {
+                	customAlert.alert("주소를 입력해주세요","경고!");    
+                } else {                	
+	                $("#info").removeClass("block").addClass("none");
+	                $("#pay").removeClass("none").addClass("block");
+                }	                	
+	        });
             $("#prebtn1").click(function(){
                 event.preventDefault();
                 $("#info").removeClass("block").addClass("none");
@@ -260,7 +244,6 @@
             });
             
 
-            
             $("#search").click(function(){
                 event.preventDefault();
                 var pop = window.open("${cp}donationjusopopup","pop","width=570,height=420, scrollbars=yes, resizable=yes");  
@@ -270,8 +253,8 @@
 
  function jusoCallBack(roadAddrPart1,addrDetail){
     		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-    		document.frm2.roadAddrPart1.value = roadAddrPart1; 
-    		document.frm2.addrDetail.value = addrDetail;    		
+    		document.frm.roadAddrPart1.value = roadAddrPart1;
+    		document.frm.addrDetail.value = addrDetail;
     	}
     </script>    
 

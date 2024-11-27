@@ -10,4 +10,6 @@ public interface DonationService {
 	// 도네이션 결제
 	int donationPay(Donation donation);
 	
+	Donation findBy(Long dno);
+	
 }

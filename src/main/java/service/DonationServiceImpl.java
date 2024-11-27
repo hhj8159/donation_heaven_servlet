@@ -16,5 +16,15 @@ public class DonationServiceImpl implements DonationService{
 			return mapper.insert(donation);
 		}
 	}
+
+	@Override
+	public Donation findBy(Long dno) {
+		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
+			DonationMapper mapper = session.getMapper(DonationMapper.class);
+			return mapper.selectOne(dno);
+		}
+	}
+	
+	
 	
 }

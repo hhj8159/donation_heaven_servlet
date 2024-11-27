@@ -5,20 +5,14 @@
 <head>
 <jsp:include page="../common/head.jsp"></jsp:include>
 <style>
-     .font-color {color: #005B48; font-size: 25px;}
-     body{
-         font-family: 'MinSans', sans-serif;
-     }
-     .donation {background-color: #005B48; color: white; font-size: 30px; margin-right: 30px; }
-     .signup {margin-right: 20px;}
-     .sign {margin-top: 50px; color: #005B48;}
-     .sign a:link { color: #005B48; }
-     .donation:hover { color: #005B48;}
-     .footer {background-color: #005B48; color: white;}
-     .block {display: block;}
-     .none {display: none;}
-     
- </style>
+    .block {display: block;}
+    .none {display: none;}
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    }
+</style>
 </head>
 <body>
 
