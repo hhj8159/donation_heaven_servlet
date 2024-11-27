@@ -100,7 +100,7 @@
                                 <label class="form-check-label font-size" style="margin-left: 2%" for="mySwitch">아이디
                                     저장</label>
                                 <a href="#" class="font-size" style="margin-left: 8%;">아이디</a> <span
-                                    class="font-size mx-1"> / </span> <a href="#"
+                                    class="font-size mx-1"> / </span> <a href="${cp}updatePassword"
                                     class="font-size"><span>비밀번호찾기</span></a><span class="font-size mx-1"> | </span><a
                                     href="${cp}signup"><span class="font-size">회원가입</span></a>
                             </div>

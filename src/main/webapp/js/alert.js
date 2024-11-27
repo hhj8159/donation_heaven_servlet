@@ -1,5 +1,5 @@
 function CustomAlert(){
-  this.alert = function(message, title){
+  this.alert = function(message, title,callback){
     // 경고창 요소를 동적으로 생성
     let dialogoverlay = document.createElement('div');
     dialogoverlay.id = 'dialogoverlay';
@@ -50,13 +50,14 @@ function CustomAlert(){
     document.getElementById('dialogboxfoot').innerHTML = '<button class="pure-material-button-contained active" onclick="customAlert.ok()">확인</button>';
   }
 
-  this.ok = function(){
+  this.ok = function(callback){
     // 경고창을 닫을 때 DOM에서 제거
     document.getElementById('dialogbox').style.display = "none";
     document.getElementById('dialogoverlay').style.display = "none";
 
     document.body.removeChild(document.getElementById('dialogbox'));
     document.body.removeChild(document.getElementById('dialogoverlay'));
+	return callback;
   }
 }
 function CustomConfirm(){

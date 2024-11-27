@@ -72,7 +72,7 @@
     <div class="wrap">
         <jsp:include page="../common/header.jsp"></jsp:include>
          <main class="container card w-50 mt-5" style="margin-left: 25%;">
-                     <form method="post">
+                     <form method="post" name="frm">
            <div class="mt-3 w-100 text-center" id="step1">
             <p class="font-color">회원정보에 등록한 비밀번호 변경</p>
 
@@ -100,7 +100,7 @@
                 <label for="name" class="col-2  mt-2" >새 비밀번호 확인</label>
                 <input type="password" class="form-control textwidth mt-2" id="newpw" name="">
             </div>
-            <button class="btn mt-3 mb-3" style="background-color: #005B48; color: white; width: 41%;;margin-left: 3%;" id="updatebtn" onclick="customAlert.alert('비밀번호 변경이 완료되었습니다!.','승인!')">비밀번호 변경</button>
+            <button class="btn mt-3 mb-3" style="background-color: #005B48; color: white; width: 41%;margin-left: 3%;" id="updatebtn" onclick="alert('비밀번호 변경이 완료되었습니다')">비밀번호 변경</button>
              			
              </div>
 			</form>
@@ -110,15 +110,17 @@
     <script src="${cp}js/alert.js"></script>
  	<script>
  	 $(function(){
- 		 
+/*  		 $("#updatebtn").on('click',function(event){
+ 			event.preventDefault();
+ 			
+ 			
+ 		 }); */
      	$("#emailbtn").on('click',function(event){
      		event.preventDefault();
      		const email = $("#email").val();
-     		const id = $("id").val();
+     		const id = $("#id").val();
+     	    if (email == "" || id =="") {
 
-     	    if (email == "" && id =="") {
-     	    	console.log(email);
-     	    	console.log(id)
      	    	customAlert.alert("이메일과 아이디를 입력해주세요.","경고!");
      	        return;
      	    }
