@@ -157,7 +157,7 @@
                     <input type="text" class="col-3 form-control textwidth mt-3 mb-3" style="margin-left: 31%" id="addrDetail" name = "addrDetail" placeholder="상세주소" readonly>
                     </div>
                         
-                    <button class="btn mt-5 mb-5" style="background-color: #005B48; color: white; width: 40%;margin-left: 31%;" id="updatebtn">확인</button>
+                    <button class="btn mt-5 mb-5" style="background-color: #005B48; color: white; width: 40%;margin-left: 31%;" >확인</button>
                     </div>
                 </div>
                 </div>
@@ -169,10 +169,7 @@
     <script src="${cp}js/alert.js"></script>
     <script>
     $(function(){
-    	$("updatebtn").on('click',function(event)){
-    		event.preventDefault();
-    		customAlert.alert("비밀번호변경이 완료되었습니다","승인!");
-    	}
+
     	$("#emailbtn").on('click',function(event){
     		event.preventDefault();
     		const email = $("#email").val();
