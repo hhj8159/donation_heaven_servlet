@@ -22,6 +22,7 @@
     </style>
 </head>
    <body>
+   <img src="">
     <div class="wrap">
         <jsp:include page="../common/header.jsp" />       
         <main class="container">
@@ -47,11 +48,9 @@
 	             	<span class="mx-2 attach-count-txt"></span>
 	                <input type="file" id="attach" name="files" class="d-none" multiple>
 					
-                    <ul class="list-group attach-result">
-					
+                    <ul class="list-group attach-result">					
                     </ul>
-	               
-                   
+	                                 
                     <div class="text-center text-light my-5">
 	                	<button class="btn text-light" style="background-color: #005B48; width: 70px;">작성</button>
 	                    <a href="list" class="btn text-light" style="background-color: #005B48; width: 70px;">목록</a>
@@ -59,14 +58,14 @@
 	                <div class="uploaded-input">
 	                </div>
                 </form>
-            </div>
-            
-              
+            </div>          
         </main>
         <jsp:include page="../common/footer.jsp"></jsp:include>
    </div>
    <script>
+   
 	/* 유효성체크해야함 - 개수, 크기, 확장자 제한*/
+	 
 		$("#attach").change(function() {
 			const url = '${cp}'+'upload';
 			const formData = new FormData();
@@ -97,13 +96,12 @@
 					strHidden += `<input type="hidden" name="origin" value="\${data[i].origin}">`;
 					strHidden += `<input type="hidden" name="image" value="\${data[i].image}">`;
 					strHidden += `<input type="hidden" name="path" value="\${data[i].path}">`;
-
 				}
 				$(".attach-result").html(str);
 				$(".uploaded-input").html(strHidden);
 				console.log(data);
 			});
-		});
+		}); 
 	</script>
 </body>
 </html>

@@ -170,15 +170,20 @@
 	                </thead> 
 	                <tbody>
 		  		    <c:if test="${empty posts}"><tr><td colspan="5">작성된 글이 없습니다.<td></tr></c:if>
-	                <c:forEach items="${posts}" var="p">		           
+	                <c:forEach items="${posts}" var="p">
+	                ${p.attachs}
 		                <tr class="align-middle">
 		                	<td>${p.pno}</td>
 		             		<td class="text-truncate text-start">${p.title}</td>
 		             
 		                	<td><fmt:formatDate value="${p.regdate}" pattern="yyyy-MM-dd" /></td>
 		                	<!-- 다운로드수를 어찌 처리해야하나... -->
-		                	<td>${p.attachs}</td>	                			
-		                	<td><a type="button" class="btn btn-sm btn-outline-light text-dark" href="${cp}download?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}">다운로드 <i class="fa-solid fa-down-long"></i> </a></td>						
+		                	<td>0</td>	                			
+		                	<td>
+			                	<c:forEach items="${p.attachs}" var="a" begin="0" end="0">
+			                		<a type="button" class="btn btn-sm btn-outline-light text-dark" href="${cp}download?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}">다운로드 <i class="fa-solid fa-down-long"></i></a>
+			                	</c:forEach>
+		                	</td>
 		                </tr>
 	                </c:forEach>
 	                </tbody>

@@ -49,6 +49,7 @@ public class Upload extends HttpServlet{
 				if(dotIdx != -1) {
 					ext = origin.substring(dotIdx);
 				}
+				
 				String uuid = UUID.randomUUID().toString();
 				String realName = uuid + ext;
 				String path = getTodayStr();
@@ -56,7 +57,7 @@ public class Upload extends HttpServlet{
 				if(!parentPath.exists()) {
 					parentPath.mkdirs();
 				}
-				item.write(new File(parentPath, realName));	
+		
 				attachs.add(Attach.builder().uuid(realName).path(path).origin(origin).build());
 			}
 			System.out.println(attachs);

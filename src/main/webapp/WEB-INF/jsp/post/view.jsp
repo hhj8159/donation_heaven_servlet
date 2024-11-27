@@ -33,6 +33,7 @@
         </style>
     </head>
     <body>
+   		<img src='mime.jsp'>
         <div class="wrap">
             <jsp:include page="../common/header.jsp" />
             <main class="container">
@@ -51,6 +52,7 @@
                             <p class="text-center" style="font-size: 20px;"><b>${post.title}</b></p>
                         </div>
                         <div class="dropdown">
+                        ${post.attachs}
                             <div class="text-end">작성자 <a class="nav-link dropdown-toggle d-inline" href="#" role="button" data-bs-toggle="dropdown">${post.id}</a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" onclick="return confirm('이 회원을 차단하시겠습니까?')">차단</a>
@@ -115,7 +117,7 @@
         			event.preventDefault();
         			const id = $("#memberId").val(); 
         			const pno = $("#postPno").val(); 
-        			if(customConfirm.confirm('추천하시겠습니까?',"추천")==true){
+        			if(confirm('추천하시겠습니까?',"추천")==true){
         				$.ajax({
         					url: "${cp}post/like",
         					type: "POST",
