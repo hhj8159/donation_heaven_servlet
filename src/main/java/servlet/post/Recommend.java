@@ -9,21 +9,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dto.Criteria;
+import service.LikeService;
+import service.LikeServiceImpl;
 import service.PostService;
 import service.PostServiceImpl;
 import utils.Commons;
+import vo.Like;
 import vo.Member;
 import vo.Post;
 
 @WebServlet("/post/like")
-public class Like extends HttpServlet{
+public class Recommend extends HttpServlet{
 private PostService service = new PostServiceImpl();
+private LikeService likeservice = new LikeServiceImpl();
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		String pnoStr = req.getParameter("pno");
+		Long pno = Long.valueOf(pnoStr);
+		String id = req.getParameter("id");
+		
 	    Object memberObj = req.getSession().getAttribute("member");
+	    
 	    Criteria cri = new Criteria(req);
 	    String redirectUrl = "view?" + cri.getQs2();
 	
@@ -33,15 +41,25 @@ private PostService service = new PostServiceImpl();
 	        return;
 	    }
 	    
-	    Long pno = Long.valueOf(pnoStr);
 	    Member m = (Member) memberObj;
-	    if(m.getId().equals(service.findBy(pno).getId())) {
+	    
+	    if(m.getId().equals(likeservice.findBy(id, pno).getId())) {
 	    	Commons.printMsg("본인의 글은 추천할 수 없습니다", redirectUrl, resp);
 	    	return;
 	    }
-	    
-	    service.like(pno);
-		resp.sendRedirect(redirectUrl);
-	
+		
+		
+		if(likeservice.findBy(id, pno) == null){
+			try {
+				service.like(id, pno);
+				resp.getWriter().write("success");
+			} catch(Exception e){
+				e.printStackTrace();
+				resp.getWriter().write("fail");
+			}
+		}
+		else {
+			resp.getWriter().write("duplication");
+		}    
 	}
 }

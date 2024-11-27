@@ -22,6 +22,5 @@ public interface PostService {
 	
 	int count(Criteria cri);
 	
-	public int like(Long pno);
-	
+	public int like(String id, Long pno);
 }

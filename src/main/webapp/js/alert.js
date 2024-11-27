@@ -22,7 +22,7 @@ function CustomAlert(){
 
     let winH = window.innerHeight;
     dialogoverlay.style.height = winH + "px";
-    dialogbox.style.top = "100px";
+    dialogbox.style.top = "20%";
 
     dialogoverlay.style.display = "block";
     dialogbox.style.display = "block";

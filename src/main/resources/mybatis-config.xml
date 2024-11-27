@@ -21,6 +21,7 @@
 		<mapper resource="mapper/PostMapper.xml"/>
 		<mapper resource="mapper/AttachMapper.xml"/>
 		<mapper resource="mapper/DonationMapper.xml"/>
+		<mapper resource="mapper/LikeMapper.xml"/>
 
   </mappers>
 </configuration>

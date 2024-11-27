@@ -5,6 +5,7 @@
     <html>
 
     <head>
+    
         <jsp:include page="../common/head.jsp"></jsp:include>
         <style>
             .font-color {
@@ -57,8 +58,10 @@
                                 </ul>
                             </div>
                             <p class="text-end mb-0">작성일 <fmt:formatDate value="${post.regdate}" pattern="yyyy-MM-dd"/></p>
-                            <p class="text-end mb-0">조회 ${post.viewCount}</p>
+                            <c:if test="${cri.category == 2}">
                             <p class="text-end mb-0">추천 ${post.likes}</p>
+                        	</c:if>
+                            <p class="text-end mb-0">조회 ${post.viewCount}</p>
                         </div>
                     </div>
                     <div class="card-body" style="height: 515px;">${post.content}</div>
@@ -85,23 +88,57 @@
                 	</c:if>
                 	
                 	<c:if test="${post.id != member.id}">
-                	  <c:if test="${cri.category== 2}">
-	                  <a href="like?pno=${post.pno}&${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 70px;" onclick="return confirm('추천하시겠습니까?')">추천</a>                	  
+                	  <c:if test="${cri.category== 2 and not empty member.id}">
+	                  	<a class="btn text-light" style="background-color: #005B48; width: 80px;" id="likeBtn">추천 ${post.likes} </a>
+ 	                  	<a class="btn text-light d-none" style="background-color: #005B48; width: 70px;" id="unlikeBtn">추천 ${post.likes} </a>                 	  
                 	  </c:if>
 	                  <a href="list?${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 70px;">목록</a>
 	                  <c:if test="${cri.category== 2}">
 	                  <a href="report?" class="btn btn-secondary text-light" style="width: 70px;" onclick="return confirm('신고하시겠습니까?')">신고</a>                    
                 	  </c:if>
-                	</c:if>                    	
+                	</c:if>                 	
                 </div>    
                 <form>
-	                <input type="hidden" value="${post.pno}">
+	                <input type="hidden" value="${post.pno}" id="postPno">
+	                <input type="hidden" value="${member.id}" id="memberId">
 	                <input type="text">
 	                <input type="submit" class="btn" value="댓글작성">
                 </form>
+               
             </main>
         <jsp:include page="../common/footer.jsp"></jsp:include>
         </div>
+        <script src="${cp}js/alert.js"></script>
+        <script>
+        	$(function() {
+        		$("#likeBtn").click(function(){
+        			event.preventDefault();
+        			const id = $("#memberId").val(); 
+        			const pno = $("#postPno").val(); 
+        			if(confirm('추천하시겠습니까?')==true){
+        				$.ajax({
+        					url: "${cp}post/like",
+        					type: "POST",
+        					data: {id:id, pno:pno},
+        					success: function(response) {
+        						  if (response === "success") {
+	        						customAlert.alert("추천되었습니다","확인");
+        						  }
+        						  else if(response === "duplication") {
+        							  customAlert.alert("같은 아이디로 중복추천 불가능","경고"); 
+        						  }
+        					},
+        					error: function(response) {
+        						if (response === "fail") {
+	        						customAlert.alert("서버 오류","경고");        							  
+        						  }
+        					} 			
+        				})
+        			} 
+        			
+        		})
+        	});
+        </script>
     </body>
 
     </html>

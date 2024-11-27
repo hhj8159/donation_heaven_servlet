@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import dto.Criteria;
 import mapper.AttachMapper;
+import mapper.LikeMapper;
 import mapper.PostMapper;
 import utils.MybatisInit;
 import vo.Post;
@@ -91,10 +92,13 @@ public class PostServiceImpl implements PostService{
 	}
 	
 	@Override
-	public int like(Long pno) {
+	public int like(String id, Long pno) {
 		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
 			PostMapper mapper = session.getMapper(PostMapper.class);
-			mapper.increaseLikes(pno);
+			LikeMapper likemapper = session.getMapper(LikeMapper.class);
+//			mapper.increaseLikes(pno);
+			System.out.println(mapper.increaseLikes(pno));
+			likemapper.insertLike(id, pno);
 			return 1;
 		}
 	}

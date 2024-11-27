@@ -2,6 +2,9 @@ package mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
+
 import dto.Criteria;
 import vo.Post;
 
@@ -19,8 +22,7 @@ public interface PostMapper {
 	int increaseViewCount(Long pno);
 	
 	int delete(Long pno);
-	
-//	int increaseLikes(Long pno);
 
-	void increaseLikes(Long pno);
+	int increaseLikes(Long pno);
+	
 }
