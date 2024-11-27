@@ -63,6 +63,16 @@ public class EmailSender extends HttpServlet{
 		      	resp.getWriter().write("fail");
 		        }
 		   }
+		   if (uri.startsWith("userEmailSelect")) {
+				 String id = req.getParameter("id");
+				 System.out.println("id");
+           	try {
+                   service.useremail(id, email);
+                   resp.getWriter().write("success");
+               }catch(Exception e){
+             	resp.getWriter().write("fail");
+               }	
+           }
 		
        
         

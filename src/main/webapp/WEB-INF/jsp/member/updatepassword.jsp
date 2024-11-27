@@ -72,8 +72,10 @@
     <div class="wrap">
         <jsp:include page="../common/header.jsp"></jsp:include>
          <main class="container card w-50 mt-5" style="margin-left: 25%;">
+                     <form method="post">
            <div class="mt-3 w-100 text-center" id="step1">
             <p class="font-color">회원정보에 등록한 비밀번호 변경</p>
+
             <div class="row">
                 <label for="name" class="col-2 mt-2"  >아이디</label>
                 <input type="text" class="form-control textwidth mt-2" id="id" name="id">
@@ -92,14 +94,16 @@
               <p class="font-color">비밀번호 변경</p>
               <div class="row mt-2">
                 <label for="name" class="col-2  mt-2"  >새 비밀번호</label>
-                <input type="text" class="form-control textwidth mt-2" id="newpw" name="newpw">
+                <input type="password" class="form-control textwidth mt-2" id="newpw" name="newpw">
             </div>
               <div class="row  mt-2">
                 <label for="name" class="col-2  mt-2" >새 비밀번호 확인</label>
-                <input type="text" class="form-control textwidth mt-2" id="newpw" name="">
+                <input type="password" class="form-control textwidth mt-2" id="newpw" name="">
             </div>
+            <button class="btn mt-3 mb-3" style="background-color: #005B48; color: white; width: 41%;;margin-left: 3%;" id="updatebtn" onclick="return false;">비밀번호 변경</button>
+             			
              </div>
-			
+			</form>
         </main>
          <jsp:include page="../common/footer.jsp"></jsp:include>
     </div>
@@ -107,6 +111,12 @@
  	<script>
  	 $(function(){
      	
+ 		 $("updatebtn").on("click",function(event){
+      		event.preventDefault();
+ 			customAlert.alert("비밀번호 변경이 완료되었습니다.","승인!");
+ 			window.location.href("${cp}semi/signup");
+ 		 })
+ 		 
      	$("#emailbtn").on('click',function(event){
      		event.preventDefault();
      		const email = $("#email").val();
@@ -123,9 +133,12 @@
      	        success: function (response) {
      	        	console.log(response);
      	            if (response === "success") {
+     	            	
      	            	customConfirm.confirm("인증번호가 발송되었습니다 이메일을 확인해주세요.","승인");
-     	                $("#emailcode").removeClass("none").addClass("block");
-     	                $("#emailbtn2").removeClass("none").addClass("block");
+     	            		$("#emailcode").removeClass("none").addClass("block");
+         	                $("#emailbtn2").removeClass("none").addClass("block");
+         	            	$("#id" ).prop('readonly', true);
+     	                
      	            } else {
      	            	customAlert.alert("인증번호 발송에 실패했습니다 다시 시도해주세요.");
      	            }
@@ -140,22 +153,24 @@
      		event.preventDefault();
      		const emailcode = $("#emailcode").val();
      		const email = $("#email").val();
+     		const id = $("#id").val();
      	    if (!email) {
      	    	customAlert.alert("이메일을 입력해주세요.","경고!");
      	        return;
      	    }else if(!emailcode){
-     	    	customAlert.alert("이메일을 입력해주세요.","경고!");
+     	    	customAlert.alert("인증코드를 입력해주세요","경고!");
      	        return;
      	    }
 
      	    $.ajax({
-     	        url: "${cp}sendemail/select",
+     	        url: "${cp}sendemail/userEmailSelect",
      	        type: "POST",
      	        data: { email:email,
-     	        		code:emailcode},
+     	        		id:id},
      	        success: function (response) {
      	        	console.log(response);
      	            if (response === "success") {
+
      	                $("#step3div").removeClass("none").addClass("block");
      	                customAlert.alert("인증번호가 확인되었습니다","확인");
      	                $("#emailcode").removeClass("block").addClass("none");

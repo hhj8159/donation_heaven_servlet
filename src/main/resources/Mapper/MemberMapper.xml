@@ -8,7 +8,7 @@
     select * from member where id = #{id}
   </select>
     <insert id="insert" >
-	insert into member (username,tel,gender,email,id,pw,road_addr,detail_addr) values(#{username},#{tel},#{gender},#{email},#{id},#{pw},#{roadAddr},#{detailAddr})
+	insert into member (username,tel,gender,email,id,pw,road_addr,detail_addr) values(#{name},#{tel},#{gender},#{email},#{id},#{pw},#{roadAddr},#{detailAddr})
   </insert>
   <insert id="emailinsert">
 	insert into email_verification(email,code) values(#{email},#{code});
@@ -22,6 +22,9 @@
   	 <update id="updatepw">
   	 Update member set pw = #{pw} Where id = #{id}; 
   	 </update>
+  	 <select id="userEmailSelect">
+  	 Select code,m.email from email_verification as e Join member as m On m.email = e.email  Where e.email = #{email} ORDER BY createdate DESC limit 1
+  	 </select>
   	 <!-- <delete id="deleteOldEmails">
     DELETE FROM email_verification
     WHERE createdate < NOW() - INTERVAL 20 MINUTE;

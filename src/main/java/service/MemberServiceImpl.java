@@ -88,7 +88,13 @@ public class MemberServiceImpl implements MemberService{
 			return mapper.updatepw(id, pw);
 		}
 	}
-	
+	@Override
+	public void useremail(String id, String email) {
+		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
+			MemberMapper mapper = session.getMapper(MemberMapper.class);
+			mapper.userEmailSelect(id,email);
+		}
+	}
 	
 	
 	

@@ -23,9 +23,14 @@ public class UpdatePassword extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String id = req.getParameter("id");
-		String pw = req.getParameter("pw");
+		String pw = req.getParameter("newpw");
 		
+		System.out.println(id);
+		System.out.println(pw);
 		service.modifypw(id, pw);
+		
+		 String redirectURL = req.getContextPath()+"/signin";
+	        resp.sendRedirect(redirectURL);
 		
 	}
 	
