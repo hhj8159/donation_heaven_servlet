@@ -21,5 +21,12 @@ public class Commons {
 		}
 		pw.println("</script>");
 	}
-		
+//	public static String getDomain() throws UnknownHostException {
+//	
+//    InetAddress inetAddress = InetAddress.getLocalHost();
+//    System.out.println(inetAddress);
+//  
+//    return inetAddress.getHostName();
+//}
+
 }

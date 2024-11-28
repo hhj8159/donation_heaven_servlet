@@ -65,8 +65,24 @@
 		    <groupId>org.eclipse.angus</groupId>
 		    <artifactId>jakarta.mail</artifactId>
 		    <version>2.0.3</version>
-		</dependency>		
+		</dependency>
+		
+		<!-- https://github.com/iamport/iamport-rest-client-java -->		
+		<dependency>
+		    <groupId>com.github.iamport</groupId>
+		    <artifactId>iamport-rest-client-java</artifactId>
+		    <version>0.2.23</version>
+		</dependency>				
 	</dependencies>
+	
+	<repositories>
+		<!-- https://github.com/iamport/iamport-rest-client-java -->		
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+
   <build>
     <plugins>
       <plugin>

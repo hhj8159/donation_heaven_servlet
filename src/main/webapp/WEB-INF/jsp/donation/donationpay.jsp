@@ -1,10 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
+
 <jsp:include page="../common/head.jsp"></jsp:include>
-   <link rel='stylesheet' type='text/css'href='${cp}css/alert.css'>  
+	
+	<!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+	<!-- iamport.payment.js --> 
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+      
 <style>
 	.block {display: block;}
 	.none {display: none;}
@@ -16,6 +23,7 @@
 </style>
 </head>
 <body>
+	
     <div class="wrap">
         <jsp:include page="../common/header.jsp"></jsp:include>
         
@@ -39,26 +47,26 @@
                             </div>                                
                             <div class="d-grid col-10 mx-auto">
                                 <hr class="border border-2 border-secondary">
-                                <ul class="list-group list-group-horizontal form-check my-3">
+                                <ul class="list-group list-group-horizontal form-check my-3" id="donationcategoryselect">
                                     <li class="list-group px-3 col-2">후원방식</li>
-                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" value="1" name="donationcategory" checked>정기후원</label></li>
-                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" value="2" name="donationcategory">일시후원</label></li>
+                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" value="정기후원" name="donationcategory" checked>정기후원</label></li>
+                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" value="일시후원" name="donationcategory">일시후원</label></li>
                                 </ul>
                                 <ul class="list-group list-group-horizontal form-check mb-2 mt-3">
                                     <li class="list-group px-3 col-2">후원종류</li>
-                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" value="1" name="donationtype" checked>독거노인</label></li>
-                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" value="2" name="donationtype">결식아동</label></li>
-                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" value="3" name="donationtype">한부모가정</label></li>
-                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" value="4" name="donationtype">장애인</label></li>
+                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" value="독거노인" name="donationtype" checked>독거노인</label></li>
+                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" value="결식아동" name="donationtype">결식아동</label></li>
+                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" value="한부모가정" name="donationtype">한부모가정</label></li>
+                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" value="장애인" name="donationtype">장애인</label></li>
                                 </ul>
                                 <div class="list-group list-group-horizontal my-3">
                                     <p class="list-group px-3 mt-2 col-2">후원금액</p>
                                     <div class="col-3 px-3">
                                         <select class="form-select" id="donationpriceselect">
                                             <option value="직접입력">직접입력</option>
-                                            <option value="10,000">10,000</option>
-                                            <option value="50,000">50,000</option>
-                                            <option value="100,000">100,000</option>
+                                            <option value="10000">10,000</option>
+                                            <option value="50000">50,000</option>
+                                            <option value="100000">100,000</option>
                                         </select>
                                     </div>
                                     <p class="list-group ps-1"><input class="form-control text-end" type="number" name="donadate" id="priceWrite" placeholder="직접입력"></p>
@@ -92,25 +100,25 @@
                                 <hr class="border border-2 border-secondary">
                                 <ul class="list-group list-group-horizontal form-check my-3">
                                     <li class="list-group px-3 col-2">이름</li>
-                                    <li class="list-group px-3">김길동</li>
+                                    <li class="list-group px-3">${member.name}</li>
                                 </ul>
                                 <ul class="list-group list-group-horizontal form-check my-3">
                                     <li class="list-group px-3 col-2">휴대전화</li>
-                                    <li class="list-group px-3">010-1234-5678</li>
+                                    <li class="list-group px-3">${member.tel}</li>
                                 </ul>   
                                 <ul class="list-group list-group-horizontal my-3">
                                     <li class="list-group px-3 col-2">이메일</li>
-                                    <li class="list-group px-3">kimgd1234@naver.com</li>
+                                    <li class="list-group px-3" >${member.email}</li>
                                 </ul>
                                 <div class="col-md-10">
                                     <div class="list-group list-group-horizontal my-3">
                                         <p class="list-group px-3 me-3 col-2">주소</p>
-                                        <input type="text" class="form-control col-2 ms-3 me-2  py-2 w-50" id="roadAddrPart1" name="roadAddrPart1" placeholder="도로명주소" readonly>
-                                        <button class="btn btn-success py-2 col-3" type="button" style="width: 15%;" id="search">주소 검색</button>
+                                        <input type="text" class="form-control col-2 ms-3 me-2  py-2 w-50" id="roadAddrPart1" name="roadAddrPart1" placeholder="도로명주소" value="${member.roadAddr}" readonly>
+                                        <button class="btn btn-success py-2 col-3" type="button" style="width: 15%;" id="search">주소 변경</button>
                                     </div>
                                     <div class="list-group list-group-horizontal my-3">
                                         <p class="list-group px-3 me-3 col-2"></p>
-                                        <input type="text" class="form-control col-2 ms-3 me-2 py-2 w-50" id="addrDetail" name="addrDetail" placeholder="상세주소" readonly>
+                                        <input type="text" class="form-control col-2 ms-3 me-2 py-2 w-50" id="addrDetail" name="addrDetail" placeholder="상세주소" value="${member.detailAddr}" readonly>
                                     </div>
                                     <ul class="list-group search-result-wrap mb-3 w-50" style="margin-left: 15%;" >
                 
@@ -141,8 +149,8 @@
                                     </ul>
                                     <div>
                                         <div class="d-flex col-12 mx-auto">
-                                            <button type="button" class="btn btn-outline-success mt-4 mb-5 mx-4 py-2 w-75 fs-4 bold-text">신용카드</button>
-                                            <button type="button" class="btn btn-outline-success mt-4 mb-5 mx-4 py-2 w-75 fs-4 bold-text">계좌이체</button>
+                                            <button type="button" class="btn btn-outline-success mt-4 mb-5 mx-4 py-2 w-75 fs-4 bold-text" onclick="requestPay()">신용카드</button>
+                                            <button type="button" class="btn btn-outline-success mt-4 mb-5 mx-4 py-2 w-75 fs-4 bold-text bg-success text-white border-success">계좌이체</button>
                                             <button type="button" class="btn btn-outline-success mt-4 mb-5 mx-4 py-2 w-75 fs-4 bold-text">무통장입금</button>
                                         </div>
                                     </div>
@@ -167,7 +175,15 @@
        <jsp:include page="../common/footer.jsp"></jsp:include>
     </div>
     <script src="${cp}js/alert.js"></script>
-
+	
+	<c:if test="${empty member}">
+    <script>
+	 customAlert.alert("로그인 후 이용 가능합니다","경고!").then(function(){
+		 location.href ="signin";
+	 });	 
+	 </script>
+	</c:if>
+	
     <script>
 
         
@@ -251,11 +267,68 @@
 
     })
 
- function jusoCallBack(roadAddrPart1,addrDetail){
-    		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-    		document.frm.roadAddrPart1.value = roadAddrPart1;
-    		document.frm.addrDetail.value = addrDetail;
+	function jusoCallBack(roadAddrPart1,addrDetail){
+ 		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+ 		document.frm.roadAddrPart1.value = roadAddrPart1;
+ 		document.frm.addrDetail.value = addrDetail;
+ 	}
+    
+    
+        
+    function requestPay() {    	
+    	let priceValue = document.getElementById("donationpriceselect").value;
+    	if(priceValue === "직접입력"){
+    		priceValue = document.getElementById("priceWrite").value;
     	}
+    	var donationTypeValue = document.querySelector("input[name=donationtype]:checked").value;    	
+    	
+    	
+    	console.log(priceValue);
+    	console.log(donationTypeValue);
+    	
+    	IMP.init("imp82235424");
+	    IMP.request_pay({
+		    channelKey: "channel-key-1d16e053-71db-476a-b2e7-6b2549d33d0f",
+		    pay_method: "card",
+		    merchant_uid: `payment-${crypto.randomUUID()}`, // 주문 고유 번호
+		    name: donationTypeValue,
+		    amount: priceValue,
+		    buyer_email: "gildong@gmail.com",
+		    buyer_name: "홍길동",
+		    buyer_tel: "010-4242-4242",
+		    buyer_addr: "서울특별시 강남구 신사동",
+	    },
+		  	function (rsp) {
+		    	// 결제 종료 시 호출되는 콜백 함수
+		    	// response.imp_uid 값으로 결제 단건조회 API를 호출하여 결제 결과를 확인하고,
+		    	// 결제 결과를 처리하는 로직을 작성합니다.
+		    	if(rsp.success) {
+		    		console.log(rsp);		    		
+		    	} else {
+		    		console.log(rsp);		    		
+		    	}
+	  	},
+	  	async (response) => {
+	  	    if (response.error_code != null) {
+	  	      return alert(`결제에 실패하였습니다. 에러 내용: ${response.error_msg}`);
+	  	    }
+
+	  	    // 고객사 서버에서 /payment/complete 엔드포인트를 구현해야 합니다.
+	  	    // (다음 목차에서 설명합니다)
+	  	    const notified = await fetch(`${SERVER_BASE_URL}/payment/complete`, {
+	  	      method: "POST",
+	  	      headers: { "Content-Type": "application/json" },
+	  	      // imp_uid와 merchant_uid, 주문 정보를 서버에 전달합니다
+	  	      body: JSON.stringify({
+	  	        imp_uid: response.imp_uid,
+	  	        merchant_uid: response.merchant_uid,
+	  	        // 주문 정보...
+	  	      }),
+	  	    });
+	  	  },
+	    
+	    ); 
+    }
     </script>    
 
 </body>
