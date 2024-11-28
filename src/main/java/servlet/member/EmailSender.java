@@ -98,9 +98,8 @@ public class EmailSender extends HttpServlet{
 		   if (uri.startsWith("cfnamesendemail")) {
 				 String name = req.getParameter("name");
            	try {
-           		System.out.println(";;;;11111");
+
                    if(service.selectname(name, email) != null) {
-                	  System.out.println(";;;;");
                 	  String rndText = String.format("%08d", (int)(Math.random() * 100000000));
  		              service.emailinsert(email,rndText);
  		              

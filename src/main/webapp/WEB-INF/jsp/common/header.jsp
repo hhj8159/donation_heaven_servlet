@@ -33,7 +33,7 @@
                     	<ul class="nav-item dropdown"style="color: #005B48;">
                  	   <li style="list-style: none"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><strong>${member.name}</strong>님<br> 환영합니다</a>
                  	   <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="${cp}post/list?category=2">마이페이지</a></li>
+                            <li><a class="dropdown-item" href="${cp}mypage">마이페이지</a></li>
                             <li><a class="dropdown-item" href="${cp}post/list?category=3">후원관리</a></li>
                             <li><a class="dropdown-item" href="${cp}post/list?category=2">나의후원대상</a></li>
                             <li><button class="dropdown-item  donation" onclick="location.href='${cp}logout'">로그아웃</button></li>

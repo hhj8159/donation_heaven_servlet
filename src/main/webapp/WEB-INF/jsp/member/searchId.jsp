@@ -92,14 +92,14 @@
              <div class="mt-3 w-100 text-center none mb-5" id="step2">
               <p class="font-color">생성하신 아이디</p>
               <div class="row mt-2">
-                <label for="name" class="col-2  mt-2"  >아이디</label>
-                <input type="text" class="form-control textwidth mt-2" readonly>
+                <label for="id" class="col-2  mt-2"  >아이디</label>
+                <input type="text" class="form-control textwidth mt-2" readonly id="id" name="id">
             </div>
               <div class="row  mt-2">
-                <label for="name" class="col-2  mt-2" >생성일자</label>
-                <input type="text" class="form-control textwidth mt-2"readonly>
+                <label for="regdate" class="col-2  mt-2" >생성일자</label>
+                <input type="text" class="form-control textwidth mt-2"readonly id="regdate" name="regdate">
             </div>
-            <button class="btn mt-3 mb-3" style="background-color: #005B48; color: white; width: 41%;margin-left: 3%;" id="updatebtn" onclick="alert('비밀번호 변경이 완료되었습니다')">비밀번호 변경</button>
+            <button class="btn mt-3 mb-3" style="background-color: #005B48; color: white; width: 41%;margin-left: 3%;" id="updatebtn">로그인화면으로</button>
              			
              </div>
 			</form>
@@ -112,8 +112,10 @@
  	 $(function(){
   		 $("#updatebtn").on('click',function(event){
  			event.preventDefault();
- 			customAlert.alert("변경이완료되었습니다");
- 			document.frm.submit();
+ 			customAlert.alert("변경이완료되었습니다").then(function(){
+ 	 			document.frm.submit();
+ 			});
+
  		 }); 
      	$("#emailbtn").on('click',function(event){
      		event.preventDefault();
@@ -156,7 +158,9 @@
      		event.preventDefault();
      		const emailcode = $("#emailcode").val();
      		const email = $("#email").val();
-     		const id = $("#id").val();
+     		const name = $("#name").val();
+     		console.log(name);
+     		console.log(email);
      	    if (!email) {
      	    	customAlert.alert("이메일을 입력해주세요.","경고!");
      	        return;
@@ -166,10 +170,10 @@
      	    }
 
      	    $.ajax({
-     	        url: "${cp}sendemail/userEmailSelect",
+     	        url: "${cp}sendemail/select",
      	        type: "POST",
      	        data: { email:email,
-     	        		id:id},
+     	        		code:emailcode},
      	        success: function (response) {
      	        	console.log(response);
      	            if (response === "success") {
@@ -189,6 +193,16 @@
  	    	        	        	console.log(response);
  	    	        	        },
  	    	        		});
+ 	    	               $.ajax({
+	    	        	        url: "${cp}searchid/searchid",
+	    	        	        type: "POST",
+	    	        	        data: {name:name,email:email},
+	    	        	        success: function (response) {
+	    	        	        	
+	    	        	        	$("#id").val(response.id);
+	    	        	        	$("#regdate").val(response.regdate);
+	    	        	        },
+	    	        		});
 
      	            } else {
      	            	customAlert.alert("인증번호가 틀립니다");
