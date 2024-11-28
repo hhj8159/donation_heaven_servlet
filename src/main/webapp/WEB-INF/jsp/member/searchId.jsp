@@ -108,6 +108,7 @@
     </div>
     <script src="${cp}js/alert.js"></script>
  	<script>
+ 	
  	 $(function(){
   		 $("#updatebtn").on('click',function(event){
  			event.preventDefault();
@@ -117,19 +118,21 @@
      	$("#emailbtn").on('click',function(event){
      		event.preventDefault();
      		const email = $("#email").val();
-     		const id = $("#id").val();
-     	    if (email == "" || id =="") {
-     	    	customAlert.alert("이메일과 아이디를 입력해주세요.","경고!");
+     		const name = $("#name").val();
+     	    if (email == "" || name =="") {
+     	    	customAlert.alert("이름과 아이디를 입력해주세요.","경고!");
      	        return;
      	    }
-
+			$("#emailbtn").css("background-color","#a9a9a9");
      	    $.ajax({
-     	        url: "${cp}sendemail/send",
+     	        url: "${cp}sendemail/cfnamesendemail",
      	        type: "POST",
-     	        data: { email },
+     	        data: { email:email,
+     	        		name:name},
      	        success: function (response) {
      	        	console.log(response);
      	            if (response === "success") {
+    	            	$("#emailbtn").css("background-color","#005B48");
      	            	customConfirm.confirm("인증번호가 발송되었습니다 이메일을 확인해주세요.","승인").then((result)=> {
      	            		if(result){
      	            			$("#emailcode").removeClass("none").addClass("block");
@@ -139,7 +142,8 @@
      	            	})	
      	                
      	            } else {
-     	            	customAlert.alert("인증번호 발송에 실패했습니다 다시 시도해주세요.");
+    	            	$("#emailbtn").css("background-color","#005B48");
+     	            	customAlert.alert("회원정보에 등록한 이름과 이메일을 입력해주세요.");
      	            }
      	        },
      	        error: function () {

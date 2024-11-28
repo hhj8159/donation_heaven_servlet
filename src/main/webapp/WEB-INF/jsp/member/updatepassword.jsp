@@ -83,7 +83,7 @@
                 <label for="name" class="col-2 mt-2">이메일</label>
                 <input type="text" class="form-control textwidth mt-2 " id="email" name="email">
             </div>
-            <button class="btn mt-3 mb-3" style="background-color: #005B48; color: white; width: 41%;;margin-left: 3%;" id="emailbtn">인증 번호 발송</button>
+            <button class="btn mt-3 mb-3" style="background-color: #005B48; color: white; width: 41%;;margin-left: 3%;" id="emailbtn">인증 번호 발송</button><img src="${cp}images/8puiO.gif" id="lodingimg" class="ms-3 none"style="width:30px;height:30px;">
             <div class="row mt-2 mb-5">
             <input type="text" class="form-control  none" id="emailcode" name ="code"placeholder="인증번호" style="margin-left: 31%;width: 20% ;">
             <button class="btn col-2  none" style="background-color: #005B48; color: white; margin-left: 3%;" id="emailbtn2">인증 번호 확인</button>
@@ -99,7 +99,7 @@
                 <label for="name" class="col-2  mt-2" >새 비밀번호 확인</label>
                 <input type="password" class="form-control textwidth mt-2" id="newpw" name="">
             </div>
-            <button class="btn mt-3 mb-3" style="background-color: #005B48; color: white; width: 41%;margin-left: 3%;" id="updatebtn" onclick="alert('비밀번호 변경이 완료되었습니다')">비밀번호 변경</button>
+            <button class="btn mt-3 mb-3" style="background-color: #005B48; color: white; width: 41%;margin-left: 3%;" id="updatebtn" >비밀번호 변경</button>
              			
              </div>
 			</form>
@@ -111,8 +111,10 @@
  	 $(function(){
   		 $("#updatebtn").on('click',function(event){
  			event.preventDefault();
- 			customAlert.alert("변경이완료되었습니다");
- 			document.frm.submit();
+ 			customAlert.alert("변경이완료되었습니다").then(function(){
+ 	 			document.frm.submit();
+ 			});
+
  		 }); 
      	$("#emailbtn").on('click',function(event){
      		event.preventDefault();
@@ -122,14 +124,18 @@
      	    	customAlert.alert("이메일과 아이디를 입력해주세요.","경고!");
      	        return;
      	    }
-
+			$("#emailbtn").css("background-color","#a9a9a9");
+			$("#lodingimg").show();
      	    $.ajax({
-     	        url: "${cp}sendemail/send",
+     	        url: "${cp}sendemail/cfidsendemail",
      	        type: "POST",
-     	        data: { email },
+     	        data: { email:email,
+     	        		id:id},
      	        success: function (response) {
      	        	console.log(response);
      	            if (response === "success") {
+    	            	$("#emailbtn").css("background-color","#005B48");
+    	    			$("#lodingimg").hide();
      	            	customConfirm.confirm("인증번호가 발송되었습니다 이메일을 확인해주세요.","승인").then((result)=> {
      	            		if(result){
      	            			$("#emailcode").removeClass("none").addClass("block");
@@ -139,7 +145,9 @@
      	            	})	
      	                
      	            } else {
-     	            	customAlert.alert("인증번호 발송에 실패했습니다 다시 시도해주세요.");
+     	            	customAlert.alert("회원정보에 등록한 아이디와 이메일을 기입해주세요.");
+     	            	$("#emailbtn").css("background-color","#005B48");
+    	    			$("#lodingimg").hide();
      	            }
      	        },
      	        error: function () {
@@ -162,10 +170,10 @@
      	    }
 
      	    $.ajax({
-     	        url: "${cp}sendemail/userEmailSelect",
+     	        url: "${cp}sendemail/select",
      	        type: "POST",
-     	        data: { email:email,
-     	        		id:id},
+     	        data: { code:emailcode,
+     	        		email:email},
      	        success: function (response) {
      	        	console.log(response);
      	            if (response === "success") {

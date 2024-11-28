@@ -67,22 +67,17 @@
 		    <version>2.0.3</version>
 		</dependency>
 		
-		<!-- https://github.com/iamport/iamport-rest-client-java -->		
+		
+		<!-- https://mvnrepository.com/artifact/at.favre.lib/bcrypt -->
 		<dependency>
-		    <groupId>com.github.iamport</groupId>
-		    <artifactId>iamport-rest-client-java</artifactId>
-		    <version>0.2.23</version>
-		</dependency>				
-	</dependencies>
-	
-	<repositories>
-		<!-- https://github.com/iamport/iamport-rest-client-java -->		
-		<repository>
-		    <id>jitpack.io</id>
-		    <url>https://jitpack.io</url>
-		</repository>
-	</repositories>
+		    <groupId>at.favre.lib</groupId>
+		    <artifactId>bcrypt</artifactId>
+		    <version>0.10.2</version>
+		</dependency>
 
+		
+				
+	</dependencies>
   <build>
     <plugins>
       <plugin>

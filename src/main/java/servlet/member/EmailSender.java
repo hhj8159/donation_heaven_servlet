@@ -14,6 +14,7 @@ import jakarta.mail.Session;
 import service.MemberService;
 import service.MemberServiceImpl;
 import utils.MailSender;
+import vo.Member;
 
 @WebServlet("/sendemail/*")
 public class EmailSender extends HttpServlet{
@@ -41,6 +42,10 @@ public class EmailSender extends HttpServlet{
              	resp.getWriter().write("fail");
                }	
            }
+		   
+		   
+		   
+		   
 		   if (uri.startsWith("send")) {
 			   try {
 		        	  String rndText = String.format("%08d", (int)(Math.random() * 100000000));
@@ -48,11 +53,16 @@ public class EmailSender extends HttpServlet{
 		              service.emailinsert(email,rndText);
 		              MailSender.send(session, "DonationHaeven", "김용태 전용 이메일 인증번호  : " + rndText, email);
 		              resp.getWriter().write("success");
-		        }catch(Exception e){
+		       }catch(Exception e){
 		        	e.printStackTrace();
 		        	resp.getWriter().write("fail");
-		        }
+		       }
 		   }
+		   
+		   
+		   
+		   
+		   
 		   if (uri.startsWith("delete")){
 			   System.out.println(email);
 		        try {
@@ -63,15 +73,44 @@ public class EmailSender extends HttpServlet{
 		      	resp.getWriter().write("fail");
 		        }
 		   }
-		   if (uri.startsWith("userEmailSelect")) {
+		   
+		   
+		   
+		   
+		   if (uri.startsWith("cfidsendemail")) {
 				 String id = req.getParameter("id");
 				 System.out.println("id");
            	try {
-                   service.useremail(id, email);
-                   resp.getWriter().write("success");
+                   if(service.findById(id, email)) {
+                	  String rndText = String.format("%08d", (int)(Math.random() * 100000000));
+ 		              
+ 		              service.emailinsert(email,rndText);
+ 		              MailSender.send(session, "DonationHaeven", "김용태 전용 이메일 인증번호  : " + rndText, email);
+ 		              resp.getWriter().write("success");
+                   };
+                   
                }catch(Exception e){
              	resp.getWriter().write("fail");
-               }	
+               }
+           }
+		   
+		   
+		   if (uri.startsWith("cfnamesendemail")) {
+				 String name = req.getParameter("name");
+           	try {
+           		System.out.println(";;;;11111");
+                   if(service.selectname(name, email) != null) {
+                	  System.out.println(";;;;");
+                	  String rndText = String.format("%08d", (int)(Math.random() * 100000000));
+ 		              service.emailinsert(email,rndText);
+ 		              
+ 		              MailSender.send(session, "DonationHaeven", "김용태 전용 이메일 인증번호  : " + rndText, email);
+ 		              resp.getWriter().write("success");
+                   };
+                   
+               }catch(Exception e){
+             	resp.getWriter().write("fail");
+               }
            }
 		
        

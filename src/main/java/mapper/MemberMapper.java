@@ -9,6 +9,10 @@ public interface MemberMapper {
 	 
 	 public Member selectOne(String id);
 	 
+	 public boolean selectid(@Param("id")String id,@Param("email")String email);
+	 
+	 public Member selectname(@Param("name")String name,@Param("email") String email);
+	 
 	 public int emailinsert(@Param("email") String email,@Param("code")String code);
 	 
 	 public int emailselect(@Param("email") String email,@Param("code")String code);
@@ -18,4 +22,6 @@ public interface MemberMapper {
 	 public int updatepw(@Param("id")String id,@Param("pw") String pw);
 	 
 	 public int userEmailSelect(@Param("id")String id,@Param("email") String email);
+	 
+
 }

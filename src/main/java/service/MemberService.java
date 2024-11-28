@@ -33,6 +33,8 @@ public interface MemberService {
 	
 	int modifypw(String id,String pw);
 	
-	void useremail(String id, String email);
+
+	Member selectname(String name,String email);
+	boolean findById(String id, String email);
 	
 }

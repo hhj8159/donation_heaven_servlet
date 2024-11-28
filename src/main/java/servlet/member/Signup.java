@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import service.MemberService;
 import service.MemberServiceImpl;
 import vo.Member;
@@ -37,6 +38,7 @@ public class Signup extends HttpServlet{
         String email = req.getParameter("email");
         String id = req.getParameter("id");
         String pw = req.getParameter("pw");
+		String pwcrypt = BCrypt.withDefaults().hashToString(8, pw.toCharArray());
         String addr = req.getParameter("roadAddrPart1");
         String detailAddr = req.getParameter("addrDetail");
         System.out.println(name +"/ "+  birthday +"/ "+  tel +"/ " + gender +"/ "+  email +"/ "+  id +"/ "+ pw + "/" + addr + "/"+detailAddr);
@@ -56,7 +58,7 @@ public class Signup extends HttpServlet{
         		 .gender(genderint)
         		 .email(email)
                 .id(id)
-                .pw(pw)
+                .pw(pwcrypt)
                 .roadAddr(addr)
                 .detailAddr(detailAddr)
                 .build();

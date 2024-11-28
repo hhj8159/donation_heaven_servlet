@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import service.MemberService;
 import service.MemberServiceImpl;
 
@@ -24,10 +25,10 @@ public class UpdatePassword extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String id = req.getParameter("id");
 		String pw = req.getParameter("newpw");
-		
+		String pwcrypt = BCrypt.withDefaults().hashToString(8, pw.toCharArray());
 		System.out.println(id);
 		System.out.println(pw);
-		service.modifypw(id, pw);
+		service.modifypw(id, pwcrypt);
 		
 		 String redirectURL = req.getContextPath()+"/signin";
 	        resp.sendRedirect(redirectURL);

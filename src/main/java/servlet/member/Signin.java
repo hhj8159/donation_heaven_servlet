@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import service.MemberService;
 import service.MemberServiceImpl;
 
@@ -30,7 +31,10 @@ public class Signin extends HttpServlet{
 	        String pw = req.getParameter("pw");
 	        String save = null;
 	        System.out.println(service.login(id, pw));
+	        
 	        if(service.login(id, pw)) {
+	        	
+	        	
 	            save = req.getParameter("remember-id");
 	    		Cookie cookie = new Cookie("save", id);
 	        	//로그인 성공
