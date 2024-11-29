@@ -4,5 +4,12 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.DonationMapper">
 	
+	
+	<insert id="insert">
+	INSERT INTO donation
+	(mno, dcno,buyerAddr, buyerEmail, buyerName, buyerTel, cardName, cardNumber, impUid, merchantUid, name, price, payType, pgTid)
+	VALUES(#{mno},1, #{buyerAddr}, #{buyerEmail}, #{buyerName}, #{buyerTel}, #{cardName}, #{cardNumber}, #{impUid}, #{merchantUid}, #{name}, #{price}, #{payType}, #{pgTid});
+	</insert>
+	
 
 </mapper>

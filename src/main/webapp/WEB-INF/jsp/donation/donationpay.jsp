@@ -149,9 +149,9 @@
                                     </ul>
                                     <div>
                                         <div class="d-flex col-12 mx-auto">
-                                            <button type="button" class="btn btn-outline-success mt-4 mb-5 mx-4 py-2 w-75 fs-4 bold-text" onclick="requestPay()">신용카드</button>
-                                            <button type="button" class="btn btn-outline-success mt-4 mb-5 mx-4 py-2 w-75 fs-4 bold-text bg-success text-white border-success">계좌이체</button>
-                                            <button type="button" class="btn btn-outline-success mt-4 mb-5 mx-4 py-2 w-75 fs-4 bold-text">무통장입금</button>
+                                            <button type="button" id="card" class="btn btn-outline-success mt-4 mb-5 mx-4 py-2 w-75 fs-4 bold-text" onclick="requestPay()">신용카드</button>
+                                            <button type="button" id="trans" class="btn btn-outline-success mt-4 mb-5 mx-4 py-2 w-75 fs-4 bold-text">계좌이체</button>
+                                            <button type="button" id="bank" class="btn btn-outline-success mt-4 mb-5 mx-4 py-2 w-75 fs-4 bold-text">무통장입금</button>
                                         </div>
                                     </div>
                                    
@@ -232,8 +232,8 @@
 
             $("#nextbtn1").click(function(){
                 event.preventDefault();                                
-                if($("#totalDonationPrice").text() == "" || $("#totalDonationPrice").text() <= 999) {
-                    customAlert.alert("후원금액은 1,000원 이상이어야 합니다","경고!");                    
+                if($("#totalDonationPrice").text() == "" || $("#totalDonationPrice").text() <= 499) {
+                    customAlert.alert("후원금액은 500원 이상이어야 합니다","경고!");                    
                 } else {
                     $("#select").removeClass("block").addClass("none");        
                     $("#info").removeClass("none").addClass("block");
@@ -259,6 +259,28 @@
                 $("#info").removeClass("none").addClass("block");                
             });
             
+            
+            
+            $("#card").click(function() {
+                event.preventDefault();
+                $("#card").removeClass("btn-outline-success").addClass("bg-success text-white border-success");
+                $("#trans").removeClass("bg-success text-white border-success").addClass("btn-outline-success");
+                $("#bank").removeClass("bg-success text-white border-success").addClass("btn-outline-success");                
+            })
+            $("#trans").click(function() {
+                event.preventDefault();
+                $("#trans").removeClass("btn-outline-success").addClass("bg-success text-white border-success");
+                $("#card").removeClass("bg-success text-white border-success").addClass("btn-outline-success");
+                $("#bank").removeClass("bg-success text-white border-success").addClass("btn-outline-success");                
+            })
+            $("#bank").click(function() {
+                event.preventDefault();
+                $("#bank").removeClass("btn-outline-success").addClass("bg-success text-white border-success");
+                $("#trans").removeClass("bg-success text-white border-success").addClass("btn-outline-success");
+                $("#card").removeClass("bg-success text-white border-success").addClass("btn-outline-success");                
+            })           
+            
+            
 
             $("#search").click(function(){
                 event.preventDefault();
@@ -272,10 +294,12 @@
  		document.frm.roadAddrPart1.value = roadAddrPart1;
  		document.frm.addrDetail.value = addrDetail;
  	}
-    
+        console.log(${member.mno})
     
         
-    function requestPay() {    	
+    function requestPay() { 
+        	let roadAddrPart1 = $("#roadAddrPart1").val();
+        	console.log(roadAddrPart1);
     	let priceValue = document.getElementById("donationpriceselect").value;
     	if(priceValue === "직접입력"){
     		priceValue = document.getElementById("priceWrite").value;
@@ -285,51 +309,113 @@
     	
     	console.log(priceValue);
     	console.log(donationTypeValue);
+    	const rm_uid = Math.floor(Math.random() * 10000000);
     	
+
+    	console.log( `${rm_uid}`);
     	IMP.init("imp82235424");
 	    IMP.request_pay({
 		    channelKey: "channel-key-1d16e053-71db-476a-b2e7-6b2549d33d0f",
 		    pay_method: "card",
-		    merchant_uid: `payment-${crypto.randomUUID()}`, // 주문 고유 번호
+		    merchant_uid: `${rm_uid}`, // 주문 고유 번호
 		    name: donationTypeValue,
 		    amount: priceValue,
-		    buyer_email: "gildong@gmail.com",
-		    buyer_name: "홍길동",
-		    buyer_tel: "010-4242-4242",
-		    buyer_addr: "서울특별시 강남구 신사동",
+		    buyer_email: `${member.email}`,
+		    buyer_name: `${member.name}`,
+		    buyer_tel: `${member.tel}`,
+		    buyer_addr: roadAddrPart1,
 	    },
-		  	function (rsp) {
-		    	// 결제 종료 시 호출되는 콜백 함수
-		    	// response.imp_uid 값으로 결제 단건조회 API를 호출하여 결제 결과를 확인하고,
-		    	// 결제 결과를 처리하는 로직을 작성합니다.
-		    	if(rsp.success) {
-		    		console.log(rsp);		    		
-		    	} else {
-		    		console.log(rsp);		    		
-		    	}
+	  	function (rsp) {
+	    	// 결제 종료 시 호출되는 콜백 함수
+	    	// response.imp_uid 값으로 결제 단건조회 API를 호출하여 결제 결과를 확인하고,
+	    	// 결제 결과를 처리하는 로직을 작성합니다.
+	    	if(rsp.success) {
+	    		
+	    		let mno = ${member.mno};
+	    		let impUid = rsp.imp_uid;
+	    		let buyerAddr = rsp.buyer_addr;
+	    		let merchantUid = rsp.merchant_uid;
+	    		let buyerEmail = rsp.buyer_email;
+	    		let buyerName = rsp.buyer_name;
+	    		let buyerTel = rsp.buyer_tel;
+	    		let cardName = rsp.card_name;
+	    		let cardNumber = rsp.card_number;
+	    		let name = rsp.name;
+	    		let price = rsp.paid_amount;
+	    		let payType = rsp.pay_method;
+	    		let pgTid = rsp.pg_tid;
+	    		console.log(mno + ":::" +"mno");
+	    		console.log(impUid + ":::" +"impUid");
+	    		console.log(buyerAddr + ":::" +"buyerAddr");
+	    		console.log(merchantUid + ":::" +"merchantUid");
+	    		console.log(buyerEmail + ":::" +"buyerEmail");
+	    		console.log(buyerName + ":::" +"buyerName");
+	    		console.log(buyerTel + ":::" +"buyerTel");
+	    		console.log(cardName + ":::" +"cardName");
+	    		console.log(price + ":::" +"price");
+	    		
+	    		const data = {
+	    				mno, 
+	    				impUid, 
+	    				buyerAddr, 
+	    				merchantUid, 
+	    				buyerEmail, 
+	    				buyerName, 
+	    				buyerTel,
+	    				cardName,
+	    				cardNumber,
+	    				name,
+	    				price,
+	    				payType,
+	    				pgTid
+	    		}
+	    	
+	    		
+	    		console.log(data);
+	    		console.log("ssssss");
+	    		
+	  	        $(function(){
+	  	        	 $.ajax({
+	  	    	        url: "${cp}donationpay/pay",
+	  	    	        type: "POST",
+	  	    	      	contentType: "application/json", 
+	  	    	        data: JSON.stringify(data),
+	  	    	        success: function (response) {
+	  	    	        	console.log(response);
+	  	    	        },
+	  	    	        error: function () {
+	  	    	        	customAlert.alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
+	  	    	        },
+	  	    		});
+	  	        })
+	    		
+	    	} else {
+	    		console.log(rsp);		    		
+	    	}
 	  	},
 	  	async (response) => {
+	  		console.log(response);
 	  	    if (response.error_code != null) {
 	  	      return alert(`결제에 실패하였습니다. 에러 내용: ${response.error_msg}`);
 	  	    }
 
 	  	    // 고객사 서버에서 /payment/complete 엔드포인트를 구현해야 합니다.
 	  	    // (다음 목차에서 설명합니다)
-	  	    const notified = await fetch(`${SERVER_BASE_URL}/payment/complete`, {
+	  	    const notified = await fetch(`${cp}donationpay/pay`, {
 	  	      method: "POST",
 	  	      headers: { "Content-Type": "application/json" },
 	  	      // imp_uid와 merchant_uid, 주문 정보를 서버에 전달합니다
 	  	      body: JSON.stringify({
-	  	        imp_uid: response.imp_uid,
-	  	        merchant_uid: response.merchant_uid,
-	  	        // 주문 정보...
+	  	       
 	  	      }),
 	  	    });
+	  	    
+	  	    console.log(notified);
 	  	  },
 	    
 	    ); 
     }
-    </script>    
+    </script>   
 
 </body>
 </html>
