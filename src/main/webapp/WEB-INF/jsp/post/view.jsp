@@ -15,8 +15,6 @@
         </style>
     </head>
     <body>
-   		<img src='mime.jsp'>
-   		
         <div class="wrap">
             <jsp:include page="../common/header.jsp" />
             <main class="container">

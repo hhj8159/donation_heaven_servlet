@@ -136,27 +136,34 @@
            	<c:if test="${pageDto.cri.category == 4}">
 	           	<div class="clearfix"><a href="write?${pageDto.cri.qs2}" class="btn text-light float-end" style="background-color: #005B48; width: 70px;">글쓰기</a></div>	               
 	            <div>
-	                <div class ="d-flex flex-wrap justify-content-between px-5">
-	                	<c:if test="${empty posts}"><tr><td colspan="5">작성된 글이 없습니다.<td></tr></c:if>
+	            <!-- https://placehold.co/600x600 -->
+	                <div class ="d-flex flex-wrap justify-content-center px-5">
+	                	<c:if test="${empty posts}"><tr><td colspan="5">작성된 글이 없습니다.</td></tr></c:if>
 		               	<!-- 출력 갯수에 따라 마지막페이지 정렬하는거 -->
-		                <c:forEach items="${posts}" var="p">
+
+	                	<c:forEach items="${posts}" var="p">
 		          			<c:forEach items="${p.attachs}" begin="0" end="0" var="a">		          			
-	 		                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-5 p-0" style="width: 300px; height: 400px">
+	 		                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-5 p-0" style="width: 300px;">
 		 		                    <a href="view?pno=${p.pno}&${pageDto.cri.qs2}" class="text-decoration-none text-reset">
 		 		                    	<div class="text-truncate">
-		 		                    		<div style="height:300px"><img class="img-fluid img-thumbnail" src="${cp}display?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}"></div><h4>${p.title}</h4>
+		 		                    		<div style="height:300px; overflow: hidden; align-items: center; justify-content: center;">
+		 		                    			<c:if test="${a.image==false}">
+		 		                    				<img src="https://placehold.co/300x300?text=cannot%20find\nimage%20data">
+		 		                    			</c:if>
+		 		                    			<c:if test="${a.image==true}">
+		 		                    				<img class="img-fluid mx-auto" src="${cp}display?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}">
+		 		                    			</c:if>
+		 		                    		</div>
+		 		                    		<h4>${p.title}</h4>
 		 		                    	</div>
-		 		                    	​<picture>
-										  <source type="image/svg+xml">
-										  <img src="https://placehold.co/600x600" class="img-fluid img-thumbnail" alt="...">
-										</picture>
 		 		                    </a>
 	 		                    </div>	                		          			
 		                	</c:forEach>
-		                </c:forEach>
+		                </c:forEach> 
 	            	</div>	            
 	            </div>
            	</c:if>
+           	
            	<!-- 자료실 -->
            	
            	<c:if test="${pageDto.cri.category == 5}">
@@ -171,7 +178,7 @@
 	                </tr>
 	                </thead> 
 	                <tbody>
-		  		    <c:if test="${empty posts}"><tr><td colspan="5">작성된 글이 없습니다.<td></tr></c:if>
+		  		    <c:if test="${empty posts}"><tr><td colspan="5">작성된 글이 없습니다.</td></tr></c:if>
 	                <c:forEach items="${posts}" var="p">	       
 		                <tr class="align-middle">
 		                	<td>${p.pno}</td>
@@ -181,7 +188,7 @@
 		                	<c:forEach items="${p.attachs}" var="a" begin="0" end="1">
 								<td><span id="downloadCount">${a.downloadCount}</span></td>	    
 								<td>            	
-		                		<a id="downloadBtn" type="button" class="btn btn-sm btn-outline-light text-dark" href="${cp}download?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}">다운로드 <i class="fa-solid fa-down-long"></i></a>
+		                			<a id="downloadBtn" type="button" class="btn btn-sm btn-outline-light text-dark" href="${cp}download?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}">다운로드 <i class="fa-solid fa-down-long"></i></a>
 		                		</td>
 		                	</c:forEach>
 		                </tr>
@@ -191,9 +198,8 @@
            	</c:if>
            
             <c:if test="${(pageDto.cri.category == 2) or (pageDto.cri.category == 3)}">
-	            <a href="write?${pageDto.cri.qs2}" class="btn float-end text-white" style="background-color: #005B48; width: 70px;">글쓰기</a>            
-            
-            </c:if>    
+	            <a href="write?${pageDto.cri.qs2}" class="btn float-end text-white" style="background-color: #005B48; width: 70px;">글쓰기</a>                    
+         	</c:if>
 
              <ul class="pagination justify-content-center my-5">
              	<c:if test="${pageDto.doublePrev}">

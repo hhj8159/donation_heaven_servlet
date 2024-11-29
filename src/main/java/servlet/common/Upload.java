@@ -69,7 +69,7 @@ public class Upload extends HttpServlet{
 				attachs.add(Attach.builder().uuid(realName).path(path).origin(origin).image(image).build());
 			}
 			
-			System.out.println(attachs);
+			//System.out.println(attachs);
 			
 			
 			resp.setContentType("application/json; charset=utf-8");

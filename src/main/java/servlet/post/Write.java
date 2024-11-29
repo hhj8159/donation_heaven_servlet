@@ -26,6 +26,7 @@ public class Write extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {	
 		Criteria cri = new Criteria(req);
+		
 		if(req.getSession().getAttribute("member") == null) {
 			String cp = req.getContextPath();
 			resp.sendRedirect(cp + "/signin?url=" + URLEncoder.encode(cp + "/post/write?" + cri.getQs2(), "utf-8"));

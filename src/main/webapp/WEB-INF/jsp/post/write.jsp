@@ -84,17 +84,17 @@
 					strHidden += `<input type="hidden" name="image" value="\${data[i].image}">`	
 					strHidden += `<input type="hidden" name="path" value="\${data[i].path}">`;
 					//console.log(data[i].path);
-					
-					if(data[i].image == true){
-						console.log("이미지맞음"+data[i].image);
-					
+					//
+					//if(data[i].image == true){
+					//	console.log("이미지맞음"+data[i].image);
+					//
 					//이거까지는 뜸	
-					strHidden += `<div style="width:100px;"><img class="img-thumbnail" src="https://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg"></div>`	
-					
+					//strHidden += `<div style="width:100px;"><img class="img-thumbnail" src="https://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg"></div>`	
+					//
 					//경로설정 못하겟음.....
-					strHidden += `<img src="\${cp}display?uuid=\${a.uuid}&origin=\${a.origin}&path=\${a.path}">`
+					//strHidden += `<img src="\${cp}display?uuid=\${a.uuid}&origin=\${a.origin}&path=\${a.path}">`
 						
-					}
+					//}
 					
 					
 				}

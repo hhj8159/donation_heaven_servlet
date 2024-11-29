@@ -30,7 +30,7 @@ function CustomAlert() {
 	  
 	   /* http://localhost:8080/semi/updatePassword
 	        http://localhost:8080/donation_heaven/post/view?pno=97&page=1&amount=10&category=2&type=&keyword=*/
-			const aaa = location.href;
+/*			const aaa = location.href;
 
 			var url = new URL(aaa);
 			var urlparams = url.searchParams;
@@ -50,7 +50,7 @@ function CustomAlert() {
 	          }else{
 	              dialogbox.style.top = "20%";
 	              console.log(aaa);
-	          }
+	          }*/
 	  
 	  
 	  
@@ -134,7 +134,7 @@ function CustomConfirm() {
 /*
 	          http://localhost:8080/semi/updatePassword
 	       http://localhost:8080/donation_heaven/post/view?pno=97&page=1&amount=10&category=2&type=&keyword=*/
-		   const aaa = location.href;
+/*		   const aaa = location.href;
 
 		   var url = new URL(aaa);
 		   var urlparams = url.searchParams;
@@ -154,7 +154,7 @@ function CustomConfirm() {
 	          }else{
 	              dialogbox.style.top = "20%";
 	              console.log(aaa);
-	          }
+	          }*/
 
       dialogoverlay.style.display = "block";
       dialogbox.style.display = "block";

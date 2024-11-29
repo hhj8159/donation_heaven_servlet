@@ -20,17 +20,7 @@ public class PostList extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Criteria cri = new Criteria(req);
-//		System.out.println(cri);
-		
-	
-//		String pnoStr = req.getParameter("pno");
-//		Long pno = Long.valueOf(pnoStr);
-
-
 		req.setAttribute("posts", service.list(cri));
-		
-//		req.setAttribute("attachList", service.AttachList(pno));
-		
 		req.setAttribute("pageDto", new PageDto(cri, service.count(cri)));
 		req.getRequestDispatcher("/WEB-INF/jsp/post/list.jsp").forward(req, resp);
 	}	
