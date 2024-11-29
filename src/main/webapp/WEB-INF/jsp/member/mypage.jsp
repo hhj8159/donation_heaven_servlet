@@ -133,7 +133,7 @@
 	                </li>
 	                </ul>
 	                 <ul class="list-unstyled sidebar">  
-                    <li class="mb-3 mt-3"><a href="#" class="" style="color: #005B48;">개인 정보</a></li>
+                    <li class="mb-3 mt-3"><a href="${cp}myinfo" class="" style="color: #005B48;">개인 정보</a></li>
 					</ul>
             </div>
             

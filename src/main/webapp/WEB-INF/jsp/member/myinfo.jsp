@@ -121,7 +121,7 @@
 
             <div class="col-3">
                 <ul class="list-unstyled sidebar">
-                    <li class="mb-3"><a href="#" class="" style="color: #005B48;">마이페이지</a></li>
+                    <li class="mb-3"><a href="${cp}mypage" class="" style="color: #005B48;">마이페이지</a></li>
                 </ul>
                  <ul class="list-unstyled sidebar"id="done">                    
                     <li class=""><a href="#" class=""  style="color: #005B48;">후원관리</a></li>
@@ -133,7 +133,7 @@
 	                </li>
 	                </ul>
 	                 <ul class="list-unstyled sidebar">  
-                    <li class="mb-3 mt-3"><a href="#" class="" style="color: #005B48;">개인 정보</a></li>
+                    <li class="mb-3 mt-3"><a href="${cp}myinfo" class="" style="color: #005B48;">개인 정보</a></li>
 					</ul>
             </div>
             
@@ -148,39 +148,39 @@
             <tbody>
                 <tr>
                     <th class="fw-bold text-start ">아이디</th>
-                    <td>dydxo4423</td>
+                    <td>${member.id}</td>
                     <td></td>
                 </tr>
                 <tr>
                     <th class="fw-bold text-start">비밀번호</th>
                     <td>**********</td>
-                    <td><button class="btn btn-secondary btn-sm">변경</button></td>
+                    <td><button id="updatepwd"class="btn btn-secondary btn-sm">변경</button></td>
                 </tr>
                 <tr>
                     <th class="fw-bold text-start">이름</th>
-                    <td></td>
-                    <td></td>
+                    <td>${member.name}</td>
+
                 </tr>
                 <tr>
                     <th class="fw-bold text-start">성별</th>
-                    <td></td>
-                    <td></td>
+                    <td>${member.gender}</td>
+
                 </tr>
                 <tr>
                     <th  class="fw-bold text-start">생년월일</th>
-                    <td>1111111</td>
+                    <td>${member.birthday}</td>
                     <td></td>
                 </tr>
                 <tr>
                     <th class="fw-bold text-start">휴대폰번호</th>
-                    <td>1111111</td>
+                    <td>${member.tel}</td>
                     <td><button class="btn btn-secondary btn-sm">변경</button></td>
                 </tr>
                 <tr>
                     <th  class="fw-bold text-start">이메일</th>
                     <td>
                         <div class="d-flex">
-                            <input type="text" class="form-control form-control-sm me-2" value="dydxo4423">
+                            <input type="text" class="form-control form-control-sm me-2" value="${member.email}">
                         </div>
                     </td>
                     <td></td>
@@ -191,8 +191,8 @@
                         <div class="mb-2">
                             <button class="btn btn-secondary btn-sm">주소지 검색</button>
                         </div>
-                        <input type="text" class="form-control form-control-sm mb-2" placeholder="기본주소">
-                        <input type="text" class="form-control form-control-sm" placeholder="상세주소">
+                        <input type="text" class="form-control form-control-sm mb-2" placeholder="기본주소" value="${member.roadAddr}">
+                        <input type="text" class="form-control form-control-sm" placeholder="상세주소" value="${member.detailAddr}">
                     </td>
                     <td></td>
                 </tr>

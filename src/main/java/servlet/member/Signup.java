@@ -15,9 +15,10 @@ import javax.servlet.http.HttpSession;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import service.MemberService;
 import service.MemberServiceImpl;
+import utils.MailSender;
 import vo.Member;
 
-@WebServlet("/signup")
+@WebServlet("/signup/*")
 public class Signup extends HttpServlet{
 	private MemberService service = new MemberServiceImpl();
 	@Override
@@ -28,6 +29,26 @@ public class Signup extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("utf-8");
+        
+        String uri = req.getRequestURI();
+        uri = uri.replace(req.getContextPath() + "/signup/", "");
+        
+        
+        if (uri.startsWith("dupliid")) {
+			 String id = req.getParameter("id");
+      	try {
+
+              if(service.findBy(id) == null) {
+	              resp.getWriter().write("success");
+              };
+              
+          }catch(Exception e){
+        	resp.getWriter().write("fail");
+          }
+      	return;
+        }
+        
+        
 		String name =    req.getParameter("name");
         String birthday = req.getParameter("birthday");
         String tel = req.getParameter("tel");

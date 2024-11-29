@@ -112,7 +112,7 @@
                         <label for="birthday" class="col-2 mt-2">생년월일</label><input type="text" class="form-control col-3 textwidth" id="birthday" name="birthday" placeholder="생년월일 8자리를입력해주세요">
                     </div>
                     <div class="row mt-3 ">
-                        <label for="name" class="col-2 mt-2" style="padding: 0px">휴대전화 번호</label><input type="text" class="col-3 form-control" style=" width: 30%;" id="name" name="tel"><button class="btn" style="background-color: #005B48; color: white; width: 10%">인증</button>
+                        <label for="tel" class="col-2 mt-2" style="padding: 0px">휴대전화 번호</label><input type="text" class="col-3 form-control" style=" width: 30%;" id="tel" name="tel"><button class="btn" style="background-color: #005B48; color: white; width: 10%">인증</button>
                     </div>
                     <div class="row mt-3">
                             <label for="birthday" class="col-2 mt-2">인증번호</label><input type="text" class="form-control col-3 textwidth" id="oknum" name="oknum">
@@ -129,7 +129,7 @@
                         </div>
                     </div>
                     <div class="row mt-3">
-                    <label for="name" class="col-2 mt-2">이메일</label>
+                    <label for="email" class="col-2 mt-2">이메일</label>
                     <input type="text" class="form-control textwidth mt-2 " id="email" name="email">
                     </div>
                     <button class="btn mt-3 mb-3 d-inline-block" style="background-color: #005B48; color: white; width: 40%;margin-left: 31%;" id="emailbtn">인증 번호 발송</button><img src="${cp}images/8puiO.gif" id="lodingimg" class="ms-3 none"style="width:30px;height:30px;">
@@ -141,17 +141,59 @@
                     
 					<div class="none" id="step3div">
                     <div class="row">
-                        <label for="name" class="col-2 mt-2"  >아이디</label>
-                        <input type="text" class="form-control textwidth mt-2" id="id" name="id">
+                        <label for="id" class="col-2 mt-2"  >아이디</label>
+                        <input type="text" class="form-control mt-2" style="width:30%"id="id" name="id"><button class="btn mt-2" id="duplie" style="background-color: #005B48; color: white; width: 10%; height:38px;">중복 확인</button>
                     </div>
+                    
+                    
+                    
+                         <div class="col-5 mt-2" style="margin-left: 31%" id="succesId">
+					        <div class="alert fade alert-simple alert-success alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
+					          <i class="start-icon far fa-check-circle faa-tada animated"></i>
+					          <strong class="font__weight-semibold">사용가능한 아이디입니다!</strong>
+					        </div>
+      					</div>
+      					
+      					
+      					
+      					<div class="col-5 mt-2" style="margin-left: 31%" id="failId">
+				        <div class="alert fade alert-simple alert-danger alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show" role="alert" data-brk-library="component__alert" >
+				          <i class="start-icon far fa-times-circle faa-pulse animated"></i>
+				          <strong class="font__weight-semibold">사용이 불가능한 아이디입니다</strong>
+				        </div>
+     					 </div>
+                    
+                    
+                    
+                    
+                    
                     <div class="mt-3 row">
-                        <label for="name" class="col-2 mt-2"  >비밀번호</label>
+                        <label for="pw" class="col-2 mt-2"  >비밀번호</label>
                         <input type="password" class="form-control textwidth mt-2" id="pwd" placeholder="비밀번호" name="pw">
                     </div>
                     <input type="password" class="form-control mt-2 " id="pwdresult" placeholder="비밀번호 확인" style="margin-left: 31%;width: 41%;">
                     
+                    <div class="col-5 mt-2" style="margin-left: 31%" id="succesPwd">
+					        <div class="alert fade alert-simple alert-success alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
+					          <i class="start-icon far fa-check-circle faa-tada animated"></i>
+					          <strong class="font__weight-semibold">비밀번호가 일치합니다.</strong>
+					        </div>
+      					</div>
+      					
+      					
+      					
+      					<div class="col-5 mt-2" style="margin-left: 31%" id="failPwd">
+				        <div class="alert fade alert-simple alert-danger alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show" role="alert" data-brk-library="component__alert" >
+				          <i class="start-icon far fa-times-circle faa-pulse animated"></i>
+				          <strong class="font__weight-semibold">비밀번호가 일치하지않습니다.</strong>
+				        </div>
+     					 </div>
+                    
+                    
+                    
+                    
                     <div class="mt-3 row">
-                     <label for="name" class="col-2 mt-3" >주소</label>
+                     <label for="" class="col-2 mt-3" >주소</label>
                     <button class="btn mb-3 mt-2" id="search" style="background-color: #005B48; color: white; width: 15%;">주소지 검색</button>
                         
                     </div>
@@ -160,7 +202,7 @@
                     <input type="text" class="col-3 form-control textwidth mt-3 mb-3" style="margin-left: 31%" id="addrDetail" name = "addrDetail" placeholder="상세주소" readonly>
                     </div>
                         
-                    <button class="btn mt-5 mb-5" style="background-color: #005B48; color: white; width: 40%;margin-left: 31%;" >확인</button>
+                    <button class="btn mt-5 mb-5" style="background-color: #005B48; color: white; width: 40%;margin-left: 31%;" id="signupbtn" >확인</button>
                     </div>
                 </div>
                 </div>
@@ -173,7 +215,75 @@
     <script src="${cp}js/alert.js"></script>
     <script>
     $(function(){
-
+    	let token = false;
+    	let pwdresult =false;
+    	$("#failPwd").slideUp();
+        $("#succesPwd").slideUp();
+      	$("#failId").slideUp();
+        $("#succesId").slideUp();
+    	
+        
+        $('#pwdresult').keyup(function () {
+        	let pwdresultVal = $("#pwdresult").val();
+        	let pwd = $("#pwd").val();
+        	if(pwdresultVal == pwd && pwd != "" && pwdresultVal != ""){
+                $("#succesPwd").slideDown(350);
+                $("#failPwd").slideUp(150);
+                pwdresult = true;
+        	}else{
+            	$("#failPwd").slideDown(350);
+                $("#succesPwd").slideUp(150);
+                pwdresult = false;
+        	}
+        });
+   
+        $("#signupbtn").on('click',function(event){
+        	let pwd = $("#pwd").val();
+        	event.preventDefault();
+        	
+        	if(!token){
+        		customAlert.alert("아이디중복확인 버튼을 눌러주세요");
+        		return;
+        	}
+			if(!pwdresult){
+        		customAlert.alert("비밀번호와 비밀번호확인이 맞지않습니다");
+        		return;
+        	}
+        	
+        	document.form.submit();
+        });
+        
+        
+    	$("#duplie").on('click',function(event){
+    		event.preventDefault();
+        	let id = $("#id").val();
+        	
+        	$.ajax({
+    	        url: "${cp}signup/dupliid",
+    	        type: "POST",
+    	        data: { id },
+    	        beforeSend : function() {
+    	          	$("#failId").slideUp(150);
+    	            $("#succesId").slideUp(150);
+    	        },
+    	        success: function (response) {
+    	        	console.log(response);
+    	            if (response === "success") {
+    	                $("#succesId").slideDown(150);
+    	                token = true;
+    	            } else {
+    	            	$("#failId").slideDown(150);
+    	            	token = false;
+    	            }
+    	        },
+    	        error: function () {
+    	        	customAlert.alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
+    	        },
+    	    });
+    	});
+    	
+    	
+    	
     	$("#emailbtn").on('click',function(event){
     		event.preventDefault();
     		const email = $("#email").val();
@@ -260,6 +370,19 @@
        
     $("#nextbtn").click(function(){
         event.preventDefault();
+    	if($("#tel").val() == ""){
+    		customAlert.alert("전화번호를 입력해주세요.","경고!");
+    		return;
+    	}
+    	if($("#name").val() == ""){
+    		customAlert.alert("이름을 입력해주세요.","경고!");
+    		return;
+    	}
+    	if($("#birthday").val() == ""){
+    		customAlert.alert("생년월일을 입력해주세요.","경고!");
+    		return;
+   		 }
+
         $("#onediv").removeClass("block").addClass("none");
         $("#twodiv").removeClass("none").addClass("block");
         $("#step1").removeClass("block").addClass("none");

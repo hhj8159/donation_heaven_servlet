@@ -35,7 +35,7 @@
                  	   <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="${cp}mypage">마이페이지</a></li>
                             <li><a class="dropdown-item" href="${cp}post/list?category=3">후원관리</a></li>
-                            <li><a class="dropdown-item" href="${cp}post/list?category=2">나의후원대상</a></li>
+                            <li><a class="dropdown-item" href="${cp}myinfo">내정보</a></li>
                             <li><button class="dropdown-item  donation" onclick="location.href='${cp}logout'">로그아웃</button></li>
                         </ul>
                  	   </li>

@@ -112,7 +112,7 @@
  	 $(function(){
   		 $("#updatebtn").on('click',function(event){
  			event.preventDefault();
- 			customAlert.alert("변경이완료되었습니다").then(function(){
+ 			customConfirm.confirm("로그인화면으로 이동합니다","승인").then(function(){
  	 			document.frm.submit();
  			});
 
