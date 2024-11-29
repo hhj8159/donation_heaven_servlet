@@ -4,6 +4,7 @@ package servlet.common;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,8 +17,8 @@ import mapper.PostMapper;
 import service.PostService;
 import service.PostServiceImpl;
 import utils.Commons;
-@WebServlet("/download")
-public class Download extends HttpServlet{
+@WebServlet("/display")
+public class Display extends HttpServlet{
 
 	private PostService service = new PostServiceImpl();
 	
@@ -42,12 +43,10 @@ public class Download extends HttpServlet{
 			Commons.printMsg("잘못된 접근입니다.", null, resp);
 			return;
 		}
-		//2. 실제 이름 처리
-		String fileName = new String(origin.getBytes("utf-8"), "8859_1");
 		
-		//3. 응답처리
-		resp.setContentType("application/octet-stream"); // 콘텐트타입변경
-		resp.setHeader("Content-Disposition", String.format("attachment; filename=%s", fileName)); 
+		String mime = Files.probeContentType(file.toPath());
+		
+		resp.setContentType(mime);
 		
 		FileInputStream fis = new FileInputStream(file);
 		byte[] bytes = fis.readAllBytes(); //20gb

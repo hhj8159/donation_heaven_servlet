@@ -38,7 +38,7 @@
                         ${post.attachs}
                             <div class="text-end">작성자 <a class="nav-link dropdown-toggle d-inline" href="#" role="button" data-bs-toggle="dropdown">${post.id}</a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" onclick="return confirm('이 회원을 차단하시겠습니까?')">차단</a>
+                                    <li><a class="dropdown-item" onclick="customConfirm.confirm('해당 회원을 차단하시겠습니까?','차단')">차단</a>
                                     </li>
                                 </ul>
                             </div>
@@ -60,7 +60,10 @@
                         </c:if>
                         <c:forEach items="${post.attachs}" var="a">
                         	<li class="list-group item">
-                        		<a href="${cp}download?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}" class="text-dark text-decoration-none">${a.origin}</a>
+                        		<a href="${cp}download?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}" class="text-dark text-decoration-none">${a.origin}</a>                        		
+                        		<c:if test="${a.image == 'true'}">
+                        		<div style="width: 100px;"><img class="img-thumbnail" src="${cp}display?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}"></div>
+                        		</c:if>
                         	</li>
                         </c:forEach>
                         </ul>
@@ -71,7 +74,9 @@
                 	<c:if test="${post.id == member.id}">
 	                  <a href="modify?pno=${post.pno}&${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;">수정</a>
 	                  <a href="list?${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;">목록</a>
-	                  <a href="remove?pno=${post.pno}&${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;" onclick="return confirm('삭제하시겠습니까?')">삭제</a>
+	                  <a href="remove?pno=${post.pno}&${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;" onclick="confirm('삭제하시겠습니까?')">삭제</a>
+	                  
+<%-- 	                  <a href="" class="btn text-light" style="background-color: #005B48; width: 80px;" onclick="customConfirm.confirm('삭제하시겠습니까?','삭제').then(function() { location.href='remove?pno=${post.pno}&${cri.qs2}'})">삭제</a> --%>
                 	</c:if>
                 	
                 	<c:if test="${post.id != member.id}">
@@ -81,7 +86,7 @@
                 	  </c:if>
 	                  <a href="list?${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;">목록</a>
 	                  <c:if test="${cri.category== 2}">
-	                  <a href="report?" class="btn btn-secondary text-light" style="width: 80px;" onclick="return confirm('신고하시겠습니까?')">신고</a>                    
+	                  <a href="report?" class="btn btn-secondary text-light" style="width: 80px;" onclick="customConfirm.confirm('해당 글을 신고하시겠습니까?','신고')">신고</a>                    
                 	  </c:if>
                 	</c:if>                 	
                 </div>   

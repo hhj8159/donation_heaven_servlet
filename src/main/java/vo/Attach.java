@@ -15,5 +15,4 @@ public class Attach {
 	private int downloadCount;
 	private Long pno;
 	private Date regdate;
-
 }

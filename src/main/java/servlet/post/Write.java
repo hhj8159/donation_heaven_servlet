@@ -3,6 +3,7 @@ package servlet.post;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -58,6 +59,7 @@ public class Write extends HttpServlet{
 		String[] uuids = req.getParameterValues("uuid");
 		String[] origins = req.getParameterValues("origin");
 		String[] images = req.getParameterValues("image");
+		System.out.println(Arrays.toString(images));
 		String[] paths = req.getParameterValues("path");
 
 		

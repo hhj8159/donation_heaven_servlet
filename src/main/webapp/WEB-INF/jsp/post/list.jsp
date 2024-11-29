@@ -140,7 +140,19 @@
 	                	<c:if test="${empty posts}"><tr><td colspan="5">작성된 글이 없습니다.<td></tr></c:if>
 		               	<!-- 출력 갯수에 따라 마지막페이지 정렬하는거 -->
 		                <c:forEach items="${posts}" var="p">
-		                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-5 p-0" style="width: 300px;"><a href="view?pno=${p.pno}&${pageDto.cri.qs2}" class="text-decoration-none text-reset"><div class="text-truncate"><img src="https://placehold.co/300"><h4>${p.title}</h4></div></a></div>	                
+		          			<c:forEach items="${p.attachs}" begin="0" end="0" var="a">		          			
+	 		                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-5 p-0" style="width: 300px; height: 400px">
+		 		                    <a href="view?pno=${p.pno}&${pageDto.cri.qs2}" class="text-decoration-none text-reset">
+		 		                    	<div class="text-truncate">
+		 		                    		<div style="height:300px"><img class="img-fluid img-thumbnail" src="${cp}display?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}"></div><h4>${p.title}</h4>
+		 		                    	</div>
+		 		                    	​<picture>
+										  <source type="image/svg+xml">
+										  <img src="https://placehold.co/600x600" class="img-fluid img-thumbnail" alt="...">
+										</picture>
+		 		                    </a>
+	 		                    </div>	                		          			
+		                	</c:forEach>
 		                </c:forEach>
 	            	</div>	            
 	            </div>
