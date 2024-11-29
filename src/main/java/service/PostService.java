@@ -3,6 +3,7 @@ package service;
 import java.util.List;
 
 import dto.Criteria;
+import vo.Attach;
 import vo.Post;
 
 
@@ -15,6 +16,8 @@ public interface PostService {
 	int remove(Long pno);
 
 	Post findBy(Long pno);
+	
+	List<Attach> attachList(Long pno);
 
 	Post view(Long pno);
 	
@@ -22,5 +25,7 @@ public interface PostService {
 	
 	int count(Criteria cri);
 	
-	public int like(String id, Long pno);
+	int like(String id, Long pno);
+	
+	int download(String uuid);
 }

@@ -9,17 +9,6 @@
    	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment-with-locales.min.js" integrity="sha512-4F1cxYdMiAW98oomSLaygEwmCnIP38pb4Kx70yQYqRwLVCs3DbRumfBq82T08g/4LJ/smbFGFpmeFlQgoDccgg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
     <style>
-        .font-color {color: #005B48; font-size: 30px;}
-        .green-color { color: #005B48; }
-       
-        body{
-            font-family: 'MinSans', sans-serif;
-        }
-        .bold-text {
-           font-family: 'MinSans', sans-serif;
-            font-weight: 700;
-        }
-
         .pagination a:hover { background-color: #ffffff; font: #005B48;}     
         .pagination a:focus { background-color: #ffffff; box-shadow:none; font: #005B48;}     
 
@@ -157,8 +146,9 @@
 	            </div>
            	</c:if>
            	<!-- 자료실 -->
+           	
            	<c:if test="${pageDto.cri.category == 5}">
-           		<table class="table text-center" style="table-layout: fixed;">
+				<table class="table text-center" style="table-layout: fixed;">
             		<thead>
 	                <tr class="table-active">
 	                    <th style="width: 15%;">글번호</th>
@@ -170,20 +160,18 @@
 	                </thead> 
 	                <tbody>
 		  		    <c:if test="${empty posts}"><tr><td colspan="5">작성된 글이 없습니다.<td></tr></c:if>
-	                <c:forEach items="${posts}" var="p">
-	                ${p.attachs}
+	                <c:forEach items="${posts}" var="p">	       
 		                <tr class="align-middle">
 		                	<td>${p.pno}</td>
 		             		<td class="text-truncate text-start">${p.title}</td>
 		             
 		                	<td><fmt:formatDate value="${p.regdate}" pattern="yyyy-MM-dd" /></td>
-		                	<!-- 다운로드수를 어찌 처리해야하나... -->
-		                	<td>0</td>	                			
-		                	<td>
-			                	<c:forEach items="${p.attachs}" var="a" begin="0" end="0">
-			                		<a type="button" class="btn btn-sm btn-outline-light text-dark" href="${cp}download?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}">다운로드 <i class="fa-solid fa-down-long"></i></a>
-			                	</c:forEach>
-		                	</td>
+		                	<c:forEach items="${p.attachs}" var="a" begin="0" end="1">
+								<td><span id="downloadCount">${a.downloadCount}</span></td>	    
+								<td>            	
+		                		<a id="downloadBtn" type="button" class="btn btn-sm btn-outline-light text-dark" href="${cp}download?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}">다운로드 <i class="fa-solid fa-down-long"></i></a>
+		                		</td>
+		                	</c:forEach>
 		                </tr>
 	                </c:forEach>
 	                </tbody>
@@ -216,7 +204,14 @@
         	<jsp:include page="../common/footer.jsp"></jsp:include>
     </div>
     <script>
-   		moment.locale('ko');
+	    $(function() {
+			$("#downloadBtn").click(function(){
+				let currentDownload = parseInt($("#downloadCount").text());
+				let afterDownload = currentDownload + 1;
+				$("#downloadCount").text(afterDownload);
+			})
+		});
+	    
     </script>
 </body>
 </html>

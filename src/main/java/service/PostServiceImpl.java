@@ -9,6 +9,7 @@ import mapper.AttachMapper;
 import mapper.LikeMapper;
 import mapper.PostMapper;
 import utils.MybatisInit;
+import vo.Attach;
 import vo.Post;
 
 public class PostServiceImpl implements PostService{
@@ -64,6 +65,15 @@ public class PostServiceImpl implements PostService{
 	}
 	
 	@Override
+	public List<Attach> attachList(Long pno) {
+		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
+			AttachMapper attachMapper = session.getMapper(AttachMapper.class);
+			return attachMapper.selectList(pno);
+		}
+	}
+
+	
+	@Override
 	public Post view(Long pno) { //부하가 심한 코드임 -> 나중엔 테이블이 아니라 시퀀스 등으로 처리하거나 nosql로 ...처리?
 		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
 			PostMapper mapper = session.getMapper(PostMapper.class);
@@ -79,10 +89,15 @@ public class PostServiceImpl implements PostService{
 	public List<Post> list(Criteria cri){
 		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
 			PostMapper mapper = session.getMapper(PostMapper.class);
-			return mapper.selectList(cri);
+			List<Post> list = mapper.selectList(cri);
+			list.forEach(post -> {
+				post.setAttachs(attachList(post.getPno())); 
+			});
+			return list;
 		}
 	}
-
+	
+	
 	@Override
 	public int count(Criteria cri) {
 		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
@@ -101,6 +116,17 @@ public class PostServiceImpl implements PostService{
 			likemapper.insertLike(id, pno);
 			return 1;
 		}
+	}
+	
+	public int download(String uuid) {		
+		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
+			AttachMapper attachMapper = session.getMapper(AttachMapper.class);
+			attachMapper.increaseDownloadCount(uuid);
+			return 1;
+		}
+		
+		
+		
 	}
 	
 	

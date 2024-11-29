@@ -11,10 +11,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import mapper.AttachMapper;
+import mapper.PostMapper;
+import service.PostService;
+import service.PostServiceImpl;
 import utils.Commons;
 @WebServlet("/download")
 public class Download extends HttpServlet{
 
+	private PostService service = new PostServiceImpl();
+	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//1. 파라미터 수집
@@ -22,6 +28,8 @@ public class Download extends HttpServlet{
 		String origin = req.getParameter("origin");
 		String path = req.getParameter("path");
 		
+		service.download(uuid);	//다운로드 수 증가
+	
 		if(uuid == null || origin == null || path == null) {
 			Commons.printMsg("잘못된 접근입니다.", null, resp);
 			return;

@@ -19,32 +19,29 @@ import vo.Member;
 import vo.Post;
 
 @WebServlet("/post/like")
-public class Recommend extends HttpServlet{
-private PostService service = new PostServiceImpl();
-private LikeService likeservice = new LikeServiceImpl();
-	
+public class Recommend extends HttpServlet {
+	private PostService service = new PostServiceImpl();
+	private LikeService likeservice = new LikeServiceImpl();
+
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		String pnoStr = req.getParameter("pno");
 		Long pno = Long.valueOf(pnoStr);
 		String id = req.getParameter("id");
-	    Criteria cri = new Criteria(req);
-	
-	    
-	    if(likeservice.findBy(id, pno) == null){
-	    	try {
-	    		service.like(id, pno);
-	    		resp.getWriter().write("success");
-	    	} catch(Exception e){
-	    		e.printStackTrace();
-	    		resp.getWriter().write("fail");
-	    	}
-	    }
-	    else {
-	    	resp.getWriter().write("duplication");
-	    }    
-	      
+		Criteria cri = new Criteria(req);
+
+		if (likeservice.findBy(id, pno) == null) {
+			try {
+				service.like(id, pno);
+				resp.getWriter().write("success");
+			} catch (Exception e) {
+				e.printStackTrace();
+				resp.getWriter().write("fail");
+			}
+		} else {
+			resp.getWriter().write("duplication");
+		}
 
 	}
 }

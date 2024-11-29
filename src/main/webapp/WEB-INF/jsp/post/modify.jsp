@@ -6,17 +6,6 @@
 <head>
     <jsp:include page="../common/head.jsp"></jsp:include>
     <style>
-        .font-color {color: #005B48; font-size: 30px;}
-        .green-color { color: #005B48; }
-       
-        body{
-            font-family: 'MinSans', sans-serif;
-        }
-        .bold-text {
-           font-family: 'MinSans', sans-serif;
-            font-weight: 700;
-        }
-
         .pagination a:hover { background-color: #ffffff; font: #005B48;}     
 
     </style>

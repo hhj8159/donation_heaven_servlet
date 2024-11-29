@@ -19,7 +19,7 @@ public interface AttachMapper {
 	@Delete("delete from attach where pno = #{pno}")
 	int delete(Long pno);
 	
-	@Update("update attach set download_count = download_count + 1 where pno = #{pno}")
-	int increaseDownloadCount(Long pno);
+	@Update("update attach set download_count = download_count + 1 where uuid = #{uuid}")
+	int increaseDownloadCount(String uuid);
 	
 }

@@ -8,24 +8,6 @@
     
         <jsp:include page="../common/head.jsp"></jsp:include>
         <style>
-            .font-color {
-                color: #005B48;
-                font-size: 30px;
-            }
-
-            .green-color {
-                color: #005B48;
-            }
-
-            body {
-                font-family: 'MinSans', sans-serif;
-            }
-
-            .bold-text {
-                font-family: 'MinSans', sans-serif;
-                font-weight: 700;
-            }
-
             .pagination a:hover {
                 background-color: #ffffff;
                 font: #005B48;
@@ -34,6 +16,7 @@
     </head>
     <body>
    		<img src='mime.jsp'>
+   		
         <div class="wrap">
             <jsp:include page="../common/header.jsp" />
             <main class="container">
@@ -76,7 +59,9 @@
                             <li class="list-group-item">첨부파일이 없습니다.</li>
                         </c:if>
                         <c:forEach items="${post.attachs}" var="a">
-                        	<li class="list-group item"><a href="${cp}download?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}" class="text-dark text-decoration-none">${a.origin}</a></li>
+                        	<li class="list-group item">
+                        		<a href="${cp}download?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}" class="text-dark text-decoration-none">${a.origin}</a>
+                        	</li>
                         </c:forEach>
                         </ul>
                     </div>                     
@@ -99,7 +84,8 @@
 	                  <a href="report?" class="btn btn-secondary text-light" style="width: 80px;" onclick="return confirm('신고하시겠습니까?')">신고</a>                    
                 	  </c:if>
                 	</c:if>                 	
-                </div>    
+                </div>   
+                 
                 <form>
 	                <input type="hidden" value="${post.pno}" id="postPno">
 	                <input type="hidden" value="${member.id}" id="memberId">
@@ -111,13 +97,15 @@
         <jsp:include page="../common/footer.jsp"></jsp:include>
         </div>
         <script src="${cp}js/alert.js"></script>
+
+        
         <script>
         	$(function() {
         		$("#likeBtn").click(function(){
         			event.preventDefault();
         			const id = $("#memberId").val(); 
         			const pno = $("#postPno").val(); 
-        			if(confirm('추천하시겠습니까?',"추천")==true){
+        			customConfirm.confirm('추천하시겠습니까?',"추천").then(function() {
         				$.ajax({
         					url: "${cp}post/like",
         					type: "POST",
@@ -125,8 +113,11 @@
         					success: function(response) {
         						  if (response === "success") {
 	        						customAlert.alert("추천되었습니다","확인");
-	        						let currentLikes = parseInt($("#likesCount").text());
-	                                $("#likesCount").text(currentLikes + 1);
+	        						let currentLikes = parseInt($("span#likesCount").text());
+	                                
+	        						let afterLikes = currentLikes + 1;
+	        						
+	        						$("span#likesCount").text(afterLikes);
 	        						
         						  }
         						  else if(response === "duplication") {
@@ -140,7 +131,9 @@
         						  }
         					} 			
         				})
-        			} 
+        				
+        			})
+        			
         			
         		})
         	});
