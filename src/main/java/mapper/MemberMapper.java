@@ -1,7 +1,10 @@
 package mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
+import vo.Donation;
 import vo.Member;
 
 public interface MemberMapper {
@@ -23,5 +26,12 @@ public interface MemberMapper {
 	 
 	 public int userEmailSelect(@Param("id")String id,@Param("email") String email);
 	 
+	 public List<Donation> selectdone(int mno);
+	 
+	 public boolean leavemember(String id);
+	 
+	 public boolean idCheck(String id,String email);
+	 
+	 public int memberHistory(@Param("id")String id,@Param("email")String email);
 
 }

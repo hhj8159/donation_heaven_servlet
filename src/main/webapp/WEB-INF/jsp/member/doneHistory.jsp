@@ -126,11 +126,11 @@
                 </ul>
                  <ul class="list-unstyled sidebar"id="done">                    
                     <li class=""><a href="${cp}donehistory" class=""  style="color: #005B48;">후원관리</a></li>
-                     <li class="submenu non d-none">
-                    <a href="${cp}donehistory" class="">- 후원내역</a>
+                     <li class="submenu non ">
+                    <a href="${cp}donehistory"  class="text-decoration-underline">- 후원내역</a>
 	                </li>
-	                <li class="submenu non d-none">
-	                    <a href="#" class="">- 결제방식 조회/변경</a>
+	                <li class="submenu non">
+	                    <a href="${cp}monthdone" class="">- 결제방식 조회/변경</a>
 	                </li>
 	                </ul>
 	                 <ul class="list-unstyled sidebar">  
@@ -140,26 +140,67 @@
             
 
             <div class="col-9">
-                <h2 class="main-heading">${member.name}님 반갑습니다.</h2>
-                <hr>
-                <div class="row">
+			    <h2 class="fw-bold" style="color: #005B48;">후원내역</h2>
+			    <p class="text-muted">신청하신 후원내역을 확인하세요</p>
+			    <hr>
+			    <!-- 리스트 컨테이너 -->
+			    <ul class="list-unstyled" id="support-list">
+			        <c:if test="${not empty done}">
+			         
+				         <c:forEach items="${done}" var="done">
+				           <li class="mb-4">
+				                <div class="row">
+				                    <div class="col-md-2 fw-bold">금액:</div>
+				                    <div class="col-md-10">${done.price}원</div>
+				                </div>
+				                <div class="row">
+				                    <div class="col-md-2 fw-bold">후원일자:</div>
+				                    <div class="col-md-10">${done.regdate}</div>
+				                </div>
+				                <div class="row">
+				                    <div class="col-md-2 fw-bold">후원대상:</div>
+				                    <div class="col-md-10">${done.name}</div>
+				                </div>
+				                <div class="row">
+				                    <div class="col-md-2 fw-bold">결제타입:</div>
+				                    <div class="col-md-10">
+				                        <c:choose>
+				                            <c:when test="${done.payType == 'card'}">카드</c:when>
+				                            <c:otherwise>${done.payType}</c:otherwise>
+				                        </c:choose>
+				                    </div>
+				                </div>
+				                <div class="row">
+				                    <div class="col-md-2 fw-bold">카드명:</div>
+				                    <div class="col-md-10">${done.cardName}</div>
+				                </div>
+				                <div class="row">
+				                    <div class="col-md-2 fw-bold">주소:</div>
+				                    <div class="col-md-10">${done.buyerAddr}</div>
+				                </div>
+				                <hr>
+	            		</li>
+				         
+				         </c:forEach>
+			       
+			        
+			        </c:if>
+			        
+			        <c:if test="${empty done}">
+			       <li class="text-center text-muted" id="no-data-message" style="margin: 50px 0;">
+			            후원내역이 없습니다
+			        </li>
+			        </c:if>
 
-                    <div class="col-4">
-                        <img src="${cp}images/login.png" class="">
-                    </div>
-
-                    <div class="col-8">
-                        <h4 class="subheading">나눔이 주는 <span style="color: #009273;">기쁨과 행복</span>을 누리세요</h4>
-                        <p class="description">기부천국과 함께 라면 나눔은 즐거운 일이 됩니다.</p>
-                        <!-- Buttons -->
-                       
-                    </div>
-                     <div class="d-flex gap-3 mt-5">
-                            <button class="btn main-btn px-4" id="doneBtn">후원하기</button>
-                           <!--  <button class="btn main-btn px-4">통합 회원가입</button> -->
-                      </div>
-                </div>
-            </div>
+			    </ul>
+			    <hr>
+			    <!-- 버튼 -->
+			    <div class="text-center mt-4">
+			        <button class="btn" style="border: 1px solid #005B48; color: #005B48; font-weight: bold; padding: 10px 20px; background-color: white;">
+			            후원 신청하기
+			        </button>
+			    </div>
+			</div>
         </div>
     </main>
     <jsp:include page="../common/footer.jsp"></jsp:include>
@@ -178,18 +219,7 @@
     
     	$(function(){
     		
-    		$("#doneBtn").click(function(){
-    			location.href="donationpay";
-    		
-    		})
-    		
-    		
-    		$("#done").hover(function () {
-    			$(".non").removeClass("d-none");
-                $(".non").slideDown();
-            }, function () {
-                $(".non").slideUp();
-            });
+    	
     	});
     </script>
 </body>

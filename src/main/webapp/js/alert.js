@@ -1,3 +1,4 @@
+
 function CustomAlert() {
   this.alert = function (message, title) {
     return new Promise((resolve) => {

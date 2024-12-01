@@ -22,6 +22,7 @@
 		<mapper resource="mapper/AttachMapper.xml"/>
 		<mapper resource="mapper/DonationMapper.xml"/>
 		<mapper resource="mapper/LikeMapper.xml"/>
+		<mapper resource="mapper/ReplyMapper.xml"/>
 
   </mappers>
 </configuration>

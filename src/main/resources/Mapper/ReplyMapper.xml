@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.ReplyMapper">
+   <insert id="insert">
+   insert into reply(content,id,pno) values(#{content},#{id},#{pno})
+   </insert>
+   
+   <update id="update">
+   update reply set content = #{content},updatedate = now() where rno = #{rno}
+   </update>
+   
+   <delete id="delete">
+   delete from reply where rno = #{rno}
+   </delete>
+   <delete id="deleteAll">
+   delete from reply where pno = #{pno}
+   </delete>
+   <select id="selectOne" resultType="vo.Reply">
+   select * from reply where rno = #{rno}
+   </select>
+   
+   <select id="selectList" resultType="vo.Reply">
+<!--     select * from tbl_reply where pno = #{pno} -->
+   select *
+    from reply tr
+    where pno = #{pno}
+    and rno > #{cri.lastRno}
+    order by rno 
+    limit #{cri.amount}
+   </select>
+   <select id="selectListByMe" resultType="vo.Reply">
+	   select * from reply tr 
+	where id = #{id}
+	and pno = #{pno}
+	ORDER by rno DESC
+	limit 3;
+   </select>
+</mapper>

@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Reply {
 
 	private Long rno;

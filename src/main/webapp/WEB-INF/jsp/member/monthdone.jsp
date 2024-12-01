@@ -126,11 +126,11 @@
                 </ul>
                  <ul class="list-unstyled sidebar"id="done">                    
                     <li class=""><a href="${cp}donehistory" class=""  style="color: #005B48;">후원관리</a></li>
-                     <li class="submenu non d-none">
-                    <a href="${cp}donehistory" class="">- 후원내역</a>
+                     <li class="submenu non ">
+                    <a href="${cp}donehistory"  class="">- 후원내역</a>
 	                </li>
-	                <li class="submenu non d-none">
-	                    <a href="#" class="">- 결제방식 조회/변경</a>
+	                <li class="submenu non">
+	                    <a href="${cp}monthdone" class="text-decoration-underline">- 결제방식 조회/변경</a>
 	                </li>
 	                </ul>
 	                 <ul class="list-unstyled sidebar">  
@@ -140,26 +140,28 @@
             
 
             <div class="col-9">
-                <h2 class="main-heading">${member.name}님 반갑습니다.</h2>
-                <hr>
-                <div class="row">
+			    <h2 class="fw-bold" style="color: #005B48;">정기결제방식 조회/변경</h2>
+			    <p class="text-muted">정기 후원금에 대한 결제방식을 변경할 수 있습니다</p>
+			    <hr>
+			    <!-- 리스트 컨테이너 -->
+			    <ul class="list-unstyled" id="support-list">
 
-                    <div class="col-4">
-                        <img src="${cp}images/login.png" class="">
-                    </div>
+			        
 
-                    <div class="col-8">
-                        <h4 class="subheading">나눔이 주는 <span style="color: #009273;">기쁨과 행복</span>을 누리세요</h4>
-                        <p class="description">기부천국과 함께 라면 나눔은 즐거운 일이 됩니다.</p>
-                        <!-- Buttons -->
-                       
-                    </div>
-                     <div class="d-flex gap-3 mt-5">
-                            <button class="btn main-btn px-4" id="doneBtn">후원하기</button>
-                           <!--  <button class="btn main-btn px-4">통합 회원가입</button> -->
-                      </div>
-                </div>
-            </div>
+			       <li class="text-center text-muted" id="no-data-message" style="margin: 50px 0;">
+			            정기후원내역이 없습니다
+			        </li>
+
+
+			    </ul>
+			    <hr>
+			    <!-- 버튼 -->
+			    <div class="text-center mt-4">
+			        <button class="btn" style="border: 1px solid #005B48; color: #005B48; font-weight: bold; padding: 10px 20px; background-color: white;">
+			            변경하기
+			        </button>
+			    </div>
+			</div>
         </div>
     </main>
     <jsp:include page="../common/footer.jsp"></jsp:include>
@@ -178,18 +180,7 @@
     
     	$(function(){
     		
-    		$("#doneBtn").click(function(){
-    			location.href="donationpay";
-    		
-    		})
-    		
-    		
-    		$("#done").hover(function () {
-    			$(".non").removeClass("d-none");
-                $(".non").slideDown();
-            }, function () {
-                $(".non").slideUp();
-            });
+    	
     	});
     </script>
 </body>

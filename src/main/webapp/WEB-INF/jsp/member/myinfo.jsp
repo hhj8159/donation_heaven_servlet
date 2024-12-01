@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -124,12 +125,12 @@
                     <li class="mb-3"><a href="${cp}mypage" class="" style="color: #005B48;">마이페이지</a></li>
                 </ul>
                  <ul class="list-unstyled sidebar"id="done">                    
-                    <li class=""><a href="#" class=""  style="color: #005B48;">후원관리</a></li>
+                    <li class=""><a href="${cp}donehistory" class=""  style="color: #005B48;">후원관리</a></li>
                      <li class="submenu non d-none">
-                    <a href="#" class="">- 후원내역</a>
+                    <a href="${cp}donehistory" class="">- 후원내역</a>
 	                </li>
 	                <li class="submenu non d-none">
-	                    <a href="#" class="">- 결제방식 조회/변경</a>
+	                    <a href="${cp}monthdone" class="">- 결제방식 조회/변경</a>
 	                </li>
 	                </ul>
 	                 <ul class="list-unstyled sidebar">  
@@ -200,21 +201,46 @@
               
             </tbody>
         </table>
+        			    <div class="text-center mt-4" id="leavebtn">
+			        <button class="btn" style="border: 1px solid #005B48; color: #005B48; font-weight: bold; padding: 10px 20px; background-color: white;">
+			            회원탈퇴
+			        </button>
+			    </div>
         </div>
        </div>
        </div>
     </main>
     <jsp:include page="../common/footer.jsp"></jsp:include>
 </div>
+        <script src="${cp}js/alert.js"></script>
+        <c:if test="${empty member}">
+    <script>
+	 customAlert.alert("로그인 후 이용 가능합니다","경고!").then(function(){
+		 location.href ="signin";
+	 });
+
+	 </script>
+	 	 </c:if>
     <script>
     	$(function(){
-    		
+    		$("#updatepwd").click(function(){
+    			location.href="updatePassword";
+    		})
     		$("#done").hover(function () {
     			$(".non").removeClass("d-none");
                 $(".non").slideDown();
             }, function () {
                 $(".non").slideUp();
             });
+    		
+    		
+    		$("#leavebtn").click(function(event){
+    			event.preventDefault();
+    			customConfirm.confirm('정말로 회원탈퇴 하시겠습니까? 이메일과 연관된 동일아이디는 10분뒤에 재가입가능합니다',"추천").then(function() {
+        			location.href="leavemember";
+    			});
+
+    		})
     	});
     </script>
 </body>

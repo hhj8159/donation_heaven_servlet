@@ -27,8 +27,8 @@
                 <a href="${cp}donationpay" class="btn btn-block btn-sm col-1 donation" style="background-color: #005B48; color: white; font-size: 30px; margin-right: 30px; ">후원하기</a>
                	</c:if>
                	<c:if test="${not empty sessionScope.member}">
-						<div class="mt-4">
-                       <div class="sign" >
+
+                       <div class="sign" style="margin-top: 30px;" >
                         
                     	<ul class="nav-item dropdown"style="color: #005B48;">
                  	   <li style="list-style: none"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><strong>${member.name}</strong>님<br> 환영합니다</a>
@@ -41,7 +41,7 @@
                  	   </li>
                  	   </ul>
                 		</div>
-                		</div>
+
                 <a href="${cp}donationpay" class="btn btn-block btn-sm col-1 donation ms-5" style="background-color: #005B48; color: white; font-size: 30px; margin-right: 30px; ">후원하기</a>
                       	</c:if>
                

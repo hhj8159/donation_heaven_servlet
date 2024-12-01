@@ -51,34 +51,109 @@
         .certifi {color: #005B48;}
         .certifi-img img {text-align: center;}
         .certifi-img a {margin-left: 20px;}
+        
+        
+        .gallery-section {
+        padding: 30px 0;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+    }
+
+    .gallery {
+        font-size: 35px;
+        color: #005B48;
+    }
+
+    .card {
+        border: none;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .card-img {
+        border-radius: 10px 10px 0 0;
+    }
+
+    .card-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: #005B48;
+    }
+
+    .card-text {
+        font-size: 14px;
+        color: #666;
+    }
+
+    .detailbtn {
+        color: #005B48;
+        border-color: #005B48;
+        transition: all 0.3s ease;
+    }
+
+    .detailbtn:hover {
+        background-color: #005B48;
+        color: white;
+    }
+        
+        
+        
     </style>
     <body>
     <div class="wrap">
     	<jsp:include page="../common/header.jsp" /> 
         <main class="container main">
-            <div class="row">
-                <div class="col-md-12">
-				 <div class="slider-wrap">
-			        <div>
-			            <img src ="https://bxslider.com/assets/plant-bd76206132f914fc54fd28f9794f7fe346bb8b9a9d16dd5de830b93f365eea9c.jpg">
-			            <img src ="https://bxslider.com/assets/daisies-aef04136667e60d9190943f4c6cd605043e67188247ffe928500edfd29b0a158.jpg" >
-			            <img src ="https://bxslider.com/assets/succulents-7b5637dbc01af703069905a7991d9e7e7d27c680fa885fe3d6c713c1f77c0f92.jpg">
-			        </div>
-			     </div>
-                    <ul class="box mt-5 container">
-	                    <div class="gallery float-start">
-                            <b><span>모두의 행복을 더하는 </span> <span class="certifi">봉사 인증</span></b>
-	                            
-	                                                        
-                        </div>
-                        <p id="token-result"></p>
-                        <p id="token-result"></p>
-						<button class="api-btn" onclick="requestUserInfo()" id="api-btn"style="visibility:hidden">사용자 정보 가져오기</button>
-                    </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="slider-wrap">
+                <div>
+                    <img src="https://bxslider.com/assets/plant-bd76206132f914fc54fd28f9794f7fe346bb8b9a9d16dd5de830b93f365eea9c.jpg">
+                    <img src="https://bxslider.com/assets/daisies-aef04136667e60d9190943f4c6cd605043e67188247ffe928500edfd29b0a158.jpg">
+                    <img src="https://bxslider.com/assets/succulents-7b5637dbc01af703069905a7991d9e7e7d27c680fa885fe3d6c713c1f77c0f92.jpg">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="gallery-section">
+        <h2 class="text-center gallery">모두의 행복을 더하는 <span class="">봉사 인증</span></h2>
+        <div class="row mt-2">
+
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <img src="https://via.placeholder.com/300x200" class="card-img" alt="봉사 인증 1">
+                    <div class="card-body">
+                        <h5 class="card-title">봉사 인증</h5>
+                        <p class="card-text">봉사 활동 내용 </p>
+                        <a href="#" class="btn detailbtn">자세히 보기</a>
                     </div>
                 </div>
-                
-            </main>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <img src="https://via.placeholder.com/300x200" class="card-img" alt="봉사 인증 2">
+                    <div class="card-body">
+                        <h5 class="card-title">봉사 인증</h5>
+                        <p class="card-text">봉사 활동 내용</p>
+                        <a href="#" class="btn detailbtn">자세히 보기</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <img src="https://via.placeholder.com/300x200" class="card-img" alt="봉사 인증 3">
+                    <div class="card-body">
+                        <h5 class="card-title">봉사 인증</h5>
+                        <p class="card-text">봉사 활동 내용</p>
+                        <a href="#" class="btn detailbtn">자세히 보기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 		<jsp:include page="footer.jsp" />
     </div>
     
@@ -88,7 +163,7 @@
     </script>
     
     
-    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js"
+    <!-- <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js"
   integrity="sha384-DKYJZ8NLiK8MN4/C5P2dtSmLQ4KwPaoqAfyA/DfmEc1VDxu4yyC7wy6K1Hs90nka" crossorigin="anonymous"></script>
     
     <script>
@@ -188,7 +263,7 @@
 	    var parts = document.cookie.split(name + '=');
 	    if (parts.length === 2) { return parts[1].split(';')[0]; }
 	  }
-    </script>
+    </script> -->
     
 </body>
 </html>

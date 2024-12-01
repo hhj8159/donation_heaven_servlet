@@ -13,6 +13,8 @@
                 font: #005B48;
             }
         </style>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment-with-locales.min.js" integrity="sha512-4F1cxYdMiAW98oomSLaygEwmCnIP38pb4Kx70yQYqRwLVCs3DbRumfBq82T08g/4LJ/smbFGFpmeFlQgoDccgg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     </head>
     <body>
         <div class="wrap">
@@ -68,13 +70,45 @@
                     </div>                     
                 </div>
                 
+                                <form action="reply">
+	               <div class="comment-section mt-4">
+    <!-- 댓글 리스트 -->
+    <div class="comment-list replies" >
+        <!-- 댓글 항목 -->
+        <div class="comment-item border-bottom pb-3 mb-3">
+            <div class="d-flex justify-content-between">
+                <span class="fw-bold">kwon</span>
+                <span class="text-muted">24/11/15 04:30:42</span>
+            </div>
+            <p class="mt-2">미리 연락해보세요</p>
+            <div class="d-flex justify-content-between">
+                <span class="text-muted"><i class="fa fa-thumbs-up"></i> 3</span>
+                <span>
+                    <a href="#" class="text-danger me-3">신고</a> / 
+                    <a href="#" class="text-danger ms-2">차단</a>
+                </span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 댓글 입력 -->
+    <div class="comment-input mt-4">
+        <textarea class="form-control mb-3" rows="3" placeholder="댓글을 입력하세요..."></textarea>
+        <button class="btn btn-success">댓글 등록</button>
+    </div>
+</div>
+                </form>
+                
+                
+                
                 <div class="text-center my-5">
                 	<c:if test="${post.id == member.id}">
 	                  <a href="modify?pno=${post.pno}&${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;">수정</a>
 	                  <a href="list?${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;">목록</a>
 	                  <a href="remove?pno=${post.pno}&${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;" onclick="confirm('삭제하시겠습니까?')">삭제</a>
 	                  
-<%-- 	                  <a href="" class="btn text-light" style="background-color: #005B48; width: 80px;" onclick="customConfirm.confirm('삭제하시겠습니까?','삭제').then(function() { location.href='remove?pno=${post.pno}&${cri.qs2}'})">삭제</a> --%>
+
                 	</c:if>
                 	
                 	<c:if test="${post.id != member.id}">
@@ -89,20 +123,16 @@
                 	</c:if>                 	
                 </div>   
                  
-                <form>
-	                <input type="hidden" value="${post.pno}" id="postPno">
-	                <input type="hidden" value="${member.id}" id="memberId">
-	                <input type="text">
-	                <input type="submit" class="btn" value="댓글작성">
-                </form>
+
                
             </main>
         <jsp:include page="../common/footer.jsp"></jsp:include>
         </div>
+	
         <script src="${cp}js/alert.js"></script>
-
-        
+ 		<script src="/donation_heaven/js/reply.js"></script>	
         <script>
+
         	$(function() {
         		$("#likeBtn").click(function(){
         			event.preventDefault();
@@ -140,6 +170,199 @@
         			
         		})
         	});
+        	console.log("${cp}");
+        </script>
+ 
+		
+
+        
+        <script>
+        console.log(replyService);
+			moment.locale('ko');            
+            const pno = '${post.pno}';
+            // replyService.write({content : 'aaaa'})
+
+            function list(cri,myOnly) {
+                replyService.list(pno, cri, function(data) {
+                    if(!data.list.length) {
+                        $(".btn-more-reply")
+                        .prop("disabled", true)
+                        .text("댓글이 없습니다.")
+                        .removeClass("btn-primary")
+                        .addClass("btn-secondary");
+                        return;
+                    }
+                    let str = "";
+                    let myStr = "";
+                    for(let i in data.list) {
+                        str += makeLi(data.list[i])
+                    }
+                    for(let i in data.myList) {
+                        myStr += makeLi(data.myList[i])
+                    }
+
+                    if(myOnly != null){
+                        return false;
+                    }
+                    $(".replies").append(str);
+                    $(".my-replies").html(myStr);
+                    // 추가 css 작업
+                    $(".my-replies .text-secondary, .my-replies .text-black").removeClass("text-secondary text-black")
+                });
+            }
+            list();
+           
+
+        function makeLi(reply){
+            return `<div class="comment-item border-bottom pb-3 mb-3">
+            <div class="d-flex justify-content-between">
+            <span class="fw-bold">\${reply.id}</span>
+            <span class="">\${moment(reply.regdate,'yyyy/MM/DD-HH:mm:ss').fromNow()}</span>
+/*             <c:if test="\${member.id == reply.id}"> */
+            <div class="dropdown ms-2">
+                <a href="#" class="dropdown-toggle text-muted" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-ellipsis-v"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a href="#" class="dropdown-item btn-reply-edit">수정</a></li>
+                    <li><a href="#" class="dropdown-item btn-reply-remove">삭제</a></li>
+                </ul>
+            </div>
+/*             </c:if> */
+        </div>
+        <p class="mt-2">\${reply.content}</p>
+        <div class="d-flex justify-content-between">
+            <span class="text-muted"><a href="#" id="ddd"><i class="fa fa-thumbs-up" ></i></a> \${reply.likes} </span>
+            <span>
+                <a href="#" class="text-danger me-3">신고</a> / 
+                <a href="#" class="text-danger ms-2">차단</a>
+            </span>
+        </div>
+    </div>`;
+        }
+        
+        //좋아요 버튼 클릭시
+        $(document).on("click", "#ddd", function(event) {
+            event.preventDefault(); 
+            
+        });
+        //li 클릭시 이벤트
+        $(".replies, .my-replies").on("click", "li",function(){
+            console.log($(this).data("rno"));
+            const rno = $(this).data("rno");
+            $("#replyModal").modal("show");
+            replyService.view(rno, function(data){
+                console.log(data);
+                $("#replyModal").find(".modal-footer div button").hide().filter(":gt(0)").show();
+                $("#replyModal").data("rno",rno).modal("show");
+                $("#replyContent").val(data.content);
+                $("#replyWriter").val(data.writer);
+               
+
+
+
+            })
+        });
+
+        // 삭제 버튼 클릭시 이벤트
+        // $(".replies").on("click",$("#deletebtn"),function(){
+        //     event.preventDefault();
+        //     if(!confirm("삭제 하겠습니까?")){
+        //         return;
+        //     }
+        //     const rno = $(this).closest("li").data("rno");
+        //     replyService.remove(rno,function(data){
+        //         alert("삭제 되었습니다");
+        //         list();
+        //     });
+        // });
+
+        $(".replies, .my-replies").on("click", "li .btn-reply-remove",function(){
+            
+            if(!confirm("삭제 하겠습니까?")){
+                return false;
+            }
+            const $li = $(this).closest("li");
+            const rno = $li.data("rno");
+            replyService.remove(rno,function(data){
+                alert("삭제 되었습니다");
+
+                $li.remove();
+
+                list(undefined, true);
+                
+            });
+            return false;
+        });
+
+        // 댓글 더보기 버튼 클릭시
+        $(".btn-more-reply").click(function() {
+                const lastRno = $(".replies li:last").data("rno");
+                list({lastRno});
+            });
+
+        //댓글쓰기 버튼 클릭시
+        $("#btnReplyWrite").click(function(){
+
+                $("#replyModal").find(".modal-footer div button").hide().filter(":eq(0)").show();
+                $("#replyModal").modal("show");
+                $("#replyContent").val("");
+                $("#replyWriter").val("${member.id}");
+                list(undefined, true);
+        });
+        $(function(){
+			//댓글수정
+            $("#btnReplyModifySumbit").click(function(){
+
+                const rno = $("#replyModal").data("rno");
+                const content = $("#replyContent").val();
+                const reply = {rno,content};
+                console.log(rno);
+                replyService.modify(reply,function(data){
+                    $("#replyModal").modal("hide");
+                    const $li = $(`.replies li[data-rno='\${rno}'] p`).text(content);
+                    list(undefined,true);
+                    // location.reload();
+                });
+            });
+            $("#btnReplyWriteSumbit").click(function(){
+                const writer = $("#replyWriter").val();
+                const content = $("#replyContent").val();
+                const reply = {pno,writer,content};
+                console.log("ffff");
+                replyService.write(reply,function(data){
+                    $("#replyModal").modal("hide");
+                    list();
+                    list(undefined,true);
+                    // location.reload();
+                });
+            });
+          //댓글삭제
+            $("#btnReplyDeleteSumbit").click(function(){
+                const rno = $("#replyModal").data("rno");
+                const reply = rno;
+                console.log(rno);
+                const $li = $(`.replies li[data-rno='\${rno}']`);
+                replyService.remove(reply,function(data){
+                    $("#replyModal").modal("hide");
+                    $li.remove();
+                    // location.reload();
+                });
+            });
+        });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         </script>
     </body>
 

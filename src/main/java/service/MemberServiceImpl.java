@@ -8,6 +8,7 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 import at.favre.lib.crypto.bcrypt.BCrypt.Result;
 import mapper.MemberMapper;
 import utils.MybatisInit;
+import vo.Donation;
 import vo.Member;
 import vo.Post;
 
@@ -40,7 +41,6 @@ public class MemberServiceImpl implements MemberService{
 	public boolean login(String id, String pw) {
 		Member m = findBy(id);
 		String pwd = m.getPw();
-		System.out.println(pwd);
 		Result result = BCrypt.verifyer().verify(pw.toCharArray(),pwd);
 
 //			return m != null && m.getPw().equals(pw);
@@ -104,15 +104,59 @@ public class MemberServiceImpl implements MemberService{
 		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
 			MemberMapper mapper = session.getMapper(MemberMapper.class);
 			
-			System.out.println(mapper.selectname(name, email));
+
 			Member member = mapper.selectname(name, email);
-			System.out.println(member + "dddd");
+
 			return member;
 					
 		}
 	}
 	
 	
+	
+	
+	@Override
+	public List<Donation> donehistory(int mno) {
+		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
+			MemberMapper mapper = session.getMapper(MemberMapper.class);
+			
+			List<Donation> done = mapper.selectdone(mno);
+			return done;	
+		}
+	}
+	
+	
+	
+
+	@Override
+	public boolean deletemember(String id) {
+		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
+			MemberMapper mapper = session.getMapper(MemberMapper.class);
+			
+			return mapper.leavemember(id);
+		}
+	}
+
+	@Override
+	public boolean idCheck(String id, String email) {
+		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
+			MemberMapper mapper = session.getMapper(MemberMapper.class);
+			
+			return mapper.idCheck(id, email);
+		}
+	}
+	
+	
+
+	@Override
+	public int memberHistory(String id, String email) {
+		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
+			MemberMapper mapper = session.getMapper(MemberMapper.class);
+			
+			return mapper.memberHistory(id, email);
+		}
+	}
+
 	public static void main(String[] args) {
 		Member member = instance.selectname("김용태","dydxo4423");
 		System.out.println(member);

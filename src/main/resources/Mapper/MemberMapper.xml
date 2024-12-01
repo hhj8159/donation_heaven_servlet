@@ -29,6 +29,22 @@
   	 <update id="updatepw">
   	 Update member set pw = #{pw} Where id = #{id}; 
   	 </update>
+  	 
+  	 <select id="selectdone" resultType="vo.Donation">
+  	 Select * from donation d where mno = #{mno} ORDER BY regdate desc;
+  	 </select>
+  	 
+  	 <select id="idcheck" resultType="vo.LeaveMember">
+  		SELECT * from member_history where id=#{id} AND email = #{email};
+  	 </select>
+  	 
+  	 <delete id="leavemember">
+  	 	 delete from member where id = #{id};
+  	 </delete>
+  	   <insert id="memberHistory">
+		insert into member_history(id,email) values(#{id},#{email});
+  	 </insert>
+  	 
   	 <!-- <delete id="deleteOldEmails">
     DELETE FROM email_verification
     WHERE createdate < NOW() - INTERVAL 20 MINUTE;

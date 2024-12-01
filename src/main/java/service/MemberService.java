@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import vo.Donation;
 import vo.Member;
 
 public interface MemberService {
@@ -37,4 +38,11 @@ public interface MemberService {
 	Member selectname(String name,String email);
 	boolean findById(String id, String email);
 	
+	List<Donation> donehistory(int mno);
+	
+	boolean deletemember(String id);
+	
+	boolean idCheck(String id ,String email);
+	
+	int memberHistory(String id,String email);
 }

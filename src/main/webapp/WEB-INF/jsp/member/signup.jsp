@@ -236,6 +236,19 @@
                 pwdresult = false;
         	}
         });
+        $('#pwd').keyup(function () {
+        	let pwdresultVal = $("#pwdresult").val();
+        	let pwd = $("#pwd").val();
+        	if(pwdresultVal == pwd && pwd != "" && pwdresultVal != ""){
+                $("#succesPwd").slideDown(350);
+                $("#failPwd").slideUp(150);
+                pwdresult = true;
+        	}else{
+            	$("#failPwd").slideDown(350);
+                $("#succesPwd").slideUp(150);
+                pwdresult = false;
+        	}
+        });
    
         $("#signupbtn").on('click',function(event){
         	let pwd = $("#pwd").val();
