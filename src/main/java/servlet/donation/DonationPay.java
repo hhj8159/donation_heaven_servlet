@@ -41,6 +41,7 @@ public class DonationPay extends HttpServlet{
 		Gson gson = new Gson();
 		String uri = req.getRequestURI();
         uri = uri.replace(req.getContextPath() + "/donationpay/", "");
+//        String redirectURL = req.getContextPath()+"/donationsuccess";
 		if (uri.startsWith("pay")) {
 			
 			System.out.println("33333");
@@ -52,7 +53,8 @@ public class DonationPay extends HttpServlet{
 			System.out.println(donation);
 			System.out.println("4444444");
 			donationService.donationPay(donation);	
-      }
+        }
+		resp.sendRedirect(req.getContextPath()+"/donationsuccess");
 		
         
         

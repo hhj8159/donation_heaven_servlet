@@ -188,6 +188,18 @@
 
         
         $(function() {
+			$("input[name='donationcategory']").change(function() {
+        		event.preventDefault();
+	        	let dcno = $("input[name='donationcategory']:checked").val();
+	        	console.log("후원방식: " + dcno);	        	
+			})
+			$("input[name='donationtype']").change(function() {
+        		event.preventDefault();
+	        	let dtno = $("input[name='donationtype']:checked").val();
+	        	console.log("후원종류: " + dtno)
+			})
+        	
+        	
             $.numberWithCommas = function (x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
             }
@@ -286,6 +298,8 @@
                 event.preventDefault();
                 var pop = window.open("${cp}donationjusopopup","pop","width=570,height=420, scrollbars=yes, resizable=yes");  
             });
+            
+            
 
     })
 
