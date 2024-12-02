@@ -22,8 +22,14 @@ public class LeaveMember extends HttpServlet{
 	      Member member = (Member) session.getAttribute("member");
 	      System.out.println(member.getId());
 	      System.out.println(member.getEmail());
+	      
+	     
+	      
+	      if(service.donehistory(member.getMno()) != null) {
+	    	  service.modifynull(member.getMno()); 
+	      }
 		 if(service.memberHistory(member.getId(),member.getEmail()) == 1) {
-				req.getSession().invalidate();
+			req.getSession().invalidate();
 			 System.out.println(service.deletemember(member.getId())); 
 			 String redirectURL = req.getContextPath()+"/index";
 			 resp.sendRedirect(redirectURL);

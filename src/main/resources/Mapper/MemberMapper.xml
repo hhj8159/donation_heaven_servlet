@@ -15,7 +15,7 @@
   </select>
   
     <insert id="insert" >
-	insert into member (username,tel,gender,email,id,pw,road_addr,detail_addr) values(#{name},#{tel},#{gender},#{email},#{id},#{pw},#{roadAddr},#{detailAddr})
+	insert into member (username,tel,gender,birthday,email,id,pw,road_addr,detail_addr) values(#{name},#{tel},#{gender},#{birthday},#{email},#{id},#{pw},#{roadAddr},#{detailAddr})
   </insert>
   <insert id="emailinsert">
 	insert into email_verification(email,code) values(#{email},#{code});
@@ -34,7 +34,7 @@
   	 Select * from donation d where mno = #{mno} ORDER BY regdate desc;
   	 </select>
   	 
-  	 <select id="idcheck" resultType="vo.LeaveMember">
+  	 <select id="idCheck" resultType="vo.LeaveMember">
   		SELECT * from member_history where id=#{id} AND email = #{email};
   	 </select>
   	 
@@ -44,6 +44,14 @@
   	   <insert id="memberHistory">
 		insert into member_history(id,email) values(#{id},#{email});
   	 </insert>
+  	 
+  	 <update id="updatejuso">
+  	 Update member set road_addr = #{road_addr} ,detail_addr = #{detail_addr} where id=#{id};
+  	 </update>
+  	 
+  	 <update id="updatenull">
+  	 Update donation set mno = null   Where mno= #{mno};
+  	 </update>
   	 
   	 <!-- <delete id="deleteOldEmails">
     DELETE FROM email_verification

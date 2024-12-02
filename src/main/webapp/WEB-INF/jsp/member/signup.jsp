@@ -112,7 +112,7 @@
                         <label for="birthday" class="col-2 mt-2">생년월일</label><input type="text" class="form-control col-3 textwidth" id="birthday" name="birthday" placeholder="생년월일 8자리를입력해주세요">
                     </div>
                     <div class="row mt-3 ">
-                        <label for="tel" class="col-2 mt-2" style="padding: 0px">휴대전화 번호</label><input type="text" class="col-3 form-control" style=" width: 30%;" id="tel" name="tel"><button class="btn" style="background-color: #005B48; color: white; width: 10%">인증</button>
+                        <label for="tel" class="col-2 mt-2" style="padding: 0px">휴대전화 번호</label><input type="text" class="col-3 form-control" style=" width: 30%;" id="tel" name="tel"><button class="btn" style="background-color: #005B48; color: white; width: 10%" id="telresult">인증</button>
                     </div>
                     <div class="row mt-3">
                             <label for="birthday" class="col-2 mt-2">인증번호</label><input type="text" class="form-control col-3 textwidth" id="oknum" name="oknum">
@@ -160,6 +160,14 @@
 				        <div class="alert fade alert-simple alert-danger alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show" role="alert" data-brk-library="component__alert" >
 				          <i class="start-icon far fa-times-circle faa-pulse animated"></i>
 				          <strong class="font__weight-semibold">사용이 불가능한 아이디입니다</strong>
+				        </div>
+     					 </div>
+     					 
+     					 
+     					 <div class="col-5 mt-2" style="margin-left: 31%" id="duplieId">
+				        <div class="alert fade alert-simple alert-danger alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show" role="alert" data-brk-library="component__alert" >
+				          <i class="start-icon far fa-times-circle faa-pulse animated"></i>
+				          <strong class="font__weight-semibold">회원탈퇴시점 10분이후<br> 재가입가능합니다</strong>
 				        </div>
      					 </div>
                     
@@ -219,9 +227,14 @@
     	let pwdresult =false;
     	$("#failPwd").slideUp();
         $("#succesPwd").slideUp();
+        $("#duplieId").slideUp();
       	$("#failId").slideUp();
         $("#succesId").slideUp();
     	
+        $("#telresult").on("click",function(e){
+        	e.preventDefault();
+        	customAlert.alert("서비스준비중입니다.");
+        })
         
         $('#pwdresult').keyup(function () {
         	let pwdresultVal = $("#pwdresult").val();
@@ -270,29 +283,43 @@
     	$("#duplie").on('click',function(event){
     		event.preventDefault();
         	let id = $("#id").val();
+        	let email = $("#email").val();
+        		$.ajax({
+        	        url: "${cp}signup/dupliid",
+        	        type: "POST",
+        	        data: { id:id,
+        	        		email:email},
+        	        beforeSend : function() {
+        	          	$("#failId").slideUp(150);
+        	            $("#succesId").slideUp(150);
+        	            $("#duplieId").slideUp(150);
+        	        },
+        	        success: function (response) {
+        	        	console.log(response);
+        	        	if(id == ""){
+        	        		customAlert.alert("아이디를입력해주세요");
+        	        		$("#failId").slideDown(150);
+        	        		token = false;
+        	        		return;
+        	        	}
+        	            if (response === "success") {
+        	                $("#succesId").slideDown(150);
+        	                token = true;
+        	            }else if(response === "duplie"){
+        	            	$("#duplieId").slideDown(150);
+        	            	token = false;
+        	            } 
+        	            else {
+        	            	$("#failId").slideDown(150);
+        	            	token = false;
+        	            }
+        	        },
+        	        error: function () {
+        	        	customAlert.alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
+        	        },
+        	    });
         	
-        	$.ajax({
-    	        url: "${cp}signup/dupliid",
-    	        type: "POST",
-    	        data: { id },
-    	        beforeSend : function() {
-    	          	$("#failId").slideUp(150);
-    	            $("#succesId").slideUp(150);
-    	        },
-    	        success: function (response) {
-    	        	console.log(response);
-    	            if (response === "success") {
-    	                $("#succesId").slideDown(150);
-    	                token = true;
-    	            } else {
-    	            	$("#failId").slideDown(150);
-    	            	token = false;
-    	            }
-    	        },
-    	        error: function () {
-    	        	customAlert.alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
-    	        },
-    	    });
+        	
     	});
     	
     	

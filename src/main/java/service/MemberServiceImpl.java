@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import at.favre.lib.crypto.bcrypt.BCrypt.Result;
 import mapper.MemberMapper;
+import servlet.member.LeaveMember;
 import utils.MybatisInit;
 import vo.Donation;
 import vo.Member;
@@ -39,13 +40,17 @@ public class MemberServiceImpl implements MemberService{
 	}
 	@Override
 	public boolean login(String id, String pw) {
+		
 		Member m = findBy(id);
+		
 		String pwd = m.getPw();
 		Result result = BCrypt.verifyer().verify(pw.toCharArray(),pwd);
+		return result.verified;
+		
 
 //			return m != null && m.getPw().equals(pw);
 		
-		return result.verified;
+		
 	}
 	
 	@Override
@@ -66,11 +71,15 @@ public class MemberServiceImpl implements MemberService{
 		return false;
 	}
 
+
 	@Override
-	public boolean modify(Member member) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean modifyjuso(String road_addr, String detail_addr, String id) {
+		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
+			MemberMapper mapper = session.getMapper(MemberMapper.class);
+			return mapper.updatejuso(road_addr,detail_addr,id);
+		}
 	}
+
 	@Override
 	public void emailinsert(String email,String code) {
 		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
@@ -116,6 +125,16 @@ public class MemberServiceImpl implements MemberService{
 	
 	
 	@Override
+	public boolean modifynull(int mno) {
+		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
+			MemberMapper mapper = session.getMapper(MemberMapper.class);
+			
+	
+			return mapper.updatenull(mno);	
+		}
+	}
+
+	@Override
 	public List<Donation> donehistory(int mno) {
 		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
 			MemberMapper mapper = session.getMapper(MemberMapper.class);
@@ -138,7 +157,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public boolean idCheck(String id, String email) {
+	public vo.LeaveMember idCheck(String id, String email) {
 		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
 			MemberMapper mapper = session.getMapper(MemberMapper.class);
 			

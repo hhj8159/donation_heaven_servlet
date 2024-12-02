@@ -36,13 +36,20 @@ public class Signup extends HttpServlet{
         
         if (uri.startsWith("dupliid")) {
 			 String id = req.getParameter("id");
+			 String email = req.getParameter("email");
       	try {
-
+      			
               if(service.findBy(id) == null) {
-	              resp.getWriter().write("success");
+            	  if(service.idCheck(id, email) == null) {
+    	              resp.getWriter().write("success");
+            	  }else {
+                	  resp.getWriter().write("duplie");
+            	  }
+
               };
               
           }catch(Exception e){
+        	 e.printStackTrace();
         	resp.getWriter().write("fail");
           }
       	return;

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import servlet.member.LeaveMember;
 import vo.Donation;
 import vo.Member;
 
@@ -22,7 +23,7 @@ public interface MemberService {
 	boolean remove(String id);
 	
 	//회원정보수정
-	boolean modify(Member member);
+	boolean modifyjuso(@Param("road_addr") String road_addr,@Param("detail_addr") String detail_addr,String id);
 	//회원 로그아웃
 	boolean logout(String id);
 	
@@ -42,7 +43,9 @@ public interface MemberService {
 	
 	boolean deletemember(String id);
 	
-	boolean idCheck(String id ,String email);
+	vo.LeaveMember idCheck(String id ,String email);
 	
 	int memberHistory(String id,String email);
+	
+	boolean modifynull(int pno);
 }

@@ -93,7 +93,7 @@
                             <input type="text" class=" form-control textwidth" id="id" placeholder="아이디" name="id" value="${cookie['save'].value}">
                             <input type="password" class="form-control my-3 textwidth" id="pwd" placeholder="비밀번호"
                                 name="pw">
-                            <button class=" btn textwidth" style="background-color: #005B48; color: white;">로그인</button>
+                            <button class=" btn textwidth" style="background-color: #005B48; color: white;" id="loginbtn">로그인</button>
                             <div class=" form-check form-switch my-3">
                                 <input class="form-check-input " style="margin-left: 1%" type="checkbox" id="mySwitch"
                                     name="remember-id" value="yes" ${empty cookie['save'] ? '' : 'checked'}>
@@ -127,7 +127,7 @@
         </main>
        <jsp:include page="../common/footer.jsp"></jsp:include>
     </div>
-
+ <script src="${cp}js/alert.js"></script>
     <script>
     console.log(Kakao.isInitialized()); 
     <c:if test="${param.error == 'faild'}">
@@ -138,7 +138,47 @@
 	      redirectUri: 'http://localhost:8080/semi/index',
 	      state: 'userme',
 	    });
-	  }  
+	  } 
+	
+	$(function(){
+		 $("#loginbtn").click(function(event) {
+
+		        event.preventDefault();
+
+		        let id = $("#id").val();
+		        let pw = $("#pwd").val();
+		        let save = $("#mySwitch").prop('checked');
+
+		        if (id === "" || pw === "") {
+		            customAlert.alert("아이디 혹은 비밀번호를 입력해주세요");
+		            return;
+		        }
+
+
+		        $.ajax({
+		            url: "${cp}signin", 
+		            type: "POST", 
+		            data: {
+		                id: id,
+		                pw: pw, 
+		                remember_id: save
+		            },
+		            success: function(response) {
+		                console.log(response);
+		                if (response === "failed") {
+		                    customAlert.alert("아이디 혹은 비밀번호가 잘못되었습니다");
+		                } else {
+
+		                    window.location.href = "${cp}/index"; 
+		                }
+		            },
+		            error: function(xhr, status, error) {
+
+		                customAlert.alert("로그인에 실패하였습니다.");
+		            }
+		        });
+		    });
+	});
 	
 	  
 

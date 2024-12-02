@@ -145,6 +145,7 @@
     <hr>
     <h4 class="fw-bold mb-4">기본 정보</h4>
     <div class="">
+    <form name="form">
         <table class="table">
             <tbody>
                 <tr>
@@ -164,7 +165,13 @@
                 </tr>
                 <tr>
                     <th class="fw-bold text-start">성별</th>
-                    <td>${member.gender}</td>
+                    <c:if test="${member.gender eq 1}">
+                     <td>남성</td>
+                    </c:if>
+                    <c:if test="${member.gender eq 2}">
+                     <td>여성</td>
+                    </c:if>
+                   
 
                 </tr>
                 <tr>
@@ -175,7 +182,7 @@
                 <tr>
                     <th class="fw-bold text-start">휴대폰번호</th>
                     <td>${member.tel}</td>
-                    <td><button class="btn btn-secondary btn-sm">변경</button></td>
+                    <td><button class="btn btn-secondary btn-sm" id="telbtn">변경</button></td>
                 </tr>
                 <tr>
                     <th  class="fw-bold text-start">이메일</th>
@@ -190,17 +197,19 @@
                     <th  class="fw-bold text-start">주소</th>
                     <td>
                         <div class="mb-2">
-                            <button class="btn btn-secondary btn-sm">주소지 검색</button>
+                            <button class="btn btn-secondary btn-sm" id="search">주소지 검색</button>
                         </div>
-                        <input type="text" class="form-control form-control-sm mb-2" placeholder="기본주소" value="${member.roadAddr}">
-                        <input type="text" class="form-control form-control-sm" placeholder="상세주소" value="${member.detailAddr}">
+                        <input type="text" class="form-control form-control-sm mb-2" placeholder="기본주소" value="${member.roadAddr}" id="roadAddrPart1" name="roadAddrPart1">
+                        <input type="text" class="form-control form-control-sm" placeholder="상세주소" value="${member.detailAddr}" id="addrDetail" name="addrDetail">
                     </td>
+                    <td><button class="btn btn-secondary btn-sm" id="jusoupdate">변경</button></td>
                     <td></td>
                 </tr>
                
               
             </tbody>
         </table>
+        </form>
         			    <div class="text-center mt-4" id="leavebtn">
 			        <button class="btn" style="border: 1px solid #005B48; color: #005B48; font-weight: bold; padding: 10px 20px; background-color: white;">
 			            회원탈퇴
@@ -223,8 +232,13 @@
 	 	 </c:if>
     <script>
     	$(function(){
-    		$("#updatepwd").click(function(){
+    		$("#updatepwd").click(function(event){
+    			event.preventDefault();
     			location.href="updatePassword";
+    		})
+    		$("#telbtn").click(function(event){
+    			event.preventDefault();
+    			customAlert.alert("서비스 준비중입니다.");
     		})
     		$("#done").hover(function () {
     			$(".non").removeClass("d-none");
@@ -234,14 +248,53 @@
             });
     		
     		
+    		 $("#search").click(function(){
+    	            event.preventDefault();
+    	            var pop = window.open("${cp}jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes");  
+    	        });
+    		
     		$("#leavebtn").click(function(event){
     			event.preventDefault();
-    			customConfirm.confirm('정말로 회원탈퇴 하시겠습니까? 이메일과 연관된 동일아이디는 10분뒤에 재가입가능합니다',"추천").then(function() {
+    			customConfirm.confirm('정말로 회원탈퇴 하시겠습니까? 이메일과 연관된 동일아이디는 10분뒤에 재가입가능합니다',"경고").then(function() {
         			location.href="leavemember";
     			});
 
-    		})
+    		});
+    		$("#jusoupdate").click(function(event){
+    			event.preventDefault();
+    			let roadAddr = $("#roadAddrPart1").val();
+    			let detailAddr = $("#addrDetail").val();
+    			customConfirm.confirm('주소 변경하시겠습니까?',"승인").then(function() {
+    				$.ajax({
+    	    	        url: "${cp}myinfo/updatejuso",
+    	    	        type: "POST",
+    	    	        data: { roadAddr:roadAddr,
+    	    	        		detailAddr:detailAddr},
+    	    	      
+    	    	        success: function (response) {
+    	    	        	console.log(response);
+    	    	            if (response === "success") {
+    	    	            	customAlert.alert("주소변경및 저장이되었습니다.");
+    	    	            }
+    	    	            else {
+    	    	            	customAlert.alert("주소변경및 저장이실패했습니다.");
+    	    	            }
+    	    	        },
+    	    	        error: function () {
+    	    	        	customAlert.alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
+    	    	        },
+    	    	    })
+    			})
+    		});
     	});
+    	 function jusoCallBack(roadAddrPart1,addrDetail){
+     		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+
+     		document.form.roadAddrPart1.value = roadAddrPart1;
+
+     		document.form.addrDetail.value = addrDetail;
+     		
+     	}
     </script>
 </body>
 </html>
