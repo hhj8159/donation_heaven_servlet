@@ -137,16 +137,16 @@
 	           	<div class="clearfix"><a href="write?${pageDto.cri.qs2}" class="btn text-light float-end" style="background-color: #005B48; width: 70px;">글쓰기</a></div>	               
 	            <div>
 	            <!-- https://placehold.co/600x600 -->
-	                <div class ="d-flex flex-wrap justify-content-center px-5">
+	                <div class ="d-flex flex-wrap px-5">
 	                	<c:if test="${empty posts}"><tr><td colspan="5">작성된 글이 없습니다.</td></tr></c:if>
 		               	<!-- 출력 갯수에 따라 마지막페이지 정렬하는거 -->
 
 	                	<c:forEach items="${posts}" var="p">
 		          			<c:forEach items="${p.attachs}" begin="0" end="0" var="a">		          			
-	 		                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-5 p-0" style="width: 300px;">
+	 		                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-block m-5 p-0" style="width: 300px;">
 		 		                    <a href="view?pno=${p.pno}&${pageDto.cri.qs2}" class="text-decoration-none text-reset">
 		 		                    	<div class="text-truncate">
-		 		                    		<div style="height:300px; overflow: hidden; align-items: center; justify-content: center;">
+		 		                    		<div style=" height:300px; overflow: hidden;">
 		 		                    			<c:if test="${a.image==false}">
 		 		                    				<img src="https://placehold.co/300x300?text=cannot%20find\nimage%20data">
 		 		                    			</c:if>
@@ -182,8 +182,13 @@
 	                <c:forEach items="${posts}" var="p">	       
 		                <tr class="align-middle">
 		                	<td>${p.pno}</td>
-		             		<td class="text-truncate text-start">${p.title}</td>
-		             
+		             		<c:if test="${member.grade == 0 or empty member.id}">
+			             		<td class="text-truncate text-start">${p.title}</td>
+		             		</c:if>
+		             		<c:if test="${member.grade == 1}">
+			             		<td class="text-truncate text-start"><a href="view?pno=${p.pno}&${pageDto.cri.qs2}" class="text-decoration-none text-reset">${p.title}</a>
+		             		</c:if>
+		             		
 		                	<td><fmt:formatDate value="${p.regdate}" pattern="yyyy-MM-dd" /></td>
 		                	<c:forEach items="${p.attachs}" var="a" begin="0" end="1">
 								<td><span id="downloadCount">${a.downloadCount}</span></td>	    

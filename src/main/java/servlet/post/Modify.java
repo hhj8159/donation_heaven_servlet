@@ -1,6 +1,8 @@
 package servlet.post;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +14,7 @@ import dto.Criteria;
 import service.PostService;
 import service.PostServiceImpl;
 import utils.Commons;
+import vo.Attach;
 import vo.Member;
 import vo.Post;
 
@@ -37,7 +40,7 @@ public class Modify extends HttpServlet{
 		Member m = (Member) memberObj;
 		
 		
-		if(!m.getId().equals(service.findBy(pno).getId()) && m.getGrade()== 0) {
+		if(!m.getId().equals(service.findBy(pno).getId())) {
 			Commons.printMsg("본인이 작성한 글만 수정할 수 있습니다", redirectUrl, resp);
 			return;
 		}
@@ -51,18 +54,14 @@ public class Modify extends HttpServlet{
 	}
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		
-		
 		Object memberObj = req.getSession().getAttribute("member");
 		Criteria cri = new Criteria(req);
-		
-		
 		
 		if(memberObj == null) {
 			Commons.printMsg("비정상적인 접근입니다", "list?"+cri.getQs2(), resp);
 			return;
 		}
+		
 		
 		Member m = (Member) memberObj;
 
@@ -73,37 +72,36 @@ public class Modify extends HttpServlet{
 		Long pno = Long.valueOf(pnoStr);
 
 		
-		if(!m.getId().equals(service.findBy(pno).getId()) && m.getGrade()== 0) {
+		if(!m.getId().equals(service.findBy(pno).getId())) {
 			Commons.printMsg("본인이 작성한 글만 수정할 수 있습니다", "list?"+cri.getQs2(), resp);
 			return;
 		}
 		
-		//첨부파일수정하고싶ㅇ므 .ㅠㅠㅠ
-//		List<Attach> attachs = new ArrayList<>();
-//
-//		
-//		String[] uuids = req.getParameterValues("uuid");
-//		String[] origins = req.getParameterValues("origin");
-//		String[] images = req.getParameterValues("image");
-//		String[] paths = req.getParameterValues("path");
-//
-//		
-//		if(uuids != null) {
-//			for(int i = 0; i < uuids.length; i++) {
-//				attachs.add(Attach.builder()
-//						.uuid(uuids[i])
-//						.origin(origins[i])
-//						.image(images[i].equals("true"))
-//						.path(paths[i])
-//						.build());
-//			}
-//		}
-//			
-//		
-//		service.modify(Post.builder().title(title).content(content).attachs(attachs).build());
-//		resp.sendRedirect("view?pno="+pno+"&"+cri.getQs2());
-//		
-//		
+		List<Attach> attachs = new ArrayList<>();
+
+		
+		String[] uuids = req.getParameterValues("uuid");
+		String[] origins = req.getParameterValues("origin");
+		String[] images = req.getParameterValues("image");
+		String[] paths = req.getParameterValues("path");
+
+		
+		if(uuids != null) {
+			for(int i = 0; i < uuids.length; i++) {
+				attachs.add(Attach.builder()
+						.uuid(uuids[i])
+						.origin(origins[i])
+						.image(images[i].equals("true"))
+						.path(paths[i])
+						.build());
+			}
+		}
+			
+		
+		service.modify(Post.builder().title(title).content(content).attachs(attachs).build());
+		resp.sendRedirect("view?pno="+pno+"&"+cri.getQs2());
+		
+		
 		
 		service.modify(Post.builder().title(title).content(content).pno(pno).build());
 		resp.sendRedirect("view?pno="+pno+"&"+cri.getQs2());

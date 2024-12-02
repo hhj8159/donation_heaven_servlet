@@ -103,7 +103,7 @@
                 
                 <div class="text-center my-5">
                 	<c:if test="${post.id == member.id or member.grade == 1}">
-	                	<c:if test="${member.grade == 0}">
+	                	<c:if test="${member.grade == 0 or (member.grade == 1 and cri.category == 1) or (member.grade == 1 and cri.category == 5)}">
 		                  <a href="modify?pno=${post.pno}&${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;">수정</a>
 	                	</c:if>
 		                  	<a href="list?${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;">목록</a>

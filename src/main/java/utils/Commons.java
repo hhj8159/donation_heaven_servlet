@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 public class Commons {
 	public static final String UPLOAD_PATH = "C:/Users/tj/Desktop/jsp/jsp/donation_heaven/src/main/webapp/images";
 	
+	
 	public static void printMsg(String msg, String url, HttpServletResponse resp) throws IOException {
 		resp.setContentType("text/html; charset=utf-8");
 		PrintWriter pw = resp.getWriter();

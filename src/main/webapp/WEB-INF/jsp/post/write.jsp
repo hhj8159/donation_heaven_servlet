@@ -33,8 +33,9 @@
 	
 	             	<label for="attach" class="form-label my-1"><span class="btn text-light btn-sm" style="background-color: #005B48;">파일 첨부</span></label>
 	             	<span class="mx-2 attach-count-txt"></span>
-	                <input type="file" id="attach" name="files" class="d-none" multiple>
-					
+	                <input type="file" id="attach" accept="image/png, image/jpeg, image/gif, image/webp" name="files" class="d-none" multiple>
+						<div id="preview">
+    					</div>
                     <ul class="list-group attach-result">					
                     </ul>
 	                                 
@@ -49,12 +50,43 @@
         </main>
         <jsp:include page="../common/footer.jsp"></jsp:include>
    </div>
+    
    <script>
-   
+		function previewFiles() {
+			var preview = document.querySelector("#preview");
+			var files = document.querySelector("input[type=file]").files;
+
+			function readAndPreview(file) {
+				// `file.name` 형태의 확장자 규칙에 주의하세요
+				if (/\.(jpe?g|png|gif|webp)$/i.test(file.name)) {
+				var reader = new FileReader();
+
+				reader.addEventListener(
+					"load",
+					function () {
+					var image = new Image();
+					image.height = 150;
+					image.title = file.name;
+					image.src = this.result;
+					preview.appendChild(image);
+					},
+					false,
+				);
+
+				reader.readAsDataURL(file);
+				}
+			}
+
+			if (files) {
+				[].forEach.call(files, readAndPreview);
+			}
+		}
+		
 	/* 유효성체크해야함 - 개수, 크기, 확장자 제한*/
-	 
+	
 		$("#attach").change(function() {
 			const url = '${cp}'+'upload';
+			console.log(url);
 			const formData = new FormData();
 			const files = this.files;
 			
@@ -77,32 +109,24 @@
 				$(".attach-count-txt").text(data.length + "개의 파일");
 				let str = '';
 				let strHidden = '';
+				
 				for(let i in data){
 					str += `<li class="list-group-item">\${data[i].origin}</li>`;
 					strHidden += `<input type="hidden" name="uuid" value="\${data[i].uuid}">`;
 					strHidden += `<input type="hidden" name="origin" value="\${data[i].origin}">`;
 					strHidden += `<input type="hidden" name="image" value="\${data[i].image}">`	
 					strHidden += `<input type="hidden" name="path" value="\${data[i].path}">`;
-					//console.log(data[i].path);
-					//
-					//if(data[i].image == true){
-					//	console.log("이미지맞음"+data[i].image);
-					//
-					//이거까지는 뜸	
-					//strHidden += `<div style="width:100px;"><img class="img-thumbnail" src="https://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg"></div>`	
-					//
-					//경로설정 못하겟음.....
-					//strHidden += `<img src="\${cp}display?uuid=\${a.uuid}&origin=\${a.origin}&path=\${a.path}">`
-						
-					//}
-					
 					
 				}
+				
 				$(".attach-result").html(str);
 				$(".uploaded-input").html(strHidden);
-				console.log(data);
+				
 			});
-		}); 
+            previewFiles();
+			$("#preview").empty();
+
+		});
 	</script>
 </body>
 </html>

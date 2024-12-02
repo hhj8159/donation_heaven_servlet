@@ -13,11 +13,13 @@
         .slider-wrap img {
             max-width: 100%;
         }
-        .font-color {color: #005B48; font-size: 25px;}
+        .font-color {color: #005B48; font-size: 30px;}
+        
         body{
             position: relative;
             font-family: 'MinSans', sans-serif;
         }
+        
         .donation {background-color: #005B48; color: white; font-size: 30px; margin-right: 30px; }
         .signup {margin-right: 20px;}
         .sign {margin-top: 50px; color: #005B48;}
@@ -116,41 +118,48 @@
     </div>
 
     <section class="gallery-section">
-        <h2 class="text-center gallery">모두의 행복을 더하는 <span class="">봉사 인증</span></h2>
+        <h2 class="text-center gallery m-5"><b>모두의 행복을 더하는 <span>봉사 인증</span></b><br></h2>
         <div class="row mt-2">
-
-            <div class="col-md-4 mb-4">
-                <div class="card shadow-sm">
-                    <img src="https://via.placeholder.com/300x200" class="card-img" alt="봉사 인증 1">
-                    <div class="card-body">
-                        <h5 class="card-title">봉사 인증</h5>
-                        <p class="card-text">봉사 활동 내용 </p>
-                        <a href="#" class="btn detailbtn">자세히 보기</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-4">
-                <div class="card shadow-sm">
-                    <img src="https://via.placeholder.com/300x200" class="card-img" alt="봉사 인증 2">
-                    <div class="card-body">
-                        <h5 class="card-title">봉사 인증</h5>
-                        <p class="card-text">봉사 활동 내용</p>
-                        <a href="#" class="btn detailbtn">자세히 보기</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-4">
-                <div class="card shadow-sm">
-                    <img src="https://via.placeholder.com/300x200" class="card-img" alt="봉사 인증 3">
-                    <div class="card-body">
-                        <h5 class="card-title">봉사 인증</h5>
-                        <p class="card-text">봉사 활동 내용</p>
-                        <a href="#" class="btn detailbtn">자세히 보기</a>
-                    </div>
-                </div>
-            </div>
+			
+			<c:forEach items="${posts}" var="p">
+				<c:forEach items="${p.attachs}" begin="0" end="0" var="a">
+					<div class="col-md-4 mb-4 ">
+		                <div class="card shadow-sm" >
+		                    <div style="height:300px; overflow: hidden;">
+			                    <c:if test="${a.image==false}">
+	                   				<div class="d-flex justify-content-center"><img src="https://placehold.co/300x300/white/darkgreen"></div>
+	                   			</c:if>
+	                   			<c:if test="${a.image==true}">
+	                   				<img class="img-fluid mx-auto" src="${cp}display?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}">
+	                   			</c:if>
+                   			</div>
+		                    <div class="card-body">
+		                        <h5 class="card-title text-truncate" >${p.title}</h5>
+		                        <p class="card-text text-truncate">${p.content} </p>
+		                        <a href="${cp}post/view?pno=${p.pno}&${pageDto.cri.qs2}" class="btn detailbtn">자세히 보기</a>
+		                    </div>
+		                </div>
+		            </div>
+				<%-- 
+				         			
+                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-5 p-0" style="width: 300px;">
+	                    <a href="view?pno=${p.pno}&${pageDto.cri.qs2}" class="text-decoration-none text-reset">
+	                    	<div class="text-truncate">
+	                    		<div style="height:300px; overflow: hidden; align-items: center; justify-content: center;">
+	                    			<c:if test="${a.image==false}">
+	                    				<img src="https://placehold.co/300x300?text=cannot%20find\nimage%20data">
+	                    			</c:if>
+	                    			<c:if test="${a.image==true}">
+	                    				<img class="img-fluid mx-auto" src="${cp}display?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}">
+	                    			</c:if>
+	                    		</div>
+	                    		<h4>${p.title}</h4>
+	                    	</div>
+	                    </a>
+                    </div>	          --%>       		          			
+              	</c:forEach>
+			
+			</c:forEach>
         </div>
     </section>
 </main>
