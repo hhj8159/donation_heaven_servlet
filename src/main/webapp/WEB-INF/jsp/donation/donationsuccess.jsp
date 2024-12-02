@@ -23,35 +23,37 @@
                 <div class="col-md-9">
                     <div class="py-2">
                         <h2 class="bold-text my-3 mt-3 mb-4">후원 신청하기</h2>
-                    </div>                   
-                    
-                    <form>
+                    </div>
+                    <form method="post" action="">
                         <div class="d-grid col-10 mx-auto">
+
+				         
                             <hr class="border border-2 border-secondary">
                             <div class="row justify-content-center">
                                 <div class="mx-5 mt-3 col-6">
-                                    <p class="float-start">후원자번호</p>
-                                    <p class="float-end">000001</p>
+                                    <p class="float-start">후원금액</p>
+                                    <p class="float-end">${price}원</p>
                                 </div>
                                 <div class="mx-5 col-6">
-                                    <p class="float-start">후원분야</p>
-                                    <p class="float-end">결식아동</p>
+                                    <p class="float-start">후원대상</p>
+                                    <p class="float-end">${name}</p>
                                 </div>
                                 <div class="mx-5 col-6">
-                                    <p class="float-start">후원금액 합계</p>
-                                    <p class="float-end">30,000원</p>
+                                    <p class="float-start">납입방법</p>
+                                    <p class="float-end">${dcno}</p>
                                 </div>
                                 <div class="mx-5 col-6">
-                                    <p class="float-start">후원방식</p>
-                                    <p class="float-end">정기후원</p>
+                                    <p class="float-start">카드명</p>
+                                    <p class="float-end">${cardName}</p>
                                 </div>
                                 <div class="mx-5 mb-2 col-6">
-                                    <p class="float-start">납입방법</p>
-                                    <p class="float-end">자동이체</p>
+                                    <p class="float-start">주소</p>
+                                    <p class="float-end">${buyerAddr}</p>
                                 </div>
 
                             </div>
-                            <hr class="border border-2 border-secondary">                            
+                            <hr class="border border-2 border-secondary">   
+             
                         </div>
                     </form>
                     
@@ -63,6 +65,8 @@
         </main>
        <jsp:include page="../common/footer.jsp"></jsp:include>
     </div>
+        <script src="${cp}js/alert.js"></script>
+
 
 </body>
 </html>

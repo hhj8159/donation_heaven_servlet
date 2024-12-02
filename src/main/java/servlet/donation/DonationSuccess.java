@@ -17,13 +17,26 @@ public class DonationSuccess extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String cardName = req.getParameter("cardName"); 
+		String dcno = req.getParameter("dcno"); 
+		String name = req.getParameter("name"); 
+		String price = req.getParameter("price"); 
+		String buyerAddr = req.getParameter("buyerAddr"); 
+		String regdate = req.getParameter("regdate"); 
+		
+		req.setAttribute("cardName", cardName);
+		req.setAttribute("dcno", dcno);
+		req.setAttribute("name", name);
+		req.setAttribute("price", price);
+		req.setAttribute("regdate", regdate);
+		req.setAttribute("buyerAddr", buyerAddr);
+		
 		req.getRequestDispatcher("/WEB-INF/jsp/donation/donationsuccess.jsp").forward(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+		
 	}
 	
 }

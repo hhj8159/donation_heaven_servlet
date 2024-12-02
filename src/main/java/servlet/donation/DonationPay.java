@@ -2,6 +2,8 @@ package servlet.donation;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,13 +29,11 @@ public class DonationPay extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-	System.out.println("111111");
       HttpSession session = req.getSession();
       Member member = (Member) session.getAttribute("member");
 
       System.out.println(session.getAttribute("member"));
       req.getRequestDispatcher("/WEB-INF/jsp/donation/donationpay.jsp").forward(req, resp);
-      System.out.println("2222222");
 	}
 
 	@Override
@@ -41,21 +41,37 @@ public class DonationPay extends HttpServlet{
 		Gson gson = new Gson();
 		String uri = req.getRequestURI();
         uri = uri.replace(req.getContextPath() + "/donationpay/", "");
-//        String redirectURL = req.getContextPath()+"/donationsuccess";
-		if (uri.startsWith("pay")) {
+		
+        System.out.println(uri.startsWith("pay"));
+        if (uri.startsWith("pay")) {
 			
-			System.out.println("33333");
 			
 			Donation donation = gson.fromJson(req.getReader(), Donation.class);
+			
+			
 			System.out.println(donation);
-//			resp.setContentType("application/json; charset=utf-8");
-//			resp.getWriter().print(GSON.toJson(responseMap));
-			System.out.println(donation);
-			System.out.println("4444444");
-			donationService.donationPay(donation);	
+
+			
+			donationService.donationPay(donation);
+			
+			
+			Map<String, Object> responseMap = new HashMap<>();
+	        responseMap.put("status", "success");
+	        responseMap.put("cardName", donation.getCardName());
+	        responseMap.put("dcno", donation.getDcno());
+	        responseMap.put("name", donation.getName());
+	        responseMap.put("price", donation.getPrice());
+	        responseMap.put("regdate", donation.getRegdate());
+	        responseMap.put("buyerAddr", donation.getBuyerAddr());
+	        
+	        
+	        resp.setContentType("application/json; charset=utf-8");
+	        resp.getWriter().print(gson.toJson(responseMap));
+
+			
+			
         }
-		resp.sendRedirect(req.getContextPath()+"/donationsuccess");
-		
+
         
         
 

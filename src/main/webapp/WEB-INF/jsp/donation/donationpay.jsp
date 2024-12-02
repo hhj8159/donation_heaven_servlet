@@ -157,10 +157,13 @@
                                    
                                     <hr class="border border-2 border-secondary">
                                 </div>
-                                <div class="d-flex col-5 mx-auto">
+                                <div class="d-flex col-3 mx-auto">
+                                	<button type="button" class="btn btn-outline-success m-4 mb-5 w-75 mx-auto" id="prebtn2">이전 단계</button>
+                            	</div>
+<%--                                 <div class="d-flex col-5 mx-auto">
                                     <button type="button" class="btn btn-outline-success m-4 mb-5 w-75 me-3 mx-auto" id="prebtn2">이전 단계</button>
                                     <a href="${cp}donationsuccess" type="button" class="btn btn-outline-success m-4 mb-5 w-75 ms-3 mx-auto" id="donabtn">후원 신청하기</a>
-                                </div>
+                                </div> --%>
                             <div>
                                 
                             </div>
@@ -191,12 +194,12 @@
 			$("input[name='donationcategory']").change(function() {
         		event.preventDefault();
 	        	let dcno = $("input[name='donationcategory']:checked").val();
-	        	console.log("후원방식: " + dcno);	        	
+	        	console.log("후원방식:" + dcno);	        	
 			})
 			$("input[name='donationtype']").change(function() {
         		event.preventDefault();
 	        	let dtno = $("input[name='donationtype']:checked").val();
-	        	console.log("후원종류: " + dtno)
+	        	console.log("후원종류:" + dtno)
 			})
         	
         	
@@ -318,6 +321,7 @@
     	if(priceValue === "직접입력"){
     		priceValue = document.getElementById("priceWrite").value;
     	}
+    	var donationCategoryValue = document.querySelector("input[name='donationtype']:checked").value;    	
     	var donationTypeValue = document.querySelector("input[name=donationtype]:checked").value;    	
     	
     	
@@ -386,22 +390,28 @@
 	    	
 	    		
 	    		console.log(data);
-	    		console.log("ssssss");
 	    		
-	  	        $(function(){
-	  	        	 $.ajax({
-	  	    	        url: "${cp}donationpay/pay",
-	  	    	        type: "POST",
-	  	    	      	contentType: "application/json", 
-	  	    	        data: JSON.stringify(data),
-	  	    	        success: function (response) {
-	  	    	        	console.log(response);
-	  	    	        },
-	  	    	        error: function () {
-	  	    	        	customAlert.alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
-	  	    	        },
-	  	    		});
-	  	        })
+	    		
+	    		$.ajax({
+  	    	        url: "${cp}donationpay/pay",
+  	    	        type: "POST",
+  	    	      	contentType: "application/json", 
+  	    	        data: JSON.stringify(data),
+  	    	        success: function (res) {
+						if(res.status="success"){
+							console.log(res.cardName);
+							console.log(res.dcno);
+							console.log(res.name);
+							console.log(res.price);
+							console.log(res.regdate);
+							console.log(res.buyerAddr);
+  	    	        	location.href = "${cp}donationsuccess?cardName="+res.cardName+"&dcno="+res.dcno+"&name="+res.name+"&price="+res.price+"&regdate="+res.regdate+"&buyerAddr="+res.buyerAddr;
+						}
+  	    	        },
+  	    	        error: function () {
+  	    	        	customAlert.alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
+  	    	        },
+  	    		});
 	    		
 	    	} else {
 	    		console.log(rsp);		    		
