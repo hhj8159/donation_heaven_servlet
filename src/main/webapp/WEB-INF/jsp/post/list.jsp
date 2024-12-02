@@ -200,6 +200,13 @@
             <c:if test="${(pageDto.cri.category == 2) or (pageDto.cri.category == 3)}">
 	            <a href="write?${pageDto.cri.qs2}" class="btn float-end text-white" style="background-color: #005B48; width: 70px;">글쓰기</a>                    
          	</c:if>
+         	<c:if test="${(pageDto.cri.category == 1) or (pageDto.cri.category == 5)}">
+         		<c:if test="${member.grade==1}">
+	            	<a href="write?${pageDto.cri.qs2}" class="btn float-end text-white" style="background-color: #005B48; width: 70px;">글쓰기</a>                             		
+         		</c:if>
+         	</c:if>
+         	
+         	
 
              <ul class="pagination justify-content-center my-5">
              	<c:if test="${pageDto.doublePrev}">

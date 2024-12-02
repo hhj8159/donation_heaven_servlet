@@ -103,7 +103,7 @@
                 
                 
                 <div class="text-center my-5">
-                	<c:if test="${post.id == member.id}">
+                	<c:if test="${post.id == member.id or member.grade == 1}">
 	                  <a href="modify?pno=${post.pno}&${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;">수정</a>
 	                  <a href="list?${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;">목록</a>
 	                  <a href="remove?pno=${post.pno}&${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;" onclick="confirm('삭제하시겠습니까?')">삭제</a>
@@ -111,13 +111,13 @@
 
                 	</c:if>
                 	
-                	<c:if test="${post.id != member.id}">
-                	  <c:if test="${cri.category== 2 and not empty member.id}">
+                	<c:if test="${post.id != member.id and member.grade == 0}">
+                	  <c:if test="${(cri.category == 2 or cri.category == 5) and not empty member.id}">
 	                  	<a class="btn text-light" style="background-color: #005B48; width: 80px;" id="likeBtn">추천 <span id="likesCount">${post.likes}</span></a>
  	                  	<a class="btn text-light d-none" style="background-color: #005B48; width: 80px;" id="unlikeBtn">추천 ${post.likes} </a>                 	  
                 	  </c:if>
 	                  <a href="list?${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;">목록</a>
-	                  <c:if test="${cri.category== 2}">
+	                  <c:if test="${cri.category == 2 or cri.category == 5}">
 	                  <a href="report?" class="btn btn-secondary text-light" style="width: 80px;" onclick="customConfirm.confirm('해당 글을 신고하시겠습니까?','신고')">신고</a>                    
                 	  </c:if>
                 	</c:if>                 	
