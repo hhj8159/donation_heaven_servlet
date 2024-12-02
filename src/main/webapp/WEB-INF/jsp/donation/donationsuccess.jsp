@@ -58,7 +58,7 @@
                     </form>
                     
                     <div class="d-flex col-3 mx-auto">
-                        <button type="button" class="btn btn-outline-success m-4 mb-5 w-75">확인</button>
+                        <a href="${cp}index" type="button" class="btn btn-outline-success m-4 mb-5 w-75">확인</a>
                     </div>
                 </div>    
             </div> 

@@ -362,15 +362,7 @@
 	    		let price = rsp.paid_amount;
 	    		let payType = rsp.pay_method;
 	    		let pgTid = rsp.pg_tid;
-	    		console.log(mno + ":::" +"mno");
-	    		console.log(impUid + ":::" +"impUid");
-	    		console.log(buyerAddr + ":::" +"buyerAddr");
-	    		console.log(merchantUid + ":::" +"merchantUid");
-	    		console.log(buyerEmail + ":::" +"buyerEmail");
-	    		console.log(buyerName + ":::" +"buyerName");
-	    		console.log(buyerTel + ":::" +"buyerTel");
-	    		console.log(cardName + ":::" +"cardName");
-	    		console.log(price + ":::" +"price");
+	    		let dcno = rsp.dcno;
 	    		
 	    		const data = {
 	    				mno, 
@@ -385,7 +377,8 @@
 	    				name,
 	    				price,
 	    				payType,
-	    				pgTid
+	    				pgTid,
+	    				dcno
 	    		}
 	    	
 	    		
