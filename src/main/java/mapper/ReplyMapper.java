@@ -18,6 +18,8 @@ public interface ReplyMapper {
 	
 	
 	Reply selectOne(Long rno);
+	List<Reply> selectReply(@Param("pno") Long pno ,@Param("id")String id);
 	List<Reply> selectList(@Param("pno") Long pno, @Param("cri") ReplyCri cri);
 	List<Reply> selectListByMe(Reply reply);
+	
 }

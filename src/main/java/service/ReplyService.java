@@ -13,6 +13,6 @@ public interface ReplyService {
 	int remove(Long rno);
 	int removeAll(Long pno);
 	Reply findBy(Long rno);
-	
+	List<Reply> selectReply(Long pno, String id);
 	Map<String, List<Reply>> selectList(Long pno,ReplyCri cri,Object writer);
 }

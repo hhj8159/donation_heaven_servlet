@@ -13,7 +13,7 @@ const replyService = (function() {
             url,
             data,
         }).done(function(data){
-            // console.log(data);
+            console.log(data);
             if(callback){
                 callback(data);
             }
@@ -23,21 +23,20 @@ const replyService = (function() {
         // }
     }
 	function list(pno, cri, callback) {
-		console.log(";");
-	        let reformedUrl = url + "/list/" + pno;
-			
-			console.log(reformedUrl);
-	        if(cri && cri.lastRno) {
-	            reformedUrl += "/" + cri.lastRno;
-	            if(cri.amount) {
-	                reformedUrl += "/" + cri.amount;
-	            }
-	        }
-	        $.getJSON(reformedUrl).done(function(data) {
-	            if(callback)
-	            callback(data);
-	        });
-	    }
+        let reformedUrl = url + "/list/" + pno;
+		
+		console.log(reformedUrl);
+        if(cri && cri.lastRno) {
+            reformedUrl += "/" + cri.lastRno;
+            if(cri.amount) {
+                reformedUrl += "/" + cri.amount;
+            }
+        }
+        $.getJSON(reformedUrl).done(function(data) {
+            if(callback)
+            callback(data);
+        });
+    }
     function view(rno,callback){
         $.getJSON(url + "/" + rno).done(function(data){
             if(callback)

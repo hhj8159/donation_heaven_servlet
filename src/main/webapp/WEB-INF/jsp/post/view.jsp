@@ -41,7 +41,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <p class="text-end mb-0">작성일 <fmt:formatDate value="${post.regdate}" pattern="yyyy-MM-dd"/></p>
+                            <p class="text-end mb-0">작성일                 <fmt:formatDate value="${post.regdate}" pattern="yyyy-MM-dd"/></p>
                             <c:if test="${cri.category == 2}">
                             <p class="text-end mb-0">추천 <span id="likesCount">${post.likes}</span></p>
                         	</c:if>
@@ -73,31 +73,48 @@
 	               <div class="comment-section mt-4">
     <!-- 댓글 리스트 -->
     <div class="comment-list replies" >
-        <!-- 댓글 항목 -->
-        <div class="comment-item border-bottom pb-3 mb-3">
-            <div class="d-flex justify-content-between">
-                <span class="fw-bold">kwon</span>
-                <span class="text-muted">24/11/15 04:30:42</span>
-            </div>
-            <p class="mt-2">미리 연락해보세요</p>
-            <div class="d-flex justify-content-between">
-                <span class="text-muted"><i class="fa fa-thumbs-up"></i> 3</span>
-                <span>
-                    <a href="#" class="text-danger me-3">신고</a> / 
-                    <a href="#" class="text-danger ms-2">차단</a>
-                </span>
-            </div>
-        </div>
-
+        <input type="hidden" value="${member.id}" id="replyWriter">
     </div>
 
     <!-- 댓글 입력 -->
     <div class="comment-input mt-4">
-        <textarea class="form-control mb-3" rows="3" placeholder="댓글을 입력하세요..."></textarea>
-        <button class="btn btn-success">댓글 등록</button>
+        <textarea class="form-control mb-3" rows="3" placeholder="댓글을 입력하세요..." id="replyContent"></textarea>
+        <button class="btn btn-success" id="replyWrite">댓글 등록</button>
     </div>
 </div>
                 </form>
+                            	<!-- The Modal -->
+	<div class="modal fade" id="replyModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">댓글 수정</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+					<label for="replyContent" class="mb-2">내용</label> <input
+						type="text" class="form-control mb-3" id="replyContent2" > <label
+						for="replyWriter" class="mb-2">작성자</label> <input type="text"
+						class="form-control mb-3" id="replyWriter2" readonly >
+				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<div>
+
+					</div>
+					<button type="button" class="btn btn-warning"
+							id="btnReplyModifySubmit">수정</button>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
                 
                 
                 
@@ -119,8 +136,13 @@
 	                  <c:if test="${cri.category == 2 or cri.category == 5}">
 	                  <a href="report?" class="btn btn-secondary text-light" style="width: 80px;" onclick="customConfirm.confirm('해당 글을 신고하시겠습니까?','신고')">신고</a>                    
                 	  </c:if>
-                	</c:if>                 	
+                	</c:if>          	
                 </div>   
+
+                 
+	${reply2.id} ${member}
+
+
             </main>
         <jsp:include page="../common/footer.jsp"></jsp:include>
         </div>
@@ -173,6 +195,7 @@
         console.log(replyService);
 			moment.locale('ko');            
             const pno = '${post.pno}';
+            const id = "${member.id}";
             // replyService.write({content : 'aaaa'})
 
             function list(cri,myOnly) {
@@ -194,10 +217,10 @@
                         myStr += makeLi(data.myList[i])
                     }
 
-                    if(myOnly != null){
+                    $(".replies").html(str);
+                    /* if(myOnly){
                         return false;
-                    }
-                    $(".replies").append(str);
+                    } */
                     $(".my-replies").html(myStr);
                     // 추가 css 작업
                     $(".my-replies .text-secondary, .my-replies .text-black").removeClass("text-secondary text-black")
@@ -207,53 +230,71 @@
            
 
         function makeLi(reply){
-            return `<div class="comment-item border-bottom pb-3 mb-3">
+        	
+            return `<div class="comment-item border-bottom pb-3 mb-3" data-rno="\${reply.rno}" id="rnoId">
             <div class="d-flex justify-content-between">
-            <span class="fw-bold">\${reply.id}</span>
+            <span class="fw-bold" >\${reply.id}</span>
             <span class="">\${moment(reply.regdate,'yyyy/MM/DD-HH:mm:ss').fromNow()}</span>
-/*             <c:if test="\${member.id == reply.id}"> */
-            <div class="dropdown ms-2">
-                <a href="#" class="dropdown-toggle text-muted" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-ellipsis-v"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a href="#" class="dropdown-item btn-reply-edit">수정</a></li>
-                    <li><a href="#" class="dropdown-item btn-reply-remove">삭제</a></li>
-                </ul>
-            </div>
-/*             </c:if> */
+
+
+
         </div>
         <p class="mt-2">\${reply.content}</p>
         <div class="d-flex justify-content-between">
             <span class="text-muted"><a href="#" id="ddd"><i class="fa fa-thumbs-up" ></i></a> \${reply.likes} </span>
-            <span>
-                <a href="#" class="text-danger me-3">신고</a> / 
-                <a href="#" class="text-danger ms-2">차단</a>
-            </span>
+	            <c:if test="\${reply.id == member.id}">
+            		<span>
+	                <a href="#" class="text-danger me-3" id="update">수정</a> / 
+	                <a href="#" class="text-danger ms-2" id="delete">삭제</a>
+		            </span>
+	            </c:if>
         </div>
     </div>`;
         }
+        
         
         //좋아요 버튼 클릭시
         $(document).on("click", "#ddd", function(event) {
             event.preventDefault(); 
             
         });
+
+        
+        
+        $(document).on("click", "#delete", function() {
+        	const $li = $(this).closest("li");
+            if(! confirm("삭제 하시겠습니까?")) {
+                return false;
+            }
+            const rno = $(this).closest("#rnoId").data("rno");
+            console.log(rno);
+            replyService.remove(rno, function(data) {
+                alert("삭제 되었습니다");
+                $li.remove();
+                list(undefined, true);
+          	});
+            return false;
+        });
+        /*     event.preventDefault(); 
+            
+            alert("dd");
+        }); */
         //li 클릭시 이벤트
-        $(".replies, .my-replies").on("click", "li",function(){
-            console.log($(this).data("rno"));
-            const rno = $(this).data("rno");
+        $(document).on("click", "#update", function() {
+        	const rno = $(this).closest("#rnoId").data("rno");
+            console.log(rno);
             $("#replyModal").modal("show");
-            replyService.view(rno, function(data){
+            replyService.view(rno, function(data) {
+            	console.log(data);
+                $("#replyModal").find(".modal-footer div button").hide()
+                    .filter(":gt(0)").show();
+				
+                $("#replyModal").data("rno", rno).modal("show");
+
+                $("#replyContent2").val(data.content);
+
+                $("#replyWriter2").val(data.id);
                 console.log(data);
-                $("#replyModal").find(".modal-footer div button").hide().filter(":gt(0)").show();
-                $("#replyModal").data("rno",rno).modal("show");
-                $("#replyContent").val(data.content);
-                $("#replyWriter").val(data.writer);
-               
-
-
-
             })
         });
 
@@ -293,7 +334,20 @@
                 const lastRno = $(".replies li:last").data("rno");
                 list({lastRno});
             });
-
+		
+        // 댓글 작성(반영) 버튼 클릭시
+    	$("#replyWrite").on("click",function(e) {
+    		e.preventDefault();
+    		const content = $("#replyContent").val();
+    		const reply = {pno, id, content};
+    		console.log(reply);
+    		replyService.write(reply, function(data) {
+    			list(undefined, true);
+    			$("#replyContent").val("");
+    		});
+            
+    	});
+        
         //댓글쓰기 버튼 클릭시
         $("#btnReplyWrite").click(function(){
 
@@ -305,10 +359,10 @@
         });
         $(function(){
 			//댓글수정
-            $("#btnReplyModifySumbit").click(function(){
-
+            $("#btnReplyModifySubmit").click(function(){
+				console.log("ddd");
                 const rno = $("#replyModal").data("rno");
-                const content = $("#replyContent").val();
+                const content = $("#replyContent2").val();
                 const reply = {rno,content};
                 console.log(rno);
                 replyService.modify(reply,function(data){
@@ -318,45 +372,9 @@
                     // location.reload();
                 });
             });
-            $("#btnReplyWriteSumbit").click(function(){
-                const writer = $("#replyWriter").val();
-                const content = $("#replyContent").val();
-                const reply = {pno,writer,content};
-                console.log("ffff");
-                replyService.write(reply,function(data){
-                    $("#replyModal").modal("hide");
-                    list();
-                    list(undefined,true);
-                    // location.reload();
-                });
-            });
-          //댓글삭제
-            $("#btnReplyDeleteSumbit").click(function(){
-                const rno = $("#replyModal").data("rno");
-                const reply = rno;
-                console.log(rno);
-                const $li = $(`.replies li[data-rno='\${rno}']`);
-                replyService.remove(reply,function(data){
-                    $("#replyModal").modal("hide");
-                    $li.remove();
-                    // location.reload();
-                });
-            });
+
         });
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         </script>
     </body>
-
     </html>

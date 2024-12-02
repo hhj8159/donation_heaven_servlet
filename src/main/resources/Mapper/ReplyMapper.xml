@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.ReplyMapper">
    <insert id="insert">
-   insert into reply(content,id,pno) values(#{content},#{id},#{pno})
+   insert into reply(id,content,pno) values(#{id},#{content},#{pno})
    </insert>
    
    <update id="update">
@@ -20,14 +20,16 @@
    <select id="selectOne" resultType="vo.Reply">
    select * from reply where rno = #{rno}
    </select>
-   
+   <select id="selectReply">
+   select * from reply where pno = #{pno} AND id = #{id}
+   </select>
    <select id="selectList" resultType="vo.Reply">
 <!--     select * from tbl_reply where pno = #{pno} -->
    select *
     from reply tr
     where pno = #{pno}
     and rno > #{cri.lastRno}
-    order by rno 
+    order by rno DESC
     limit #{cri.amount}
    </select>
    <select id="selectListByMe" resultType="vo.Reply">

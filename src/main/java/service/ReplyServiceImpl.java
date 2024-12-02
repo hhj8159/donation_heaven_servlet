@@ -15,15 +15,17 @@ import utils.MybatisInit;
 import vo.Member;
 import vo.Reply;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 
 public class ReplyServiceImpl implements ReplyService{
 	@Getter
 	private static ReplyService instance = new ReplyServiceImpl();
 	@Override
 	public int write(Reply reply) {
+		System.out.println(reply);
 		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
 			ReplyMapper mapper = session.getMapper(ReplyMapper.class);
+;
 			return mapper.insert(reply);
 		}
 	}
@@ -77,5 +79,15 @@ public class ReplyServiceImpl implements ReplyService{
 			return map;
 		}
 	}
+
+	@Override
+	public List<Reply> selectReply(Long pno, String id) {
+		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
+			ReplyMapper mapper = session.getMapper(ReplyMapper.class);
+			return mapper.selectReply(pno,id);
+		}
+	}
+	
+	
 	
 }

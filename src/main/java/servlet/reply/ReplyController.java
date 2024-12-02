@@ -70,7 +70,8 @@ public class ReplyController extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {		
-		service.write(gson.fromJson(req.getReader(), Reply.class));
+		
+		service.write(gson.fromJson(req.getReader(), Reply.class));	
 	}
 
 	
@@ -94,7 +95,7 @@ public class ReplyController extends HttpServlet{
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String uri = req.getRequestURI();
 		
-		uri = uri.replace(req.getContextPath() + "/reply/", "");
+		uri = uri.replace(req.getContextPath() + "/post/reply/", "");
 		System.out.println(uri);
 		if(uri.startsWith("delete")) {
 			int tmpIdx = uri.lastIndexOf("/");

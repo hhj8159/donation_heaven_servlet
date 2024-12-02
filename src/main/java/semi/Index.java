@@ -15,7 +15,9 @@ import service.PostServiceImpl;
 
 @WebServlet("/index")
 public class Index extends HttpServlet{
+
 	private PostService service = new PostServiceImpl();
+
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,6 +29,9 @@ public class Index extends HttpServlet{
 		
 		//req.setAttribute("pageDto", new PageDto(cri, service.count(cri)));
 		req.getRequestDispatcher("/WEB-INF/jsp/common/index.jsp").forward(req, resp);
+
+	
+
 	}	
 	
 	
@@ -35,4 +40,5 @@ public class Index extends HttpServlet{
 //		req.getRequestDispatcher("/WEB-INF/jsp/common/index.jsp").forward(req, resp);
 //	}
 	
+
 }

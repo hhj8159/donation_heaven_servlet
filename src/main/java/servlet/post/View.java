@@ -7,16 +7,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dto.Criteria;
 import service.PostService;
 import service.PostServiceImpl;
+import service.ReplyService;
+import service.ReplyServiceImpl;
 import utils.Commons;
+import vo.Member;
 
 @WebServlet("/post/view")
 public class View extends HttpServlet{
 	private PostService service = new PostServiceImpl();
-
+	private ReplyService replyService = new ReplyServiceImpl();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Criteria cri = new Criteria(req); 
@@ -31,6 +35,16 @@ public class View extends HttpServlet{
 		Long pno = Long.valueOf(pnoStr);
 		
 		req.setAttribute("post", service.view(pno));
+		/*
+		 * HttpSession session = req.getSession(); Member member = (Member)
+		 * session.getAttribute("member"); if(member != null) {
+		 * req.setAttribute("reply2", replyService.selectReply(pno,member.getId()));
+		 * }else {
+		 * 
+		 * }
+		 */
+		
+		
 		req.setAttribute("cri", cri);
 		req.getRequestDispatcher("/WEB-INF/jsp/post/view.jsp").forward(req, resp);
 		
