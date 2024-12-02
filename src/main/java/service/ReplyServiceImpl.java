@@ -80,13 +80,7 @@ public class ReplyServiceImpl implements ReplyService{
 		}
 	}
 
-	@Override
-	public List<Reply> selectReply(Long pno, String id) {
-		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
-			ReplyMapper mapper = session.getMapper(ReplyMapper.class);
-			return mapper.selectReply(pno,id);
-		}
-	}
+
 	
 	
 	

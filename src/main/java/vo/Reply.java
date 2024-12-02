@@ -24,5 +24,5 @@ public class Reply {
 	private int order;
 	private Date regdate;
 	private Date updatedate;
-	
+
 }

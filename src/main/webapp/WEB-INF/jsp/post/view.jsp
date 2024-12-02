@@ -140,8 +140,8 @@
                 </div>   
 
                  
-	${reply2.id} ${member}
-
+${reply2.id} 
+${member.id}
 
             </main>
         <jsp:include page="../common/footer.jsp"></jsp:include>
@@ -198,7 +198,7 @@
             const id = "${member.id}";
             // replyService.write({content : 'aaaa'})
 
-            function list(cri,myOnly) {
+            function list(cri,id) {
                 replyService.list(pno, cri, function(data) {
                     if(!data.list.length) {
                         $(".btn-more-reply")
@@ -229,29 +229,40 @@
             list();
            
 
-        function makeLi(reply){
-        	
-            return `<div class="comment-item border-bottom pb-3 mb-3" data-rno="\${reply.rno}" id="rnoId">
-            <div class="d-flex justify-content-between">
-            <span class="fw-bold" >\${reply.id}</span>
-            <span class="">\${moment(reply.regdate,'yyyy/MM/DD-HH:mm:ss').fromNow()}</span>
+            function makeLi(reply) {
+                const userId = "${member.id}"; 
+                console.log("BBB :" + reply.id);
+                console.log("AAA :" + userId);
+                console.log("userId:", typeof userId);
+                console.log("reply.id:", typeof reply.id);
+
+                let deleteupdate = "";
 
 
+                if (reply.id === userId) {
+                    deleteupdate = 
+                        '<span>' +
+                        '<a href="#" class="text-danger me-3" id="update">수정</a> / ' +
+                        '<a href="#" class="text-danger ms-2" id="delete">삭제</a>' +
+                        '</span>';
+                }
 
-        </div>
-        <p class="mt-2">\${reply.content}</p>
-        <div class="d-flex justify-content-between">
-            <span class="text-muted"><a href="#" id="ddd"><i class="fa fa-thumbs-up" ></i></a> \${reply.likes} </span>
-	            <c:if test="\${reply.id == member.id}">
-            		<span>
-	                <a href="#" class="text-danger me-3" id="update">수정</a> / 
-	                <a href="#" class="text-danger ms-2" id="delete">삭제</a>
-		            </span>
-	            </c:if>
-        </div>
-    </div>`;
-        }
-        
+
+                let html = '<div class="comment-item border-bottom pb-3 mb-3" data-rno="' + reply.rno + '" id="rnoId">';
+                html += '<div class="d-flex justify-content-between">';
+                html += '<span class="fw-bold">' + reply.id + '</span>';
+                html += '<span class="">' + moment(reply.regdate, 'yyyy/MM/DD-HH:mm:ss').fromNow() + '</span>';
+                html += '</div>';
+                html += '<p class="mt-2">' + reply.content + '</p>';
+                html += '<div class="d-flex justify-content-between">';
+                html += '<span class="text-muted"><a href="#" id="ddd"><i class="fa fa-thumbs-up"></i></a> ' + reply.likes + ' </span>';
+                html += deleteupdate; 
+                html += '</div>';
+                html += '</div>';
+
+
+                return html;
+            }
         
         //좋아요 버튼 클릭시
         $(document).on("click", "#ddd", function(event) {

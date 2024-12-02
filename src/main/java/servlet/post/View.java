@@ -35,14 +35,7 @@ public class View extends HttpServlet{
 		Long pno = Long.valueOf(pnoStr);
 		
 		req.setAttribute("post", service.view(pno));
-		/*
-		 * HttpSession session = req.getSession(); Member member = (Member)
-		 * session.getAttribute("member"); if(member != null) {
-		 * req.setAttribute("reply2", replyService.selectReply(pno,member.getId()));
-		 * }else {
-		 * 
-		 * }
-		 */
+
 		
 		
 		req.setAttribute("cri", cri);

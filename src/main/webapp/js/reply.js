@@ -33,6 +33,14 @@ const replyService = (function() {
             }
         }
         $.getJSON(reformedUrl).done(function(data) {
+			const rp = data.list; 
+			        console.log("aaa:", rp);
+			        
+			        rp.forEach(reply => {
+			            makeLi(reply);
+			        });
+
+
             if(callback)
             callback(data);
         });

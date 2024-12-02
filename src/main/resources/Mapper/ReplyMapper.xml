@@ -20,9 +20,7 @@
    <select id="selectOne" resultType="vo.Reply">
    select * from reply where rno = #{rno}
    </select>
-   <select id="selectReply">
-   select * from reply where pno = #{pno} AND id = #{id}
-   </select>
+
    <select id="selectList" resultType="vo.Reply">
 <!--     select * from tbl_reply where pno = #{pno} -->
    select *
