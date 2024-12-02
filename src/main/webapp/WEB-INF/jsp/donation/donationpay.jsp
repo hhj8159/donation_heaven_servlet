@@ -49,8 +49,8 @@
                                 <hr class="border border-2 border-secondary">
                                 <ul class="list-group list-group-horizontal form-check my-3" id="donationcategoryselect">
                                     <li class="list-group px-3 col-2">후원방식</li>
-                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" value="정기후원" name="donationcategory" checked>정기후원</label></li>
-                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" value="일시후원" name="donationcategory">일시후원</label></li>
+                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" value="1" name="donationcategory" checked>일시후원</label></li>
+                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" value="2" name="donationcategory">정기후원</label></li>
                                 </ul>
                                 <ul class="list-group list-group-horizontal form-check mb-2 mt-3">
                                     <li class="list-group px-3 col-2">후원종류</li>
@@ -65,7 +65,7 @@
                                         <select class="form-select" id="donationpriceselect">
                                             <option value="직접입력">직접입력</option>
                                             <option value="10000">10,000</option>
-                                            <option value="50000">50,000</option>
+                                            <option value="50000">50,000</option>     
                                             <option value="100000">100,000</option>
                                         </select>
                                     </div>
@@ -194,8 +194,9 @@
 			$("input[name='donationcategory']").change(function() {
         		event.preventDefault();
 	        	let dcno = $("input[name='donationcategory']:checked").val();
-	        	console.log("후원방식:" + dcno);	        	
+	        	console.log("후원방식:" + dcno);
 			})
+			
 			$("input[name='donationtype']").change(function() {
         		event.preventDefault();
 	        	let dtno = $("input[name='donationtype']:checked").val();
@@ -362,7 +363,7 @@
 	    		let price = rsp.paid_amount;
 	    		let payType = rsp.pay_method;
 	    		let pgTid = rsp.pg_tid;
-	    		let dcno = rsp.dcno;
+	    		let dcno = $("input[name='donationcategory']:checked").val();;
 	    		
 	    		const data = {
 	    				mno, 

@@ -41,7 +41,6 @@ public class DonationPay extends HttpServlet{
 		Gson gson = new Gson();
 		String uri = req.getRequestURI();
         uri = uri.replace(req.getContextPath() + "/donationpay/", "");
-		
         System.out.println(uri.startsWith("pay"));
         if (uri.startsWith("pay")) {
 			
@@ -62,11 +61,11 @@ public class DonationPay extends HttpServlet{
 	        responseMap.put("name", donation.getName());
 	        responseMap.put("price", donation.getPrice());
 	        responseMap.put("regdate", donation.getRegdate());
-	        responseMap.put("buyerAddr", donation.getBuyerAddr());
-	        
+	        responseMap.put("buyerAddr", donation.getBuyerAddr());	        
 	        
 	        resp.setContentType("application/json; charset=utf-8");
 	        resp.getWriter().print(gson.toJson(responseMap));
+	        
 
 			
 			
