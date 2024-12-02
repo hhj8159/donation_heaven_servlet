@@ -53,6 +53,7 @@ public class Modify extends HttpServlet{
 		
 	}
 	
+	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Object memberObj = req.getSession().getAttribute("member");
 		Criteria cri = new Criteria(req);
@@ -96,14 +97,7 @@ public class Modify extends HttpServlet{
 						.build());
 			}
 		}
-			
-		
-		service.modify(Post.builder().title(title).content(content).attachs(attachs).build());
-		resp.sendRedirect("view?pno="+pno+"&"+cri.getQs2());
-		
-		
-		
-		service.modify(Post.builder().title(title).content(content).pno(pno).build());
+		service.modify(Post.builder().title(title).content(content).pno(pno).attachs(attachs).build());
 		resp.sendRedirect("view?pno="+pno+"&"+cri.getQs2());
 	}
 	

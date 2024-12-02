@@ -145,15 +145,14 @@
 		          			<c:forEach items="${p.attachs}" begin="0" end="0" var="a">		          			
 	 		                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-block m-5 p-0" style="width: 300px;">
 		 		                    <a href="view?pno=${p.pno}&${pageDto.cri.qs2}" class="text-decoration-none text-reset">
-		 		                    	<div class="text-truncate">
-		 		                    		<div style=" height:300px; overflow: hidden;">
-		 		                    			<c:if test="${a.image==false}">
-		 		                    				<img src="https://placehold.co/300x300?text=cannot%20find\nimage%20data">
-		 		                    			</c:if>
-		 		                    			<c:if test="${a.image==true}">
-		 		                    				<img class="img-fluid mx-auto" src="${cp}display?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}">
-		 		                    			</c:if>
-		 		                    		</div>
+		 		                    	<div class="text-truncate text-center">
+		 		                    		<c:if test="${!a.image}">
+		 		                    		<c:set var="src" value="https://placehold.co/300x300?text=cannot%20find\nimage%20data"/>
+		 		                    		</c:if>
+		 		                    		<c:if test="${a.image}">
+		 		                    		<c:set var="src" value="${cp}display?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}"/>
+		 		                    		</c:if>
+		 		                    		<div style="height:300px; background: no-repeat center url('${src}'); background-size:cover;" ></div>
 		 		                    		<h4>${p.title}</h4>
 		 		                    	</div>
 		 		                    </a>
@@ -233,15 +232,5 @@
         </main>
         	<jsp:include page="../common/footer.jsp"></jsp:include>
     </div>
-    <script>
-	    $(function() {
-			$("#downloadBtn").click(function(){
-				let currentDownload = parseInt($("#downloadCount").text());
-				let afterDownload = currentDownload + 1;
-				$("#downloadCount").text(afterDownload);
-			})
-		});
-	    
-    </script>
 </body>
 </html>

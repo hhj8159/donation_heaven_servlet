@@ -121,9 +121,6 @@
                 	  </c:if>
                 	</c:if>                 	
                 </div>   
-                 
-
-               
             </main>
         <jsp:include page="../common/footer.jsp"></jsp:include>
         </div>
@@ -131,12 +128,12 @@
         <script src="${cp}js/alert.js"></script>
  		<script src="/donation_heaven/js/reply.js"></script>	
         <script>
-
         	$(function() {
         		$("#likeBtn").click(function(){
         			event.preventDefault();
         			const id = $("#memberId").val(); 
         			const pno = $("#postPno").val(); 
+        			console.log("aa");
         			customConfirm.confirm('추천하시겠습니까?',"추천").then(function() {
         				$.ajax({
         					url: "${cp}post/like",
@@ -144,6 +141,7 @@
         					data: {id:id, pno:pno},
         					success: function(response) {
         						  if (response === "success") {
+        							  console("gg");
 	        						customAlert.alert("추천되었습니다","확인");
 	        						let currentLikes = parseInt($("span#likesCount").text());
 	                                
@@ -162,14 +160,10 @@
 	        						customAlert.alert("서버 오류","경고");        							  
         						  }
         					} 			
-        				})
-        				
-        			})
-        			
-        			
+        				})   				
+        			})       			        			
         		})
         	});
-        	console.log("${cp}");
         </script>
  
 		

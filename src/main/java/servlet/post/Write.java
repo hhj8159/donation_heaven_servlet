@@ -60,7 +60,6 @@ public class Write extends HttpServlet{
 		String[] uuids = req.getParameterValues("uuid");
 		String[] origins = req.getParameterValues("origin");
 		String[] images = req.getParameterValues("image");
-		System.out.println(Arrays.toString(images));
 		String[] paths = req.getParameterValues("path");
 
 		

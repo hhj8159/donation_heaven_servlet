@@ -12,6 +12,7 @@
         }
         .slider-wrap img {
             max-width: 100%;
+           
         }
         .font-color {color: #005B48; font-size: 30px;}
         
@@ -109,9 +110,9 @@
         <div class="col-md-12">
             <div class="slider-wrap">
                 <div>
-                    <img src="https://bxslider.com/assets/plant-bd76206132f914fc54fd28f9794f7fe346bb8b9a9d16dd5de830b93f365eea9c.jpg">
-                    <img src="https://bxslider.com/assets/daisies-aef04136667e60d9190943f4c6cd605043e67188247ffe928500edfd29b0a158.jpg">
-                    <img src="https://bxslider.com/assets/succulents-7b5637dbc01af703069905a7991d9e7e7d27c680fa885fe3d6c713c1f77c0f92.jpg">
+                    <img src="${cp}images/girl.jpg">
+                    <img src="${cp}images/ddd.jpg">
+                    <img src="${cp}images/vl.jpg">
                 </div>
             </div>
         </div>
@@ -126,12 +127,14 @@
 					<div class="col-md-4 mb-4 ">
 		                <div class="card shadow-sm" >
 		                    <div style="height:300px; overflow: hidden;">
-			                    <c:if test="${a.image==false}">
-	                   				<div class="d-flex justify-content-center"><img src="https://placehold.co/300x300/white/darkgreen"></div>
-	                   			</c:if>
-	                   			<c:if test="${a.image==true}">
-	                   				<img class="img-fluid mx-auto" src="${cp}display?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}">
-	                   			</c:if>
+			                    <c:if test="${!a.image}">
+	                    		<c:set var="src" value="https://placehold.co/300x300?text=cannot%20find\nimage%20data"/>
+	                    		</c:if>
+	                    		<c:if test="${a.image}">
+	                    		<c:set var="src" value="${cp}display?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}"/>
+	                    		</c:if>
+			                    
+			                    <div style="height:300px; background: no-repeat center url('${src}'); background-size:cover;" ></div>
                    			</div>
 		                    <div class="card-body">
 		                        <h5 class="card-title text-truncate" >${p.title}</h5>
@@ -140,23 +143,7 @@
 		                    </div>
 		                </div>
 		            </div>
-				<%-- 
-				         			
-                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-inline m-5 p-0" style="width: 300px;">
-	                    <a href="view?pno=${p.pno}&${pageDto.cri.qs2}" class="text-decoration-none text-reset">
-	                    	<div class="text-truncate">
-	                    		<div style="height:300px; overflow: hidden; align-items: center; justify-content: center;">
-	                    			<c:if test="${a.image==false}">
-	                    				<img src="https://placehold.co/300x300?text=cannot%20find\nimage%20data">
-	                    			</c:if>
-	                    			<c:if test="${a.image==true}">
-	                    				<img class="img-fluid mx-auto" src="${cp}display?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}">
-	                    			</c:if>
-	                    		</div>
-	                    		<h4>${p.title}</h4>
-	                    	</div>
-	                    </a>
-                    </div>	          --%>       		          			
+			    		          			
               	</c:forEach>
 			
 			</c:forEach>

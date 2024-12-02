@@ -23,9 +23,9 @@ public class PostServiceImpl implements PostService{
 		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
 			PostMapper mapper = session.getMapper(PostMapper.class);
 			AttachMapper attachMapper = session.getMapper(AttachMapper.class);
-			System.out.println(post); 
+			//System.out.println(post); 
 			mapper.insert(post);
-			System.out.println(post);
+			///System.out.println(post);
 			post.getAttachs().forEach(a -> {
 				a.setPno(post.getPno());
 				attachMapper.insert(a);
@@ -38,6 +38,15 @@ public class PostServiceImpl implements PostService{
 	public int modify(Post post) {
 		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
 			PostMapper mapper = session.getMapper(PostMapper.class);
+			AttachMapper attachMapper = session.getMapper(AttachMapper.class);
+			
+			attachMapper.delete(post.getPno());
+			
+			post.getAttachs().forEach(a -> {
+				a.setPno(post.getPno());
+				attachMapper.insert(a);
+			});
+			
 			return mapper.update(post);
 		}
 	}

@@ -29,8 +29,8 @@ public class Recommend extends HttpServlet {
 		String pnoStr = req.getParameter("pno");
 		Long pno = Long.valueOf(pnoStr);
 		String id = req.getParameter("id");
-		Criteria cri = new Criteria(req);
 
+		
 		if (likeservice.findBy(id, pno) == null) {
 			try {
 				service.like(id, pno);
