@@ -37,7 +37,7 @@ public class Modify extends HttpServlet{
 		Member m = (Member) memberObj;
 		
 		
-		if(!m.getId().equals(service.findBy(pno).getId())) {
+		if(!m.getId().equals(service.findBy(pno).getId()) && m.getGrade()== 0) {
 			Commons.printMsg("본인이 작성한 글만 수정할 수 있습니다", redirectUrl, resp);
 			return;
 		}
@@ -73,7 +73,7 @@ public class Modify extends HttpServlet{
 		Long pno = Long.valueOf(pnoStr);
 
 		
-		if(!m.getId().equals(service.findBy(pno).getId())) {
+		if(!m.getId().equals(service.findBy(pno).getId()) && m.getGrade()== 0) {
 			Commons.printMsg("본인이 작성한 글만 수정할 수 있습니다", "list?"+cri.getQs2(), resp);
 			return;
 		}

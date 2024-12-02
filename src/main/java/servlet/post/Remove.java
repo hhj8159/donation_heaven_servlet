@@ -32,7 +32,7 @@ public class Remove extends HttpServlet{
 		
 		Long pno = Long.valueOf(pnoStr);
 		Member m = (Member) memberObj;
-		if(!m.getId().equals(service.findBy(pno).getId())) {
+		if(!m.getId().equals(service.findBy(pno).getId()) && m.getGrade()== 0) {
 			Commons.printMsg("본인이 작성한 글만 삭제할 수 있습니다", redirectUrl, resp);
 			return;
 		}

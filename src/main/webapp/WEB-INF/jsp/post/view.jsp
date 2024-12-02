@@ -35,7 +35,6 @@
                             <p class="text-center" style="font-size: 20px;"><b>${post.title}</b></p>
                         </div>
                         <div class="dropdown">
-                        ${post.attachs}
                             <div class="text-end">작성자 <a class="nav-link dropdown-toggle d-inline" href="#" role="button" data-bs-toggle="dropdown">${post.id}</a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" onclick="customConfirm.confirm('해당 회원을 차단하시겠습니까?','차단')">차단</a>
@@ -104,11 +103,11 @@
                 
                 <div class="text-center my-5">
                 	<c:if test="${post.id == member.id or member.grade == 1}">
-	                  <a href="modify?pno=${post.pno}&${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;">수정</a>
-	                  <a href="list?${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;">목록</a>
-	                  <a href="remove?pno=${post.pno}&${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;" onclick="confirm('삭제하시겠습니까?')">삭제</a>
-	                  
-
+	                	<c:if test="${member.grade == 0}">
+		                  <a href="modify?pno=${post.pno}&${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;">수정</a>
+	                	</c:if>
+		                  	<a href="list?${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;">목록</a>
+		                 	<a href="remove?pno=${post.pno}&${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;" onclick="confirm('삭제하시겠습니까?')">삭제</a>
                 	</c:if>
                 	
                 	<c:if test="${post.id != member.id and member.grade == 0}">
