@@ -122,7 +122,7 @@
      		const email = $("#email").val();
      		const name = $("#name").val();
      	    if (email == "" || name =="") {
-     	    	customAlert.alert("이름과 아이디를 입력해주세요.","경고!");
+     	    	customAlert.alert("회원정보에 등록한 이름과 이메일을 입력해주세요.","경고!");
      	        return;
      	    }
 			$("#emailbtn").css("background-color","#a9a9a9");
