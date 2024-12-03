@@ -165,11 +165,18 @@
 		            },
 		            success: function(response) {
 		                console.log(response);
+	                	if(response === "noresult"){
+		                	 customAlert.alert("등록된 회원이 아닙니다");
+		                	 return;
+		                } 
 		                if (response === "failed") {
 		                    customAlert.alert("아이디 혹은 비밀번호가 잘못되었습니다");
-		                } else {
+		                    return;
+		                }
+		                else {
 
-		                    window.location.href = "${cp}/index"; 
+
+		                    window.location.href = "${cp}/index";
 		                }
 		            },
 		            error: function(xhr, status, error) {

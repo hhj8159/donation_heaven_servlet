@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import service.MemberService;
 import service.MemberServiceImpl;
+import vo.Member;
 
 @WebServlet("/signin")
 public class Signin extends HttpServlet{
@@ -37,7 +38,14 @@ public class Signin extends HttpServlet{
 				  String id =  req.getParameter("id");
 			        String pw = req.getParameter("pw");
 			        String save = null;
+			        
+			        Member member = service.findBy(id); // 회원 정보 가져오기
 
+			        if (member == null) {
+			            // 회원 정보가 없는 경우
+			            resp.getWriter().write("noresult");
+			            return; // 메서드 종료
+			        }
 			        
 			        if(service.login(id, pw)) {
 			        	
@@ -67,7 +75,7 @@ public class Signin extends HttpServlet{
 			        	
 			
 				     }else {
-				        	resp.getWriter().write("failed");
+				        resp.getWriter().write("failed");
 				     }
 				
 				
