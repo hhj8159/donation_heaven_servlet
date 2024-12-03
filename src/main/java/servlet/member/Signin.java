@@ -54,7 +54,7 @@ public class Signin extends HttpServlet{
 			    		Cookie cookie = new Cookie("save", id);
 			        	//로그인 성공
 			        	if("yes".equals(save)) {
-
+			        		
 			        		cookie.setMaxAge(60*60*24);
 			        		resp.addCookie(cookie);
 			        		System.out.println(save);

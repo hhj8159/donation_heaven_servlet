@@ -258,17 +258,18 @@
         
         
         $(document).on("click", "#delete", function() {
-        	const $li = $(this).closest("li");
-            if(! confirm("삭제 하시겠습니까?")) {
-                return false;
-            }
-            const rno = $(this).closest("#rnoId").data("rno");
-            console.log(rno);
-            replyService.remove(rno, function(data) {
-                alert("삭제 되었습니다");
-                $li.remove();
-                list(undefined, true);
-          	});
+				const this_a = $(this);
+        	customConfirm.confirm('정말로 삭제 하시겠습니까?',"경고").then(function() {
+            	const $li = this_a.closest("li");
+                const rno = this_a.closest("#rnoId").data("rno");
+                console.log(rno);
+                replyService.remove(rno, function(data) {
+                	customAlert.alert("삭제되었습니다","승인");
+                    $li.remove();
+                    list(undefined, true);
+              	});
+        	});
+
             return false;
         });
         /*     event.preventDefault(); 
@@ -277,8 +278,8 @@
         }); */
         //li 클릭시 이벤트
         $(document).on("click", "#update", function() {
+            event.preventDefault(); 
         	const rno = $(this).closest("#rnoId").data("rno");
-            console.log(rno);
             $("#replyModal").modal("show");
             replyService.view(rno, function(data) {
             	console.log(data);
@@ -315,7 +316,7 @@
             const $li = $(this).closest("li");
             const rno = $li.data("rno");
             replyService.remove(rno,function(data){
-                alert("삭제 되었습니다");
+            	customAlert.alert("삭제되었습니다","승인");
 
                 $li.remove();
 
@@ -334,6 +335,10 @@
         // 댓글 작성(반영) 버튼 클릭시
     	$("#replyWrite").on("click",function(e) {
     		e.preventDefault();
+    		if($("#replyContent") == ""){
+    			customAlert.alert("댓글 작성란을 확인해주세요.","경고");
+    			return;
+    		}
     		const content = $("#replyContent").val();
     		const reply = {pno, id, content};
     		console.log(reply);
@@ -346,7 +351,6 @@
         
         //댓글쓰기 버튼 클릭시
         $("#btnReplyWrite").click(function(){
-
                 $("#replyModal").find(".modal-footer div button").hide().filter(":eq(0)").show();
                 $("#replyModal").modal("show");
                 $("#replyContent").val("");
