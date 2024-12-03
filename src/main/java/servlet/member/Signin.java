@@ -51,7 +51,6 @@ public class Signin extends HttpServlet{
 			        	
 			        	
 			            save = req.getParameter("remember_id");
-			            System.out.println(save);
 			    		Cookie cookie = new Cookie("save", id);
 			        	//로그인 성공
 			        	if("yes".equals(save)) {

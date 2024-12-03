@@ -147,8 +147,7 @@
 
 		        let id = $("#id").val();
 		        let pw = $("#pwd").val();
-		        let save = $("#mySwitch").prop('checked');
-
+		        let save = $("#mySwitch").prop('checked')?"yes":false;
 		        if (id === "" || pw === "") {
 		            customAlert.alert("아이디 혹은 비밀번호를 입력해주세요");
 		            return;
