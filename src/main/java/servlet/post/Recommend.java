@@ -27,9 +27,18 @@ public class Recommend extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		String pnoStr = req.getParameter("pno");
-		Long pno = Long.valueOf(pnoStr);
 		String id = req.getParameter("id");
 
+		Criteria cri = new Criteria(req);
+		String redirectUrl = "list?"+cri.getQs2();
+
+		if(pnoStr == null) {
+			Commons.printMsg("비정상적인 접근입니다", redirectUrl, resp);
+			return;
+		}
+		
+		Long pno = Long.valueOf(pnoStr);
+		
 		
 		if (likeservice.findBy(id, pno) == null) {
 			try {

@@ -1,197 +1,189 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-    <!DOCTYPE html>
-    <html>
-
-    <head>
-    
-        <jsp:include page="../common/head.jsp"></jsp:include>
-        <style>
-            .pagination a:hover {
-                background-color: #ffffff;
-                font: #005B48;
-            }
-        </style>
-         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment-with-locales.min.js" integrity="sha512-4F1cxYdMiAW98oomSLaygEwmCnIP38pb4Kx70yQYqRwLVCs3DbRumfBq82T08g/4LJ/smbFGFpmeFlQgoDccgg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    </head>
-    <body>
-        <div class="wrap">
-            <jsp:include page="../common/header.jsp" />
-            <main class="container">
-                <div class="clearfix py-4">
-                    <h2 class="mt-5 font-color bold-text;"><b> 
-			            <c:if test="${cri.category == 1}">공지사항</c:if>
-			            <c:if test="${cri.category == 2}">자유게시판</c:if>
-			            <c:if test="${cri.category == 3}">질문과 답변</c:if>
-			            <c:if test="${cri.category == 4}">봉사인증</c:if>
-			            <c:if test="${cri.category == 5}">자료실</c:if>            
-            		</b></h2>
-                </div>
-                <div class="card border-start-0 border-end-0 rounded-0 border-2">
-                    <div class="card-header">
-                        <div>
-                            <p class="text-center" style="font-size: 20px;"><b>${post.title}</b></p>
-                        </div>
-                        <div class="dropdown">
-                            <div class="text-end">작성자 <a class="nav-link dropdown-toggle d-inline" href="#" role="button" data-bs-toggle="dropdown">${post.id}</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" onclick="customConfirm.confirm('해당 회원을 차단하시겠습니까?','차단')">차단</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <p class="text-end mb-0">작성일                 <fmt:formatDate value="${post.regdate}" pattern="yyyy-MM-dd"/></p>
-                            <c:if test="${cri.category == 2}">
-                            <p class="text-end mb-0">추천 <span id="likesCount">${post.likes}</span></p>
-                        	</c:if>
-                            <p class="text-end mb-0">조회 ${post.viewCount}</p>
-                        </div>
+<!DOCTYPE html>
+<html>
+<head>
+<jsp:include page="../common/head.jsp"></jsp:include>
+<style>
+    .pagination a:hover {
+        background-color: #ffffff;
+        font: #005B48;
+    }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment-with-locales.min.js" integrity="sha512-4F1cxYdMiAW98oomSLaygEwmCnIP38pb4Kx70yQYqRwLVCs3DbRumfBq82T08g/4LJ/smbFGFpmeFlQgoDccgg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <div class="wrap">
+        <jsp:include page="../common/header.jsp" />
+        <main class="container"> 
+        	<div class="clearfix py-4">
+            	<h2 class="mt-5 font-color bold-text;"><b> 
+		            <c:if test="${cri.category == 1}">공지사항</c:if>
+		            <c:if test="${cri.category == 2}">자유게시판</c:if>
+		            <c:if test="${cri.category == 3}">질문과 답변</c:if>
+		            <c:if test="${cri.category == 4}">봉사인증</c:if>
+		            <c:if test="${cri.category == 5}">자료실</c:if>            
+           		</b></h2>
+            </div>
+            <div class="card border-start-0 border-end-0 rounded-0 border-2">
+                <div class="card-header">
+                    <div>
+                        <p class="text-center" style="font-size: 20px;"><b>${post.title}</b></p>
                     </div>
-                    <div class="card-body" style="height: 515px;">${post.content}</div>
-                    
-                    
-                    <div class="card-footer bg-white">
-                        <label class="form-label mt-3"><b>첨부파일</b></label>
-                        <ul class="list-group attach-result">
-                        <c:if test="${empty post.attachs}">
-                            <li class="list-group-item">첨부파일이 없습니다.</li>
-                        </c:if>
-                        <c:forEach items="${post.attachs}" var="a">
-                        	<li class="list-group item">
-                        		<a href="${cp}download?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}" class="text-dark text-decoration-none">${a.origin}</a>                        		
-                        		<c:if test="${a.image == 'true'}">
-                        		<div style="width: 100px;"><img class="img-thumbnail" src="${cp}display?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}"></div>
-                        		</c:if>
-                        	</li>
-                        </c:forEach>
-                        </ul>
-                    </div>                     
+                    <div class="dropdown">
+                        <div class="text-end">작성자 <a class="nav-link dropdown-toggle d-inline" href="#" role="button" data-bs-toggle="dropdown">${post.id}</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" onclick="customConfirm.confirm('해당 회원을 차단하시겠습니까?','차단')">차단</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <p class="text-end mb-0">작성일 <fmt:formatDate value="${post.regdate}" pattern="yyyy-MM-dd"/></p>
+                        <c:if test="${cri.category == 2}">
+                        <p class="text-end mb-0">추천 <span id="likesCount">${post.likes}</span></p>
+                    	</c:if>
+                        <p class="text-end mb-0">조회 ${post.viewCount}</p>
+                    </div>
                 </div>
-                
-                                <form action="reply">
-	               <div class="comment-section mt-4">
-    <!-- 댓글 리스트 -->
-    <div class="comment-list replies" >
-        <input type="hidden" value="${member.id}" id="replyWriter">
-    </div>
-
-    <!-- 댓글 입력 -->
-    <div class="comment-input mt-4">
-        <textarea class="form-control mb-3" rows="3" placeholder="댓글을 입력하세요..." id="replyContent"></textarea>
-        <button class="btn btn-success" id="replyWrite">댓글 등록</button>
-    </div>
-</div>
-                </form>
-                            	<!-- The Modal -->
-	<div class="modal fade" id="replyModal">
-		<div class="modal-dialog">
-			<div class="modal-content">
-
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4 class="modal-title">댓글 수정</h4>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-				</div>
-
-				<!-- Modal body -->
-				<div class="modal-body">
-					<label for="replyContent" class="mb-2">내용</label> <input
-						type="text" class="form-control mb-3" id="replyContent2" > <label
-						for="replyWriter" class="mb-2">작성자</label> <input type="text"
-						class="form-control mb-3" id="replyWriter2" readonly >
-				</div>
-
-				<!-- Modal footer -->
-				<div class="modal-footer">
-					<div>
-
-					</div>
-					<button type="button" class="btn btn-warning"
-							id="btnReplyModifySubmit">수정</button>
-
-				</div>
-
-			</div>
-		</div>
-	</div>
-                
-                
-                
-                <div class="text-center my-5">
-                	<c:if test="${post.id == member.id or member.grade == 1}">
-	                	<c:if test="${member.grade == 0 or (member.grade == 1 and cri.category == 1) or (member.grade == 1 and cri.category == 5)}">
-		                  <a href="modify?pno=${post.pno}&${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;">수정</a>
-	                	</c:if>
-		                  	<a href="list?${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;">목록</a>
-		                 	<a href="remove?pno=${post.pno}&${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;" onclick="confirm('삭제하시겠습니까?')">삭제</a>
-                	</c:if>
-                	
-                	<c:if test="${post.id != member.id and member.grade == 0}">
-                	  <c:if test="${(cri.category == 2 or cri.category == 5) and not empty member.id}">
+                <div class="card-body" style="height: 515px;">${post.content}</div>
+                <div class="card-footer bg-white">
+                    <label class="form-label mt-3"><b>첨부파일</b></label>
+                    <ul class="list-group attach-result">
+                    <c:if test="${empty post.attachs}">
+                        <li class="list-group-item">첨부파일이 없습니다.</li>
+                    </c:if>
+                    <c:forEach items="${post.attachs}" var="a">
+                    	<li class="list-group item">
+                    		<a href="${cp}download?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}" class="text-dark text-decoration-none">${a.origin}</a>                        		
+                        	<c:if test="${a.image == 'true'}">
+                        		<div style="width: 100px;"><img class="img-thumbnail" src="${cp}display?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}"></div>
+                        	</c:if>
+                        </li>
+                    </c:forEach>
+                    </ul>
+                </div>                     
+            </div>
+            <div class="text-center my-5">
+            	<c:if test="${post.id == member.id or member.grade == 1}">
+	              	<c:if test="${member.grade == 0 or (member.grade == 1 and cri.category == 1) or (member.grade == 1 and cri.category == 5)}">
+	                	<a href="modify?pno=${post.pno}&${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;">수정</a>
+	               	</c:if>
+	                  	<a href="list?${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;">목록</a>
+		              	<a href="remove?pno=${post.pno}&${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;" onclick="confirm('삭제하시겠습니까?')">삭제</a>
+                </c:if>
+                <c:if test="${(post.id != member.id and member.grade == 0) or empty member.id}">
+                	<c:if test="${(cri.category == 2 or cri.category == 5) and not empty member.id}">
 	                  	<a class="btn text-light" style="background-color: #005B48; width: 80px;" id="likeBtn">추천 <span id="likesCount">${post.likes}</span></a>
- 	                  	<a class="btn text-light d-none" style="background-color: #005B48; width: 80px;" id="unlikeBtn">추천 ${post.likes} </a>                 	  
-                	  </c:if>
-	                  <a href="list?${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;">목록</a>
-	                  <c:if test="${cri.category == 2 or cri.category == 5}">
-	                  <a href="report?" class="btn btn-secondary text-light" style="width: 80px;" onclick="customConfirm.confirm('해당 글을 신고하시겠습니까?','신고')">신고</a>                    
-                	  </c:if>
-                	</c:if>          	
-                </div>   
+<%--  	                  	<a class="btn text-light d-none" style="background-color: #005B48; width: 80px;" id="unlikeBtn">추천 ${post.likes} </a>                 	  
+ --%>                	</c:if>
+	                    <a href="list?${cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 80px;">목록</a>
+	                <c:if test="${cri.category == 2 or cri.category == 5}">
+<!-- 	                <a href="report?" class="btn btn-secondary text-light" style="width: 80px;" onclick="customConfirm.confirm('해당 글을 신고하시겠습니까?','신고')">신고</a> -->                     
+               	    </c:if>
+                </c:if>          	
+            </div>   
+            <hr>
+                
+		    <form action="reply">
+				<div class="comment-section mt-4">
+				    <!-- 댓글 리스트 -->
+				    <div class="comment-list replies" >
+				        <input type="hidden" value="${member.id}" id="replyWriter">
+				    </div>
+				
+				    <!-- 댓글 입력 -->
+				    <div class="comment-input mt-4">
+				        <textarea class="form-control mb-3" rows="3" placeholder="댓글을 입력하세요..." id="replyContent"></textarea>
+				        <button class="btn btn-success" id="replyWrite">댓글 등록</button>
+				    </div>
+				</div>
+		    </form>
+                            	<!-- The Modal -->
+			<div class="modal fade" id="replyModal">
+				<div class="modal-dialog">
+					<div class="modal-content">
+		
+						<!-- Modal Header -->
+						<div class="modal-header">
+							<h4 class="modal-title">댓글 수정</h4>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+						</div>
+		
+						<!-- Modal body -->
+						<div class="modal-body">
+							<label for="replyContent" class="mb-2">내용</label> <input
+								type="text" class="form-control mb-3" id="replyContent2" > <label
+								for="replyWriter" class="mb-2">작성자</label> <input type="text"
+								class="form-control mb-3" id="replyWriter2" readonly >
+						</div>
+		
+						<!-- Modal footer -->
+						<div class="modal-footer">
+							<div>
+		
+							</div>
+							<button type="button" class="btn btn-warning"
+									id="btnReplyModifySubmit">수정</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		                
+                
+                
 
                  
 ${reply2.id} 
 ${member.id}
 
-            </main>
-        <jsp:include page="../common/footer.jsp"></jsp:include>
-        </div>
-	
-        <script src="${cp}js/alert.js"></script>
- 		<script src="/donation_heaven/js/reply.js"></script>	
-        <script>
-        	$(function() {
-        		$("#likeBtn").click(function(){
-        			event.preventDefault();
-        			const id = $("#memberId").val(); 
-        			const pno = $("#postPno").val(); 
-        			console.log("aa");
-        			customConfirm.confirm('추천하시겠습니까?',"추천").then(function() {
-        				$.ajax({
-        					url: "${cp}post/like",
-        					type: "POST",
-        					data: {id:id, pno:pno},
-        					success: function(response) {
-        						  if (response === "success") {
-        							  console("gg");
-	        						customAlert.alert("추천되었습니다","확인");
-	        						let currentLikes = parseInt($("span#likesCount").text());
-	                                
-	        						let afterLikes = currentLikes + 1;
-	        						
-	        						$("span#likesCount").text(afterLikes);
-	        						
-        						  }
-        						  else if(response === "duplication") {
-        							  console.log("중복불가");
-        							  customAlert.alert("같은 아이디로 중복추천 불가능","경고"); 
-        						  }
-        					},
-        					error: function(response) {
-        						if (response === "fail") {
-	        						customAlert.alert("서버 오류","경고");        							  
-        						  }
-        					} 			
-        				})   				
-        			})       			        			
-        		})
-        	});
-        </script>
- 
+        </main>
+    </div>
+	<jsp:include page="../common/footer.jsp"></jsp:include>
+	<script src="${cp}js/alert.js"></script>
+	<script src="/donation_heaven/js/reply.js"></script>	
+	<script>
+	 	$(function() {
+	 		$("#likeBtn").click(function(){
+	 			event.preventDefault();
+	 			const id = $("#memberId").val(); 
+	 			const pno = $("#postPno").val(); 
+	 			console.log("aa");
+	 			customConfirm.confirm('추천하시겠습니까?',"추천").then(function() {
+	 				$.ajax({
+	 					url: "${cp}post/like",
+	 					type: "POST",
+	 					data: {id:id, pno:pno},
+	 					success: function(response) {
+	 						  if (response === "success") {
+	 							  console("gg");
+	  						customAlert.alert("추천되었습니다","확인");
+	  						let currentLikes = parseInt($("span#likesCount").text());
+	                          
+	  						let afterLikes = currentLikes + 1;
+	  						
+	  						$("span#likesCount").text(afterLikes);
+	  						
+	 						  }
+	 						  else if(response === "duplication") {
+	 							  console.log("중복불가");
+	 							  customAlert.alert("같은 아이디로 중복추천 불가능","경고"); 
+	 						  }
+	 					},
+	 					error: function(response) {
+	 						if (response === "fail") {
+	  						customAlert.alert("서버 오류","경고");        							  
+	 						  }
+	 					} 			
+	 				})   				
+	 			})       			        			
+	 		})
+	 	});
+	</script>
+
 		
 
         
-        <script>
+	<script>
         console.log(replyService);
 			moment.locale('ko');            
             const pno = '${post.pno}';
@@ -386,6 +378,6 @@ ${member.id}
 
         });
         
-        </script>
-    </body>
-    </html>
+	</script>
+</body>
+</html>
