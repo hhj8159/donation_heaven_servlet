@@ -8,6 +8,7 @@ import dto.Criteria;
 import mapper.AttachMapper;
 import mapper.LikeMapper;
 import mapper.PostMapper;
+import mapper.ReplyMapper;
 import utils.MybatisInit;
 import vo.Attach;
 import vo.Post;
@@ -57,7 +58,11 @@ public class PostServiceImpl implements PostService{
 			PostMapper mapper = session.getMapper(PostMapper.class);
 			//첨부파일도
 			AttachMapper attachMapper = session.getMapper(AttachMapper.class);
+			ReplyMapper replyMapper = session.getMapper(ReplyMapper.class);
+			LikeMapper likemapper = session.getMapper(LikeMapper.class);
+			replyMapper.deleteAll(pno);
 			attachMapper.delete(pno);
+			likemapper.delete(pno);
 			return mapper.delete(pno);
 		}
 	}
@@ -115,6 +120,16 @@ public class PostServiceImpl implements PostService{
 		}
 	}
 	
+	
+	
+	@Override
+	public int replyCount(Long pno) {
+		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
+			PostMapper mapper = session.getMapper(PostMapper.class);
+			return mapper.getReplyCount(pno);
+		}
+	}
+
 	@Override
 	public int like(String id, Long pno) {
 		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){

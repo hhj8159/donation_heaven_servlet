@@ -28,4 +28,7 @@ public interface PostService {
 	int like(String id, Long pno);
 	
 	int download(String uuid);
+	
+	int replyCount(Long pno);
+
 }

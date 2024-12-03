@@ -119,7 +119,7 @@
 	                <c:if test="${empty member.id}"><tr><td colspan="4">로그인 후 확인가능합니다.</td></tr></c:if>
 		  		    <c:if test="${not empty member.id && empty posts}"><tr><td colspan="4">작성된 글이 없습니다.</td></tr></c:if>
 	                <c:forEach items="${posts}" var="p" varStatus="status">	        
-		               <c:if test="${p.id == member.id}">
+		               <c:if test="${p.id == member.id or member.grade==1}">
 			               <tr>
 			                	<td>${p.pno}</td>
 			             		<td class="text-truncate text-start"><a href="view?pno=${p.pno}&${pageDto.cri.qs2}" class="text-decoration-none text-reset">${p.title}</a>
@@ -147,13 +147,13 @@
 		 		                    <a href="view?pno=${p.pno}&${pageDto.cri.qs2}" class="text-decoration-none text-reset">
 		 		                    	<div class="text-truncate text-center">
 		 		                    		<c:if test="${!a.image}">
-		 		                    		<c:set var="src" value="https://placehold.co/300x300?text=cannot%20find\nimage%20data"/>
+		 		                    		<c:set var="src" value="https://placehold.co/300x300?text=not%20image%20data"/>
 		 		                    		</c:if>
 		 		                    		<c:if test="${a.image}">
 		 		                    		<c:set var="src" value="${cp}display?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}"/>
 		 		                    		</c:if>
 		 		                    		<div style="height:300px; background: no-repeat center url('${src}'); background-size:cover;" ></div>
-		 		                    		<h4>${p.title}</h4>
+		 		                    		<h4 class="p-3 sm"><b>${p.title}</b></h4>
 		 		                    	</div>
 		 		                    </a>
 	 		                    </div>	                		          			

@@ -30,6 +30,10 @@
   <select id="getCount" resultType="int">
     select count(*) as cnt from post where cno = #{category}
   </select>
+
+  <select id="getReplyCount" resultType="int">
+    select count(*) reCnt from post where pno = #{pno};
+  </select>
   
   <select id="selectList" resultMap="post">
     select p.*, (select count(*) from attach a where a.pno = p.pno) attach_flag 

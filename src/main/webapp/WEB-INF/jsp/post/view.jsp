@@ -45,7 +45,7 @@
                         <p class="text-end mb-0">조회 ${post.viewCount}</p>
                     </div>
                 </div>
-                <div class="card-body" style="height: 515px;">${post.content}</div>
+                <div class="card-body" style="height: 300px;">${post.content}</div>
                 <div class="card-footer bg-white">
                     <label class="form-label mt-3"><b>첨부파일</b></label>
                     <ul class="list-group attach-result">

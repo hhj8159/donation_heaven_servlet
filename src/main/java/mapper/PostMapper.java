@@ -25,4 +25,7 @@ public interface PostMapper {
 
 	int increaseLikes(Long pno);
 	
+	int getReplyCount(Long pno);
+    
+	
 }
