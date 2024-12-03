@@ -51,7 +51,7 @@
                     </div>  
                           
     					
-	             	<label for="attach" class="form-label my-1"><span class="btn text-light btn-sm" style="background-color: #005B48;">파일 수정</span></label>
+	             	<label for="attach" class="form-label my-1"><span class="btn text-light btn-sm" style="background-color: #005B48;">파일 추가</span></label>
 	             	<span class="mx-2 attach-count-txt"></span>
 	                
                     <input type="file" id="attach" accept="image/png, image/jpeg, image/gif, image/webp" name="files" class="d-none" multiple>
@@ -60,7 +60,7 @@
                    
                     <div class="text-center text-light my-5">
 	                	<button class="btn text-light" style="background-color: #005B48; width: 70px;">작성</button>
-	                    <a href="list" class="btn text-light" style="background-color: #005B48; width: 70px;">목록</a>
+	                    <a href="view?pno=${post.pno}&${pageDto.cri.qs2}" class="btn text-light" style="background-color: #005B48; width: 70px;">취소</a>
 	                </div>
 	                <div class="uploaded-input">
 	                </div>

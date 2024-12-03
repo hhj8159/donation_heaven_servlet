@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dto.Criteria;
+import dto.PageDto;
 import service.PostService;
 import service.PostServiceImpl;
 import utils.Commons;
@@ -26,9 +27,9 @@ public class Modify extends HttpServlet{
 		
 		String pnoStr = req.getParameter("pno");
 		Object memberObj = req.getSession().getAttribute("member");
-		Criteria cri = new Criteria(req);
-		String redirectUrl = "list?"+cri.getQs2();
 		
+		Criteria cri = new Criteria(req);
+		String redirectUrl = "view?"+cri.getQs2();
 		
 		if(pnoStr == null || memberObj == null) {
 			Commons.printMsg("비정상적인 접근입니다", redirectUrl, resp);
@@ -46,7 +47,7 @@ public class Modify extends HttpServlet{
 		}
 		
 		
-		
+		req.setAttribute("pageDto", new PageDto(cri, service.count(cri)));
 		req.setAttribute("cri", cri);
 		req.setAttribute("post", service.findBy(pno));
 		req.getRequestDispatcher("/WEB-INF/jsp/post/modify.jsp").forward(req, resp);

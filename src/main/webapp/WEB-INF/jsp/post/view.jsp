@@ -142,8 +142,6 @@
 	 			event.preventDefault();
 	 			const pno = '${post.pno}';
 	            const id = "${member.id}";
-	 			console.log(id);
-	 			console.log(pno);
 	 			customConfirm.confirm('추천하시겠습니까?',"추천").then(function() {
 	 				$.ajax({
 	 					url: "${cp}post/like",

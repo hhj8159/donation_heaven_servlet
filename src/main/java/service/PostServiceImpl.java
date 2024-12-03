@@ -40,7 +40,7 @@ public class PostServiceImpl implements PostService{
 			PostMapper mapper = session.getMapper(PostMapper.class);
 			AttachMapper attachMapper = session.getMapper(AttachMapper.class);
 			
-			attachMapper.delete(post.getPno());
+			//attachMapper.delete(post.getPno());
 			
 			post.getAttachs().forEach(a -> {
 				a.setPno(post.getPno());

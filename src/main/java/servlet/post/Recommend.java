@@ -30,8 +30,8 @@ public class Recommend extends HttpServlet {
 		String id = req.getParameter("id");
 
 		Criteria cri = new Criteria(req);
-		System.out.println(pnoStr);
-		System.out.println(cri);
+//		System.out.println(pnoStr);
+//		System.out.println(cri);
 		String redirectUrl = "list?"+cri.getQs2();
 
 		if(pnoStr == null) {

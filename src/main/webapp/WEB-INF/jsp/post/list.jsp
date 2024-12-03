@@ -185,7 +185,7 @@
 			             		<td class="text-truncate text-start">${p.title}</td>
 		             		</c:if>
 		             		<c:if test="${member.grade == 1}">
-			             		<td class="text-truncate text-start"><a href="view?pno=${p.pno}&${pageDto.cri.qs2}" class="text-decoration-none text-reset">${p.title}</a>
+			             		<td class="text-truncate text-start"><a href="${cp}view?pno=${p.pno}&${pageDto.cri.qs2}" class="text-decoration-none text-reset">${p.title}</a>
 		             		</c:if>
 		             		
 		                	<td><fmt:formatDate value="${p.regdate}" pattern="yyyy-MM-dd" /></td>
