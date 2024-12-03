@@ -82,22 +82,26 @@
                	    </c:if>
                 </c:if>          	
             </div>   
+           
+            <c:if test="${cri.category !=1 and member.grade==0}">
             <hr>
-                
-		    <form action="reply">
-				<div class="comment-section mt-4">
-				    <!-- 댓글 리스트 -->
-				    <div class="comment-list replies" >
-				        <input type="hidden" value="${member.id}" id="replyWriter">
-				    </div>
-				
-				    <!-- 댓글 입력 -->
-				    <div class="comment-input mt-4">
-				        <textarea class="form-control mb-3" rows="3" placeholder="댓글을 입력하세요..." id="replyContent"></textarea>
-				        <button class="btn btn-success" id="replyWrite">댓글 등록</button>
-				    </div>
-				</div>
-		    </form>
+			    <form action="reply">
+					<div class="comment-section mt-4">
+					    <!-- 댓글 리스트 -->
+					    <div class="comment-list replies" >
+					        <input type="hidden" value="${member.id}" id="replyWriter">
+					    </div>
+					
+					    <!-- 댓글 입력 -->
+					    <div class="comment-input mt-4">
+					        <textarea class="form-control mb-3" rows="3" placeholder="댓글을 입력하세요..." id="replyContent"></textarea>
+					        <button class="btn btn-success" id="replyWrite">댓글 등록</button>
+					    </div>
+					</div>
+			    </form>
+	             
+            </c:if>     
+         
                             	<!-- The Modal -->
 			<div class="modal fade" id="replyModal">
 				<div class="modal-dialog">
