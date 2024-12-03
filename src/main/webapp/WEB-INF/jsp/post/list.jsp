@@ -96,7 +96,7 @@
 	                <tr>
 	                	<td>${p.pno}</td>
 	             		<td class="text-truncate text-start"><a href="view?pno=${p.pno}&${pageDto.cri.qs2}" class="text-decoration-none text-reset">${p.title}</a>
-	                	<c:if test="${p.attachFlag}"><i class="fa-solid fa-paperclip text-dark"></i></c:if>	                	
+	                	<c:if test="${p.attachFlag}"><i class="fa-solid fa-paperclip text-dark"></i></c:if></td>
 	                	<td>${p.id}</td>
 	                	<td><fmt:formatDate value="${p.regdate}" pattern="yyyy-MM-dd" /></td>
 	                	<td>${p.viewCount}</td>
@@ -125,7 +125,7 @@
 			               <tr>
 			                	<td>${p.pno}</td>
 			             		<td class="text-truncate text-start"><a href="view?pno=${p.pno}&${pageDto.cri.qs2}" class="text-decoration-none text-reset">${p.title}</a>
-			                	<c:if test="${p.attachFlag}"><i class="fa-solid fa-paperclip text-dark"></i></c:if>	                	
+			                	<c:if test="${p.attachFlag}"><i class="fa-solid fa-paperclip text-dark"></i></c:if></td>	                	
 			                	<td><fmt:formatDate value="${p.regdate}" pattern="yyyy-MM-dd" /></td>
 			                	<td>${p.viewCount}</td>
 			                </tr>
@@ -187,7 +187,7 @@
 			             		<td class="text-truncate text-start">${p.title}</td>
 		             		</c:if>
 		             		<c:if test="${member.grade == 1}">
-			             		<td class="text-truncate text-start"><a href="${cp}view?pno=${p.pno}&${pageDto.cri.qs2}" class="text-decoration-none text-reset">${p.title}</a>
+			             		<td class="text-truncate text-start"><a href="${cp}view?pno=${p.pno}&${pageDto.cri.qs2}" class="text-decoration-none text-reset">${p.title}</a></td>
 		             		</c:if>
 		             		
 		                	<td><fmt:formatDate value="${p.regdate}" pattern="yyyy-MM-dd" /></td>

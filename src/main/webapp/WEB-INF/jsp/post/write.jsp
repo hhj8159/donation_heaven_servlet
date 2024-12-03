@@ -34,8 +34,7 @@
 	             	<label for="attach" class="form-label my-1"><span class="btn text-light btn-sm" style="background-color: #005B48;">파일 첨부</span></label>
 	             	<span class="mx-2 attach-count-txt"></span>
 	                <input type="file" id="attach" accept="image/png, image/jpeg, image/gif, image/webp" name="files" class="d-none" multiple>
-						<div id="preview" class="rounded mx-auto d-block">
-							
+						<div id="preview">
     					</div>
     					
                     <ul class="list-group attach-result">					
