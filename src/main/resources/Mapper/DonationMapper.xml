@@ -7,8 +7,8 @@
 	
 	<insert id="insert">
 	INSERT INTO donation
-	(mno, dcno,buyerAddr, buyerEmail, buyerName, buyerTel, cardName, cardNumber, impUid, merchantUid, name, price, payType, pgTid)
-	VALUES(#{mno},1, #{buyerAddr}, #{buyerEmail}, #{buyerName}, #{buyerTel}, #{cardName}, #{cardNumber}, #{impUid}, #{merchantUid}, #{name}, #{price}, #{payType}, #{pgTid});
+	(mno, dcno, buyerAddr, buyerEmail, buyerName, buyerTel, cardName, cardNumber, impUid, merchantUid, name, price, payType, pgTid)
+	VALUES(#{mno}, #{dcno}, #{buyerAddr}, #{buyerEmail}, #{buyerName}, #{buyerTel}, #{cardName}, #{cardNumber}, #{impUid}, #{merchantUid}, #{name}, #{price}, #{payType}, #{pgTid});
 	</insert>
 	
 

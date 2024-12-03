@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +41,14 @@
                                 </div>
                                 <div class="mx-5 col-6">
                                     <p class="float-start">납입방법</p>
-                                    <p class="float-end">${dcno}</p>
+                                    <p class="float-end">
+                                    <c:if test="${dcno == 1}">
+                                    일시후원
+                                    </c:if>
+                                    <c:if test="${dcno == 2}">
+                                    정기후원
+                                    </c:if>
+                                    </p>
                                 </div>
                                 <div class="mx-5 col-6">
                                     <p class="float-start">카드명</p>
@@ -66,6 +74,11 @@
        <jsp:include page="../common/footer.jsp"></jsp:include>
     </div>
         <script src="${cp}js/alert.js"></script>
+        <script>
+        $(function() {
+			
+		})
+        </script>
 
 
 </body>

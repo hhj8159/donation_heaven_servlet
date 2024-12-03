@@ -189,7 +189,7 @@
 	
     <script>
 
-        
+	let userid = "";
         $(function() {
 			$("input[name='donationcategory']").change(function() {
         		event.preventDefault();
@@ -399,7 +399,8 @@
 							console.log(res.price);
 							console.log(res.regdate);
 							console.log(res.buyerAddr);
-  	    	        	location.href = "${cp}donationsuccess?cardName="+res.cardName+"&dcno="+res.dcno+"&name="+res.name+"&price="+res.price+"&regdate="+res.regdate+"&buyerAddr="+res.buyerAddr;
+							userid = "${member.id}";
+  	    	        	location.href = "${cp}donationsuccess?cardName="+res.cardName+"&dcno="+res.dcno+"&name="+res.name+"&price="+res.price+"&regdate="+res.regdate+"&buyerAddr="+res.buyerAddr+"&usi="+userid;
 						}
   	    	        },
   	    	        error: function () {
