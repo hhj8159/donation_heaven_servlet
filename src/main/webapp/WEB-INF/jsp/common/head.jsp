@@ -34,6 +34,7 @@
         }
         .dropdown-item:focus { background-color:white; text-decoration: black;}
         .dropdown-item:active { background-color:white; text-decoration: black;}
+         main {min-height: calc(100vh - 318px);}   
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.js"></script>

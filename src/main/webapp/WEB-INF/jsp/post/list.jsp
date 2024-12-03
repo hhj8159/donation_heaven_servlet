@@ -10,14 +10,16 @@
     
     <style>
         .pagination a:hover { background-color: #ffffff; font: #005B48;}     
-        .pagination a:focus { background-color: #ffffff; box-shadow:none; font: #005B48;}     
+        .pagination a:focus { background-color: #ffffff; box-shadow:none; font: #005B48;}  
+        
+        main {min-height: calc(100vh - 318px);}   
 
     </style>
 </head>
    <body>
     <div class="wrap">
         <jsp:include page="../common/header.jsp" />       
-        <main class="container">
+        <main class="container" >
             <h2 class="mt-5 font-color bold-text;"><b> 
 	            <c:if test="${pageDto.cri.category == 1}">공지사항</c:if>
 	            <c:if test="${pageDto.cri.category == 2}">자유게시판</c:if>
@@ -147,13 +149,13 @@
 		 		                    <a href="view?pno=${p.pno}&${pageDto.cri.qs2}" class="text-decoration-none text-reset">
 		 		                    	<div class="text-truncate text-center">
 		 		                    		<c:if test="${!a.image}">
-		 		                    		<c:set var="src" value="https://placehold.co/300x300?text=not%20image%20data"/>
+		 		                    		<c:set var="src" value="https://placehold.co/300x300?text=cannot%20find\nimage%20data"/>
 		 		                    		</c:if>
 		 		                    		<c:if test="${a.image}">
 		 		                    		<c:set var="src" value="${cp}display?uuid=${a.uuid}&origin=${a.origin}&path=${a.path}"/>
 		 		                    		</c:if>
 		 		                    		<div style="height:300px; background: no-repeat center url('${src}'); background-size:cover;" ></div>
-		 		                    		<h4 class="p-3 sm"><b>${p.title}</b></h4>
+		 		                    		<h4>${p.title}</h4>
 		 		                    	</div>
 		 		                    </a>
 	 		                    </div>	                		          			
