@@ -110,9 +110,9 @@
         <div class="col-md-12">
             <div class="slider-wrap">
                 <div>
+                    <img src="${cp}images/vl.jpg">
                     <img src="${cp}images/girl.jpg">
                     <img src="${cp}images/ddd.jpg">
-                    <img src="${cp}images/vl.jpg">
                 </div>
             </div>
         </div>

@@ -131,11 +131,6 @@
 		                
                 
                 
-
-                 
-${reply2.id} 
-${member.id}
-
         </main>
     </div>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
@@ -145,9 +140,10 @@ ${member.id}
 	 	$(function() {
 	 		$("#likeBtn").click(function(){
 	 			event.preventDefault();
-	 			const id = $("#memberId").val(); 
-	 			const pno = $("#postPno").val(); 
-	 			console.log("aa");
+	 			const pno = '${post.pno}';
+	            const id = "${member.id}";
+	 			console.log(id);
+	 			console.log(pno);
 	 			customConfirm.confirm('추천하시겠습니까?',"추천").then(function() {
 	 				$.ajax({
 	 					url: "${cp}post/like",
@@ -155,7 +151,6 @@ ${member.id}
 	 					data: {id:id, pno:pno},
 	 					success: function(response) {
 	 						  if (response === "success") {
-	 							  console("gg");
 	  						customAlert.alert("추천되었습니다","확인");
 	  						let currentLikes = parseInt($("span#likesCount").text());
 	                          
@@ -223,11 +218,7 @@ ${member.id}
 
             function makeLi(reply) {
                 const userId = "${member.id}"; 
-                console.log("BBB :" + reply.id);
-                console.log("AAA :" + userId);
-                console.log("userId:", typeof userId);
-                console.log("reply.id:", typeof reply.id);
-
+                
                 let deleteupdate = "";
 
 
