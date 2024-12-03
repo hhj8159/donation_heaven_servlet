@@ -83,7 +83,7 @@
                 </c:if>          	
             </div>   
            
-            <c:if test="${cri.category !=1 and member.grade==0}">
+            <c:if test="${(cri.category !=1 and member.grade==0) or member.grade ==1}">
             <hr>
 			    <form action="reply">
 					<div class="comment-section mt-4">
