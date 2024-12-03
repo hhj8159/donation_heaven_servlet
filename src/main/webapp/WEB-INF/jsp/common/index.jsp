@@ -98,7 +98,9 @@
         background-color: #005B48;
         color: white;
     }
-        
+    .slider-wrap div img{
+    	height : 600px;
+    }
         
         
     </style>
@@ -108,8 +110,8 @@
         <main class="container main">
     <div class="row">
         <div class="col-md-12">
-            <div class="slider-wrap">
-                <div>
+            <div class="slider-wrap" >
+                <div >
                     <img src="${cp}images/vl.jpg">
                     <img src="${cp}images/girl.jpg">
                     <img src="${cp}images/ddd.jpg">
@@ -135,6 +137,7 @@
 	                    		</c:if>
 			                    
 			                    <div style="height:300px; background: no-repeat center url('${src}'); background-size:cover;" ></div>
+			                   
                    			</div>
 		                    <div class="card-body">
 		                        <h5 class="card-title text-truncate" >${p.title}</h5>
@@ -153,9 +156,21 @@
 		<jsp:include page="footer.jsp" />
     </div>
     
-    
+        <script src="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.js"></script>
      <script>
-        $(".slider-wrap div").bxSlider({mode : 'fade'})
+     $(document).ready(function(){
+        $(".slider-wrap div").bxSlider({mode : 'fade',
+            speed: 500,        // 이동 속도를 설정
+            pager: false,      // 현재 위치 페이징 표시 여부 설정
+            moveSlides: 1,     // 슬라이드 이동시 개수
+
+            slideHight: 100,
+            slideMargin: 5,    // 슬라이드간의 간격
+            auto: true,        // 자동 실행 여부
+            autoHover: true,   // 마우스 호버시 정지 여부
+            controls: true    // 이전 다음 버튼 노출 여부
+    })
+     });
     </script>
     
     
