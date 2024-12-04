@@ -56,7 +56,7 @@
                                     <li class="list-group px-3 col-2">후원종류</li>
                                     <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" value="독거노인" name="donationtype" checked>독거노인</label></li>
                                     <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" value="결식아동" name="donationtype">결식아동</label></li>
-                                    <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" value="한부모가정" name="donationtype">한부모가정</label></li>
+                                    <li class="list-group px-2 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" value="한부모가정" name="donationtype">한부모가정</label></li>
                                     <li class="list-group px-3 col-2"><label class="radio-inline"><input class="form-check-input mx-1" type="radio" value="장애인" name="donationtype">장애인</label></li>
                                 </ul>
                                 <div class="list-group list-group-horizontal my-3">

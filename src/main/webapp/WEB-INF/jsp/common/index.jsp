@@ -105,7 +105,7 @@
     </style>
     <body>
     <div class="wrap">
-    	<jsp:include page="../common/header.jsp" /> 
+    	<jsp:include page="header.jsp" /> 
         <main class="container main">
 		    <div class="row">
 		        <div class="col-md-12">

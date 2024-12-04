@@ -24,7 +24,7 @@
                      <a href="#" class="small float-start text-decoration-none vertical mx-3" style="color: #005B48;"><p> | </p></a>
                      <a href="${cp}signup" class="small float-start text-decoration-none signup" style="margin-right: 20px; color: #005B48;">회원가입</a> 
                 </div>
-                <a href="${cp}donationpay" class="btn btn-block btn-sm col-1 donation" style="background-color: #005B48; color: white; font-size: 30px; width:130px; ">후원하기</a>
+                <a href="${cp}donationpay" class="btn btn-block btn-sm col-1 donation" style="width:135px; background-color: #005B48; color: white; font-size: 30px;">후원</a>
                	</c:if>
                	<c:if test="${not empty sessionScope.member}">
 
@@ -42,7 +42,7 @@
                  	   </ul>
                 		</div>
 
-                <a href="${cp}donationpay" class="btn btn-block btn-sm col-1 donation ms-5" style="background-color: #005B48; color: white; font-size: 30px; margin-right: 30px; ">후원하기</a>
+                <a href="${cp}donationpay" class="btn btn-block btn-sm col-1 donation ms-5" style=" width:135px; background-color: #005B48; color: white; font-size: 30px; margin-right: 30px; ">후원</a>
                       	</c:if>
                
             </nav>
