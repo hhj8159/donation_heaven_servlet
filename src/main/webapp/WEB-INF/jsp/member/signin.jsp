@@ -57,7 +57,7 @@
         }
 
         .font-size {
-            font-size: 13px;
+            font-size: 11px;
         }
 
         .loginimg {

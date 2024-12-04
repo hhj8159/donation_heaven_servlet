@@ -70,13 +70,13 @@
 
     <div class="wrap">
          <jsp:include page="../common/header.jsp"></jsp:include>
-        <main class="container  w-50 mt-5" style="margin-left: 25%;">
+        <main class="container  w-50 mt-5" >
             <form action="${cp}signin">
-                <img src="${cp}images/logo.png">
+                <img src="${cp}images/logo.png" style="margin-left: -3%;">
                 <div class="w-100 text-center mt-5">
-                    <p style="font-size: 30px"><span class="font-color bold-text">기부천국</span> 홈페이지 <span class="font-color bold-text" style="color:#FF0000">가입</span>을 축하드립니다.</p>
+                    <p style="font-size: 28px;margin-left:22%" ><span class="font-color bold-text">기부천국</span> 홈페이지 <span class="font-color bold-text" style="color:#FF0000">가입</span>을 축하드립니다.</p>
                 </div>
-                <button class="btn mt-5 mb-5" style="background-color: #005B48; color: white; width: 40%;margin-left: 31%;" >로그인으로 이동합니다</button>
+                <button class="btn mt-5 mb-5" style="background-color: #005B48; color: white; width: 40%;margin-left: 41%;" >로그인으로 이동합니다</button>
             </form>
         </main>
          <jsp:include page="../common/footer.jsp"></jsp:include>

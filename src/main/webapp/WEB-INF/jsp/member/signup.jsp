@@ -77,24 +77,24 @@
             <div class="mt-3 w-100">
                 <div class="row block" id="step1">
                     <div class="divwrap" >
-                        <span class="bold-text">Step 1</span><span style="margin-left: 40%;">Step 2</span>
+                        <span class="bold-text">Step 1</span><span style="margin-left: 35%;">Step 2</span>
                     </div>
                     <div class="col-6 circlewrap mt-2">
-                        <span class="dot float-start" style="margin: 1px;" ></span><hr class="d-inline-block circlehr" style="width: 87%;"><span class="dot2 float-end" style="margin: 0px;"></span>
+                        <span class="dot float-start" style="margin: 1px;" ></span><hr class="d-inline-block circlehr" style="width: 80%;"><span class="dot2 float-end" style="margin: 0px;"></span>
                     </div>
                     <div class="spanwrap mt-2">
-                        <span class="bold-text">후원정보 확인</span> <span style="margin-left: 34%">홈페이지 ID 만들기</span>
+                        <span class="bold-text">후원정보 확인</span> <span style="margin-left: 25%">홈페이지 ID 만들기</span>
                     </div>
                 </div>
                 <div class="row none" id="step2" >
                     <div class="divwrap" >
-                        <span class="">Step 1</span><span class="bold-text" style="margin-left: 40%;">Step 2</span>
+                        <span class="">Step 1</span><span class="bold-text" style="margin-left: 35%;">Step 2</span>
                     </div>
                     <div class="col-6 circlewrap mt-2">
-                        <span class="dot float-start" style="margin: 1px;" ></span><hr class="d-inline-block circlehr" style="width: 87%;"><span class="dot2 float-end" style="margin: 0px;"></span>
+                        <span class="dot float-start" style="margin: 1px;" ></span><hr class="d-inline-block circlehr" style="width: 80%;"><span class="dot2 float-end" style="margin: 0px;"></span>
                     </div>
                     <div class="spanwrap mt-2">
-                        <span class="">후원정보 확인</span> <span class="bold-text" style="margin-left: 34%">홈페이지 ID 만들기</span>
+                        <span class="">후원정보 확인</span> <span class="bold-text" style="margin-left: 25%">홈페이지 ID 만들기</span>
                     </div>
                 </div>
                 <hr style="width: 80%;margin-left: 10%;">
@@ -142,7 +142,7 @@
 					<div class="none" id="step3div">
                     <div class="row">
                         <label for="id" class="col-2 mt-2"  >아이디</label>
-                        <input type="text" class="form-control mt-2" style="width:30%"id="id" name="id"><button class="btn mt-2" id="duplie" style="background-color: #005B48; color: white; width: 10%; height:38px;">중복 확인</button>
+                        <input type="text" class="form-control mt-2" style="width:25%"id="id" name="id"><button class="btn mt-2" id="duplie" style="background-color: #005B48; color: white; width: 15%; height:38px;">중복 확인</button>
                     </div>
                     
                     
@@ -202,7 +202,7 @@
                     
                     <div class="mt-3 row">
                      <label for="" class="col-2 mt-3" >주소</label>
-                    <button class="btn mb-3 mt-2" id="search" style="background-color: #005B48; color: white; width: 15%;">주소지 검색</button>
+                    <button class="btn mb-3 mt-2" id="search" style="background-color: #005B48; color: white; width: 17%;">주소지 검색</button>
                         
                     </div>
                     <div>
