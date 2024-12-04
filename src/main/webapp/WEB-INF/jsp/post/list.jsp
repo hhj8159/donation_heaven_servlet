@@ -10,7 +10,9 @@
     
     <style>
         .pagination a:hover { background-color: #ffffff; font: #005B48;}     
-        .pagination a:focus { background-color: #ffffff; box-shadow:none; font: #005B48;}  
+        .pagination a:focus { background-color: #ffffff; box-shadow:none; font: #005B48;}
+         main {min-height: calc(100vh - 318px);}
+         
         
      
 
