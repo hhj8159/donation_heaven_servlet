@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <header class="container-fluid">     
             <nav class="navbar bg-white navbar-expand-sm">
-                <ul class="navbar-nav container justify-content-start" style="width:959px">
+                <ul class="navbar-nav container justify-content-start" style="width:900px">
                     <li class="mx-1 nav-item"><a href="${cp}index" class="float-start"><img src="${cp}images/logo.png" alt="로고" class="img-fluid" width="250"></a></li>
                     <li class="mx-1 nav-item"><a class="nav-link text-success" href="${cp}post/list?category=1"><b class="font-color">공지사항</b></a></li>
                     <li class="mx-1 nav-item"><a class="nav-link text-success" href="${cp}post/list?category=5"><b class="font-color">자료실</b></a></li>
