@@ -7,7 +7,6 @@
 	<jsp:include page="../common/head.jsp"></jsp:include>   
 	<style>
 		.slider-wrap {
-            width: 1300px;
             margin: 0 auto;
         }
         .slider-wrap img {

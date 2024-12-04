@@ -88,7 +88,7 @@
 	                    <th>제목</th>
 	                    <th style="width: 7%;">작성자</th>
 	                    <th style="width: 15%;">작성일</th>
-	                    <th style="width: 5%;">조회수</th>
+	                    <th style="width: 7%;">조회수</th>
 	                    <th style="width: 5%;">추천</th>
 	                </tr>
 	                </thead> 
@@ -116,7 +116,7 @@
 	                    <th style="width: 15%;">글번호</th>
 	                    <th>제목</th>
 	                    <th style="width: 15%;">작성일</th>
-	                    <th style="width: 5%;">조회수</th>
+	                    <th style="width: 10%;">조회수</th>
 	                </tr>
 	                </thead> 
 	                <tbody>
@@ -147,7 +147,7 @@
 
 	                	<c:forEach items="${posts}" var="p">
 		          			<c:forEach items="${p.attachs}" begin="0" end="0" var="a">		          			
-	 		                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-block m-5 p-0" style="width: 300px;">
+	 		                    <div class="col-6 col-sm-4 col-md-6 col-xxl-3 d-block m-3 p-0" style="width: 300px;">
 		 		                    <a href="view?pno=${p.pno}&${pageDto.cri.qs2}" class="text-decoration-none text-reset">
 		 		                    	<div class="text-truncate text-center">
 		 		                    		<c:if test="${!a.image}">
